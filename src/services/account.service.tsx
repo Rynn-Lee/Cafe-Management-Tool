@@ -1,7 +1,15 @@
+// import { client } from '../lib/mongodb'
+
 export const accountService = {
-  getData(){
-    return false
-  }
+  // async getData(){
+  //   const collection = client.db('cafemanage').collection('accounts')
+  //   const result = await collection.find().toArray()
+  //   return result
+  // },
+  // async dbStats(){
+  //   const result = client.db('cafemanage').stats()
+  //   return result
+  // }
 }
 
 const preparedAccounts = [
