@@ -24,4 +24,55 @@ body
       transition: 200ms
       padding: 20px 10px 20px 10px
 
+.content
+  left: 201px
+  position: absolute
+
+.login-content
+  z-index: 1000
+  display: flex
+  justify-content: center
+  align-items: center
+  background: #181818
+  position: fixed
+  width: 100%
+  text-align: center
+  height: 100vh
+  .logo
+    font-size: 15pt
+  form
+    display: flex
+    margin: 20px
+  input, button
+    transition: 200ms
+    text-align: center
+    margin: 0px 0px 10px 0px
+    box-sizing: border-box
+    border-radius: 0px 10px 10px 0px
+    outline: 0px
+    border: none
+    background: #232323
+    width: 400px
+    color: #fff
+    padding: 10px
+    &:hover
+      background: #303030
+  button
+    border-radius: 10px
+    width: 500px
+  .input-placeholder
+    border-radius: 10px 0px 0px 10px
+    width: 100px
+    text-align: left
+    background: #d4a66149
+  .label
+    display: block
+    position: relative
+    width: 100px
+    text-align: left
+  .status
+    border-radius: 10px !important
+    text-align: center
+    width: 500px
+
 @import '_mess.sass'
