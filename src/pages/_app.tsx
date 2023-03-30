@@ -11,11 +11,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(()=>{
-    const response = services.account.checkLogin()
+    let response = services.account.checkLogin()
     const path = router.pathname
     console.log(path)
     if(path !== "/login" && !response){router.push("/login"); return}
     router.events.on('routeChangeComplete', () => {
+      response = services.account.checkLogin()
       if(!response){router.push("/login"); return}
     })
     return()=>{

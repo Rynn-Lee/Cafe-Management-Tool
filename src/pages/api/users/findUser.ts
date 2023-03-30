@@ -12,10 +12,9 @@ export default async function findOne(req: NextApiRequest, res: NextApiResponse<
     const name = query
 
     console.log("Connecting!")
-    console.log(name.full_name)
     await connectDB()
     console.log("Searching for exact user!")
-    const foundUser = await users.findOne({full_name: name})
+    const foundUser = await users.findOne({'full_name': name.full_name})
 
     res.json(foundUser as unknown as Data)
   }

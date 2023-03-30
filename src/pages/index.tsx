@@ -7,10 +7,10 @@ export default function Home() {
 
   const [users, setUsers] = useState([])
 
-  useEffect(()=>{
-    getUsers()
-    return () => {false}
-  }, [])
+  // useEffect(()=>{
+  //   getUsers()
+  //   return () => {false}
+  // }, [])
 
   const addUser = async() => {
     console.log(await services.account.addUser())
