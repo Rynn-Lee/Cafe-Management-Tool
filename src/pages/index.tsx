@@ -2,16 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { services } from '../services'
+import Counter from '@/reducers/counter/Counter'
 
 export default function Home() {
-
   const [users, setUsers] = useState([])
-
-  // useEffect(()=>{
-  //   getUsers()
-  //   return () => {false}
-  // }, [])
-
   const addUser = async() => {
     console.log(await services.account.addUser())
   }
@@ -27,6 +21,8 @@ export default function Home() {
       <div className='content'>
         <button onClick={addUser}>Add user</button>
         <button onClick={getUsers}>Get users</button>
+        <Counter/>
+
         <ul>
         {users.map((user: any, index: number)=>{
           return(

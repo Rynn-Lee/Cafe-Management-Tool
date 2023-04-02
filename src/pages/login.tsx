@@ -2,10 +2,13 @@ import { services } from '@/services';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useRef} from 'react'
+import { useDispatch } from "react-redux"
+import { setInfo } from '@/reducers/auth/authSlice'
 let md5 = require('md5');
 
 export default function Login() {
-  const router = useRouter()
+  const router = useRouter();
+  const dispatch = useDispatch()
   const loginForm = useRef()
 
   const handleLoginForm = async(e: any) => {
@@ -23,6 +26,7 @@ export default function Login() {
       formResults['result'].value = "Произошла ошибка!"
       return
     }
+    dispatch(setInfo(checkUserExistanse))
     router.push("/")
   }
 

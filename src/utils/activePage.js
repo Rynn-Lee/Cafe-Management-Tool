@@ -1,6 +1,5 @@
-
 export default function activePage(page){
-
+  
   const pageButtons = document.querySelectorAll(".sidebar-button")
   const pages = {
     "main": 0,

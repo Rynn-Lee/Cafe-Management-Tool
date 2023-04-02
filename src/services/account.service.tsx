@@ -45,7 +45,7 @@ export const accountService = {
   async auth(fio: string, password: string, inputPassword: string){
     if(md5(inputPassword) == password){
       sessionStorage.setItem("username", fio)
-      return true
+      return fio
     }
     return false
   },
