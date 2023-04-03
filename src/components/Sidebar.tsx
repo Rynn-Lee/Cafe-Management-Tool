@@ -20,7 +20,7 @@ export default function Sidebar({passedName}: any){
         <Link href="/menu" className="sidebar-button" onClick={() => pageStyle("menu")}>Меню</Link>
         <Link href="/orders" className="sidebar-button" onClick={() => pageStyle("orders")}>Заказы</Link>
         <Link href="/administration" className="sidebar-button" onClick={() => pageStyle("administrating")}>Администрирование</Link>
-        <Link href="/account" className="sidebar-button" onClick={() => pageStyle("account")}>{passedName}</Link>
+        <Link href="/account" className="sidebar-button" onClick={() => pageStyle("account")}>{passedName.full_name}</Link>
       </div>
       <div>
         <span className="logo version">RynnLee&apos;s Cafe Management Tool v0.0.1</span>

@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  info: ""
+  info: []
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setInfo: (state, action) => {
-      state.info = action.payload
+    setInfo: (state:any, action) => {
+      state.info[0] = action.payload
     },
     deleteInfo: (state) => {
-      state.info = ""
+      state.info = []
     }
   }
 })

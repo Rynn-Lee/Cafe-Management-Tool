@@ -4,34 +4,34 @@ import { useRouter } from "next/router";
 import { services } from "@/services";
 import { useSelector, useDispatch } from "react-redux"
 import { setInfo } from '@/reducers/auth/authSlice'
+import { ServerResponse } from "http";
 
 export default function Layout({ children }: PropsWithChildren){
-  const auth = useSelector((state: any) => state.auth.info)
+  const auth = useSelector((state: any) => state.auth.info[0])
   const router = useRouter();
   const dispatch = useDispatch()
 
-  useEffect(()=>{
-    let response = services.account.checkLogin()
-    const path = router.pathname
-    response && dispatch(setInfo(response))
+  const changeRoute = async(path: string) => {
+    const login = services.account.checkLogin()
+    !login && path !== "/login" && (router.push("/login"))
+    !auth && dispatch(setInfo(login))
+  }
 
-    if(path !== "/login" && !response){
-      router.push("/login");
-      return
-    }
-    router.events.on('routeChangeComplete', () => {
-      response = services.account.checkLogin()
-      if(!response){
-        router.push("/login");
-        return
-      }
-    })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(()=>{
+    const login = services.account.checkLogin()
+    const path = router.pathname
+    
+    if(path === "/login") return
+    changeRoute(path)
+
+    router.events.on('routeChangeComplete', (url) => changeRoute(path))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+
 
   return (
     <>
-      <Navbar passedName={auth}/>
+      {auth && <Navbar passedName={auth}/>}
       {children}
     </>
   );

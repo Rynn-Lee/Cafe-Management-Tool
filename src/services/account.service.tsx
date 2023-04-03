@@ -37,15 +37,13 @@ export const accountService = {
   async findUser(fio: string, inputPassword: string, callAuth: boolean){
     const response: any = await fetch(api.users.findOne + fio)
     const result = await response.json()
-    if(callAuth && result){
-      return await this.auth(result.full_name, result.password, inputPassword)
-    }
-    else{ return result }
+    callAuth && result && this.auth(result, inputPassword)
+    return result 
   },
-  async auth(fio: string, password: string, inputPassword: string){
-    if(md5(inputPassword) == password){
-      sessionStorage.setItem("username", fio)
-      return fio
+  async auth(result: any, inputPassword: string){
+    if(md5(inputPassword) == result.password){
+      sessionStorage.setItem("username", JSON.stringify(result))
+      return true
     }
     return false
   },
@@ -55,6 +53,6 @@ export const accountService = {
   },
   checkLogin(){
     const response: any = sessionStorage.getItem("username");
-    return response
+    return JSON.parse(response)
   }
 }
