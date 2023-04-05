@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import activePage from "../utils/activePage"
-import { useSelector, useDispatch } from "react-redux"
-import { setInfo, deleteInfo } from '@/reducers/auth/authSlice'
-import { services } from "@/services";
+import mainIco from "../assets/icons/home.svg"
+import manageIco from "../assets/icons/manage.svg"
+import userIco from "../assets/icons/user.svg"
+import Image from "next/image";
 
 export default function Sidebar({passedName}: any){
   const[page, setPage] = useState("")
@@ -16,11 +17,9 @@ export default function Sidebar({passedName}: any){
     <div className="sidebar">
       <span className="logo">Панель управления</span>
       <div className="sidebar-buttons">
-        <Link href="/" className="sidebar-button" onClick={() => pageStyle("main")}>Главная</Link>
-        <Link href="/menu" className="sidebar-button" onClick={() => pageStyle("menu")}>Меню</Link>
-        <Link href="/orders" className="sidebar-button" onClick={() => pageStyle("orders")}>Заказы</Link>
-        <Link href="/administration" className="sidebar-button" onClick={() => pageStyle("administrating")}>Администрирование</Link>
-        <Link href="/account" className="sidebar-button" onClick={() => pageStyle("account")}>{passedName.full_name}</Link>
+        <Link href="/" className="sidebar-button" onClick={() => pageStyle("main")}><Image src={mainIco} className="ico" alt={"Главное меню"} />Главная</Link>
+        <Link href="/administration" className="sidebar-button" onClick={() => pageStyle("administrating")}><Image src={manageIco} className="ico" alt={"Главное меню"} />Управление</Link>
+        <Link href="/account" className="sidebar-button" onClick={() => pageStyle("account")}><Image src={userIco} className="ico" alt={"Главное меню"} />Аккаунт</Link>
       </div>
       <div>
         <span className="logo version">RynnLee&apos;s Cafe Management Tool v0.0.1</span>

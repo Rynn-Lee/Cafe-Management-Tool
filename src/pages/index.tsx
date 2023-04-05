@@ -1,8 +1,6 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { PageLayout } from '@/layouts/PageLayout'
+import { useState } from 'react'
 import { services } from '../services'
-import Counter from '@/reducers/counter/Counter'
 
 export default function Home() {
   const [users, setUsers] = useState([])
@@ -15,29 +13,32 @@ export default function Home() {
     console.log(result)
   }
 
+  const deleteAllUsers = async() => {
+    console.log(await services.account.deleteAllUser());
+  }
+
   return (
     <>
-      <Head><title>Cafe Management Tool</title></Head>
-      <div className='content'>
-        <button onClick={addUser}>Add user</button>
-        <button onClick={getUsers}>Get users</button>
-        <Counter/>
+    <PageLayout title={"Главная - Управление кафе"}>
+      <button onClick={addUser}>Add user</button>
+      <button onClick={getUsers}>Get users</button>
+      <button onClick={deleteAllUsers}>Delete users</button>
 
-        <ul>
-        {users.map((user: any, index: number)=>{
-          return(
+      <ul>
+      {users.map((user: any, index: number)=>{
+        return(
 
-            <li key={user._id}>
-              Name: {user.full_name}<br/>
-              Hire date: {user.hire_date}<br/>
-              email: {user.email}<br/>
-              job: {user.job}
-            </li>
-          
-          )
-        })}
-        </ul>
-      </div>
+          <li key={user._id}>
+            Name: {user.full_name}<br/>
+            Hire date: {user.hire_date}<br/>
+            email: {user.email}<br/>
+            job: {user.job}
+          </li>
+        
+        )
+      })}
+      </ul>
+    </PageLayout>
     </>
   )
 }

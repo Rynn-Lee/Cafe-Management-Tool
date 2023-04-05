@@ -1,9 +1,9 @@
 import { services } from '@/services';
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useRef} from 'react'
 import { useDispatch } from "react-redux"
 import { setInfo } from '@/reducers/auth/authSlice'
+import { PageLayout } from '@/layouts/PageLayout';
 let md5 = require('md5');
 
 export default function Login() {
@@ -32,17 +32,18 @@ export default function Login() {
 
   return (
     <>
-      <Head><title>Панель Управления - Вход</title></Head>
-      <div className='login-content'>
-        <div className='login-block'>
-          <form className='vertical' ref={loginForm as any} onSubmit={handleLoginForm}>
-            <div className='horizontal'><input value="Cafe Management Tool" className="input-placeholder status" name={'result'} disabled/></div>
-            <div className='horizontal'><input value="ФИО" className="input-placeholder" disabled/><input name={'FIO'} placeholder='Введите ФИО'/></div>
-            <div className='horizontal'><input value="Пароль" className="input-placeholder" disabled/><input name={'Password'} type="password" placeholder='Введите пароль'/></div>
-            <button name={'button'}>Вход</button>
-          </form>
+      <PageLayout title={"Аккаунт - Управление кафе"} noContent>
+        <div className='login-content'>
+          <div className='login-block'>
+            <form className='vertical' ref={loginForm as any} onSubmit={handleLoginForm}>
+              <div className='horizontal'><input value="Cafe Management Tool" className="input-placeholder status" name={'result'} disabled/></div>
+              <div className='horizontal'><input value="ФИО" className="input-placeholder" disabled/><input name={'FIO'} placeholder='Введите ФИО'/></div>
+              <div className='horizontal'><input value="Пароль" className="input-placeholder" disabled/><input name={'Password'} type="password" placeholder='Введите пароль'/></div>
+              <button name={'button'}>Вход</button>
+            </form>
+          </div>
         </div>
-      </div>
+      </PageLayout>
     </>
   )
 }

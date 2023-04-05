@@ -1,29 +1,35 @@
-import Head from 'next/head'
 import { services } from '@/services';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setInfo, deleteInfo } from '@/reducers/auth/authSlice';
+import { useEffect } from 'react';
+import { PageLayout } from '@/layouts/PageLayout';
 
 export default function Account() {
+  const router = useRouter()
   const auth = useSelector((state: any) => state.auth.info[0])
   const dispatch = useDispatch()
 
+  useEffect(()=>{
+    !auth && router.push("/login")
+  })
+
   const unauth = () =>{
     services.account.unauth()
-    Router.push("/login")
+    router.push("/login")
   }
 
   return (
     <>
-      <Head><title>Панель Управления - Аккаунт</title></Head>
-      <div className='content'>
-        <span>Ваше имя: {auth.full_name}</span>
-        <button onClick={()=>dispatch(setInfo("Lol"))}>Сменить имя на Lol</button>
-        <button onClick={()=>dispatch(setInfo("Rynn"))}>Сменить имя на Rynn</button>
-        <button onClick={()=>dispatch(setInfo("Rynn123123123"))}>Сменить имя на Rynn1233</button>
-        <button onClick={()=>dispatch(deleteInfo())}>Убрать имя</button>
-        <button onClick={()=>unauth()}>Выход</button>
-      </div>
+      <PageLayout title={"Аккаунт - Управление кафе"}>
+        <div className='about vertical'>
+          <span><input value={"ФИО"} className="left-input" disabled/><input value={auth?.full_name} className="right-input" disabled/></span>
+          <span><input value={"Дата принятия"} className="left-input" disabled/><input value={auth?.hire_date} className="right-input" disabled/></span>
+          <span><input value={"Email"} className="left-input" disabled/><input value={auth?.email} className="right-input" disabled/></span>
+          <span><input value={"Позиция"} className="left-input" disabled/><input value={auth?.job} className="right-input" disabled/></span>
+          <button onClick={()=>unauth()}>Выход</button>
+        </div>
+      </PageLayout>
     </>
   )
 }

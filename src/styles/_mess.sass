@@ -2,7 +2,9 @@
   left: 0px
   right: 0px
   text-align: center
-  padding: 15px 0px 15px 0px
+  padding: 12px 0px 12px 0px
+  &::first-letter
+    color: $themeDark
 
 a
   text-decoration: none
@@ -10,8 +12,13 @@ a
     size: 14pt
   color: #fff
 
+.disabled
+  pointer-events: none
+  user-select: none
+  background: #404040
+
 .active-page
-  background: #83f36788
+  background: $themeDark
 
 .horizontal
   flex-direction: row
@@ -21,3 +28,44 @@ a
 .version
   color: #ffffff0f
   font-size: 10pt
+
+.ico
+  position: relative 
+  top: 2px
+  width: 18px
+  height: 18px
+  margin: 0px 5px 0px 0px
+
+.content-title
+  position: fixed
+  left: 200px
+  right: 0px
+  padding: 10px
+  text-align: center
+  background: $gray3
+
+.left-input, .right-input, button
+  padding: 10px
+  border: none
+  box-sizing: border-box
+  width: 140px
+  color: #fff
+  text-align: center
+  border-radius: 10px
+  margin: 5px 0px 5px 0px
+  transition: 200ms
+  background: $gray3
+  &:hover:is(button)
+    background: $gray4
+
+.left-input
+  border-radius: 10px 0px 0px 10px
+  background: $gray3
+  width: 140px
+
+.right-input
+  border-radius: 0px 10px 10px 0px
+  padding: 10px 10px 10px 15px
+  background: $gray4
+  text-align: left
+  width: 500px

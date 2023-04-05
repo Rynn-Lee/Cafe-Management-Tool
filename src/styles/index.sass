@@ -1,11 +1,28 @@
+$theme: coral
+$themeDark: #ca7a5d 
+$inputPlaceholder: #c58c5d 
+$transparent: #30304020 
+$gray1: #181824
+$gray2: #222230
+$gray3: #262632
+$gray4: #303040
+  
 body
   padding: 0px
   margin: 0px
-  background: #181818
+  background: $gray1
   color: #fff
   font:
     family: monospace
     size: 13pt
+
+button
+  color: #fff
+  padding: 10px
+  margin: 0px 2px 0px 2px
+  border: none
+  border-radius: 0px
+  background: $gray3
 
 .sidebar
   display: flex
@@ -14,7 +31,7 @@ body
   justify-content: space-between
   height: 100vh
   width: 200px
-  background: #252525
+  background: $gray3
   .sidebar-buttons
     font-size: 14pt
     display: flex
@@ -25,8 +42,13 @@ body
       padding: 20px 10px 20px 10px
 
 .content
-  left: 201px
+  top: 35px
+  left: 200px
+  padding: 20px
   position: absolute
+.content-title
+  &::first-letter
+    color: $themeDark
 
 .login-content
   z-index: 1000
@@ -38,8 +60,6 @@ body
   width: 100%
   text-align: center
   height: 100vh
-  .logo
-    font-size: 15pt
   form
     display: flex
     margin: 20px
@@ -58,7 +78,7 @@ body
     &:hover
       background: #303030
     &:disabled
-      color: #c7aa74 !important
+      color: #fff !important
   button
     border-radius: 10px
     width: 500px
@@ -66,7 +86,7 @@ body
     border-radius: 10px 0px 0px 10px
     width: 100px
     text-align: left
-    background: #d4a66149
+    background: $inputPlaceholder
   .label
     display: block
     position: relative
@@ -77,4 +97,12 @@ body
     text-align: center
     width: 500px
 
+.about
+  position: fixed
+  display: flex
+  left: 200px
+  right: 0px
+  border-radius: 15px
+  background: $transparent
+  padding: 10px
 @import '_mess.sass'

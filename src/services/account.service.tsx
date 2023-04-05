@@ -1,17 +1,27 @@
-import mongoose from "mongoose"
 const md5 = require('md5')
-
+interface options {
+  year: any,
+  month: any,
+  day: any
+}
+const options: options = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+}
 
 const api = {
   "users": {
     "add": "api/users/add",
     "find": "api/users/find",
-    "findOne": "api/users/findUser?full_name="
+    "findOne": "api/users/findUser?full_name=",
+    "delete": "api/users/remove"
   }
 }
 
 export const accountService = {
   async addUser(){
+    const date = new Date()
     const randomNum = Math.floor(Math.random()*1000)
     const res = await fetch(api.users.add,{
       method: 'POST',
@@ -19,11 +29,11 @@ export const accountService = {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        full_name: `emplyee${randomNum}`,
+        full_name: `Сотрудник ${randomNum}`,
         password: md5(`123${randomNum}`),
-        hire_date:`12.12.${randomNum}`,
+        hire_date: new Intl.DateTimeFormat("en-AU", options).format(date),
         email: `test${randomNum}@gmail.com`,
-        job: `waiter`
+        job: `Официант`
       }),
     })
     const data = await res.json()
@@ -46,6 +56,12 @@ export const accountService = {
       return true
     }
     return false
+  },
+  async deleteAllUser(){
+    const response = await fetch(api.users.delete,{
+      method: 'DELETE'
+    })
+    return response.json()
   },
   unauth(){
     sessionStorage.removeItem("username")
