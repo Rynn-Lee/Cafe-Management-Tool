@@ -3,7 +3,7 @@ import Navbar from "./Sidebar";
 import { useRouter } from "next/router";
 import { services } from "@/services";
 import { useSelector, useDispatch } from "react-redux"
-import { setInfo } from '@/reducers/auth/authSlice'
+import { setInfo } from '@/reducers/authSlice'
 
 export default function Layout({ children }: PropsWithChildren){
   const auth = useSelector((state: any) => state.auth.info[0])

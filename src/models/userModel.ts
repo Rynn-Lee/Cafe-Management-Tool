@@ -3,7 +3,7 @@ import {Schema, model, models} from 'mongoose'
 const userSchema: any = new Schema({
     full_name: {type: String, required: true},
     password: {type: String, required: true},
-    hire_date: {immutable: true, type: Date},
+    hire_date: String,
     email: {type: String, unique: true},
     job: String
 })

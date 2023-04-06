@@ -11,7 +11,6 @@ export default async function findOne(req: NextApiRequest, res: NextApiResponse<
     const query = req.query;
     const name = query
 
-    console.log("Connecting!")
     await connectDB()
     console.log("Searching for exact user!")
     const foundUser = await users.findOne({'full_name': name.full_name})

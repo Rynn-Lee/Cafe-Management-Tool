@@ -8,9 +8,8 @@ type Data = {
 
 export default async function addUser(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
-    console.log("Connecting!")
     await connectDB()
-    console.log("finding!")
+    console.log("Finding!")
     const foundUsers = await users.find({})
 
     res.json(foundUsers as unknown as Data)

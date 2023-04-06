@@ -2,7 +2,7 @@ import { services } from '@/services';
 import { useRouter } from 'next/router'
 import { useRef} from 'react'
 import { useDispatch } from "react-redux"
-import { setInfo } from '@/reducers/auth/authSlice'
+import { setInfo } from '@/reducers/authSlice'
 import { PageLayout } from '@/layouts/PageLayout';
 let md5 = require('md5');
 

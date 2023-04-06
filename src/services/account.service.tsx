@@ -1,27 +1,17 @@
+import { getDateNow } from '@/utils/getDate'
 const md5 = require('md5')
-interface options {
-  year: any,
-  month: any,
-  day: any
-}
-const options: options = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-}
 
 const api = {
   "users": {
-    "add": "api/users/add",
-    "find": "api/users/find",
-    "findOne": "api/users/findUser?full_name=",
-    "delete": "api/users/remove"
+    "add": "../api/users/add",
+    "find": "../api/users/find",
+    "findOne": "../api/users/findUser?full_name=",
+    "delete": "../api/users/remove"
   }
 }
 
 export const accountService = {
   async addUser(){
-    const date = new Date()
     const randomNum = Math.floor(Math.random()*1000)
     const res = await fetch(api.users.add,{
       method: 'POST',
@@ -30,8 +20,8 @@ export const accountService = {
       },
       body: JSON.stringify({
         full_name: `Сотрудник ${randomNum}`,
-        password: md5(`123${randomNum}`),
-        hire_date: new Intl.DateTimeFormat("en-AU", options).format(date),
+        password: md5(`123456`),
+        hire_date: getDateNow(),
         email: `test${randomNum}@gmail.com`,
         job: `Официант`
       }),

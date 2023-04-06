@@ -9,14 +9,10 @@ type Data = {
 export default async function addUSer(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
     const { full_name, password, hire_date, email, job} = req.body
-
-  console.log("Connecting to DB...")
-  await connectDB()
-  console.log("Connected!")
-
-  const userResult= await users.create(req.body)
-  
-  res.json(userResult)
+    await connectDB()
+    console.log("Connected to DB")
+    const userResult= await users.create(req.body)
+    res.json(userResult)
   }
   catch(error){
     console.log(error)
