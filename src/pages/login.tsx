@@ -32,7 +32,7 @@ export default function Login() {
 
   return (
     <>
-      <PageLayout title={"Аккаунт - Управление кафе"} noContent>
+      <PageLayout>
         <div className='login-content'>
           <div className='login-block'>
             <form className='vertical' ref={loginForm as any} onSubmit={handleLoginForm}>

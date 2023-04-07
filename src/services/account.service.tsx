@@ -5,9 +5,14 @@ const api = {
   "users": {
     "add": "../api/users/add",
     "find": "../api/users/find",
-    "findOne": "../api/users/findUser?full_name=",
+    "findUser": "../api/users/findUser",
     "delete": "../api/users/remove"
   }
+}
+
+const params = {
+  "id": "?id=",
+  "full_name": "?full_name="
 }
 
 export const accountService = {
@@ -35,9 +40,14 @@ export const accountService = {
     return result
   },
   async findUser(fio: string, inputPassword: string, callAuth: boolean){
-    const response: any = await fetch(api.users.findOne + fio)
+    const response: any = await fetch(api.users.findUser + params.full_name + fio)
     const result = await response.json()
     callAuth && result && this.auth(result, inputPassword)
+    return result 
+  },
+  async findUserById(id: string){
+    const response: any = await fetch(api.users.findUser + params.id + id)
+    const result = await response.json()
     return result 
   },
   async auth(result: any, inputPassword: string){

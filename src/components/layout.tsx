@@ -10,16 +10,16 @@ export default function Layout({ children }: PropsWithChildren){
   const router = useRouter();
   const dispatch = useDispatch()
   
-  const changeRoute = async(userData: string, path: string) => {
-    !userData && path !== "/login" && (router.push("/login"))
-    dispatch(setInfo(userData))
+  const changeRoute = (path: string) => {
+    path !== "/login" && (router.push("/login"))
   }
 
   useEffect(()=>{
     const userData = services.account.checkLogin()
     const path = router.pathname
     if(path === "/login") return
-    changeRoute(userData, path)
+    !auth && userData ? dispatch(setInfo(userData)) : changeRoute(path)
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 

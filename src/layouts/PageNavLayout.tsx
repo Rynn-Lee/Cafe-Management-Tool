@@ -1,14 +1,14 @@
 import { PageLayout } from '@/layouts/PageLayout'
-import { activeTab } from '@/utils/activePage'
+// import { activePage, activeTab } from '@/utils/activePage'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export default function PageNavLayout({page}: any) {
 
-  useEffect(()=>{
-    const page = window.location.pathname.split("/")[2]
-    activeTab(page)
-  },[])
+  // useEffect(()=>{
+  //   const page = window.location.pathname.split("/")[2]
+  //    activeTab(page)
+  // })
 
 
   switch(page){
@@ -21,16 +21,17 @@ export default function PageNavLayout({page}: any) {
     case "administration":
       return (
         <div className='nav'>
-          <Link href={"/administration"} className='nav-page'>Сотрудники</Link>
+          <Link href={"/administration"} className='nav-page'>Главная</Link>
           <Link href={"/administration/menu"} className='nav-page'>Меню</Link>
+          <Link href={"/administration/employees"} className='nav-page'>Сотрудники</Link>
           <Link href={"/administration/service"} className='nav-page'>Сервисное Меню</Link>
         </div>
       )
     case "account":
       return (
         <div className='nav'>
-          <Link href={"/account"} className='nav-page'>Мой Профиль</Link>
-          <Link href={"/account/statistics"} className='nav-page'>Моя Статистика</Link>
+          <Link href={"/account"} className='nav-page'>Профиль</Link>
+          <Link href={"/account/statistics"} className='nav-page'>Статистика</Link>
         </div>
       )
   }

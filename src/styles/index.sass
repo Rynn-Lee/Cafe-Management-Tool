@@ -1,14 +1,18 @@
 $theme: coral
 $themeDark: #ca7a5d 
 $themeDark2: #ca7a5d23 
+$themeDark3: #ca7a5d71 
 $inputPlaceholder: #c58c5d 
 $transparent: #30304020 
 $gray1: #181824
 $gray15: #20202b
 $gray2: #222230
-$gray2: #222230
+$gray25: #242431
 $gray3: #262632
+$gray35: #282836
 $gray4: #303040
+$gray5: #343444
+$gray6: #383848
   
 body
   padding: 0px
@@ -47,6 +51,7 @@ button
 
 .content
   top: 83px
+  right: 0px
   left: 200px
   padding: 0px
   position: absolute
@@ -60,7 +65,7 @@ button
   display: flex
   justify-content: center
   align-items: center
-  background: #181818
+  background: $gray1
   position: fixed
   width: 100%
   text-align: center
@@ -76,7 +81,7 @@ button
     border-radius: 0px 10px 10px 0px
     outline: 0px
     border: none
-    background: #232323
+    background: $gray3
     width: 400px
     color: #fff
     padding: 10px
@@ -91,7 +96,7 @@ button
     border-radius: 10px 0px 0px 10px
     width: 100px
     text-align: left
-    background: $inputPlaceholder
+    background: $themeDark3
   .label
     display: block
     position: relative
@@ -110,8 +115,11 @@ button
   border-radius: 15px
   background: $transparent
   padding: 10px
+  &>div
+    margin: 5px 0px
 
 .nav
+  overflow-x: auto
   z-index: 999
   transition: 200ms
   position: fixed
@@ -123,25 +131,31 @@ button
   display: flex
   align-items: center
   .nav-page
+    min-width: max-content
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
     border-bottom: 1px #00000000 solid
     padding: 10px 20px 10px 20px
     background: $gray2
-
-.active-page
-  transition: 200ms
-  background: $themeDark2 !important
-  border-bottom: 1px $theme solid !important
-
+    
 table
-  position: relative
-  background: $gray1
+  table-layout: auto
+  width: 100%
+  background: $gray15
+  text-align: left
   border-spacing: 0px
   thead
-    background: $gray15
+    background: $gray3
   th
     padding: 10px
   td
     padding: 10px
+    &>a
+      font-weight: 900
+      transition: 200ms
+      &:hover
+        color: $themeDark
   tr:nth-child(2n+2)
-    background: $gray15
+    background: $gray25
 @import '_mess.sass'

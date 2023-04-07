@@ -9,11 +9,16 @@ type Data = {
 export default async function findOne(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
     const query = req.query;
-    const name = query
+    const user = query
 
     await connectDB()
     console.log("Searching for exact user!")
-    const foundUser = await users.findOne({'full_name': name.full_name})
+    let foundUser
+
+    if(user.full_name)
+      foundUser = await users.findOne({'full_name': user.full_name})
+    else
+      foundUser = await users.findById(user.id)
 
     res.json(foundUser as unknown as Data)
   }

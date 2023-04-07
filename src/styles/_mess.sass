@@ -47,7 +47,7 @@ a
   box-sizing: border-box
   width: 140px
   color: #fff
-  text-align: center
+  text-align: left
   margin: 5px 0px 5px 0px
   transition: 200ms
   background: $gray3
@@ -55,13 +55,45 @@ a
     background: $gray4
 
 .left-input
-  border-radius: 10px 0px 0px 10px
-  background: $gray3
-  width: 160px
+  margin: 0px
+  display: block
+  border-radius: 10px 10px 0px 0px
+  background: $gray35
+  width: 100%
 
 .right-input
-  border-radius: 0px 10px 10px 0px
+  margin: 0px
+  display: block
+  border-radius: 0px 0px 10px 10px
   padding: 10px 10px 10px 15px
-  background: $gray4
-  text-align: left
-  width: 500px
+  background: $gray2
+  width: 100%
+  
+::-webkit-scrollbar
+  width: 6px
+  height: 5px
+
+/* Track */
+::-webkit-scrollbar-track
+  background: $gray3
+
+/* Handle */
+::-webkit-scrollbar-thumb
+  background: $gray5
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover
+  background: $gray6
+
+.active-page
+  transition: 200ms
+  background: $themeDark2 !important
+  border-right: 2px $theme solid !important
+
+.active-page2
+  transition: 200ms
+  background: $themeDark2 !important
+  border-bottom: 1px $theme solid !important
+
+.without-nav
+  top: 40px !important
