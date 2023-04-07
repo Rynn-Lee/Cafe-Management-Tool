@@ -21,7 +21,7 @@ export function activePage(){
 
 export function activeTab(){
   const tabButtons = document.querySelectorAll(".nav-page")
-  let path = tabs[window.location.pathname.split("/")[2]] || 0
+  const path = tabs[window.location.pathname.split("/")[2]] || 0
   tabButtons.forEach((button) => button.classList.remove("active-page2"))
   tabButtons[path].classList.add("active-page2")
 }
