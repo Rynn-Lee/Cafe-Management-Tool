@@ -1,7 +1,7 @@
 import Head from "next/head";
 import PageNavLayout from "./PageNavLayout";
 
-export function PageLayout({children, title, pageNav}: any){
+export function PageLayout({children, title, pageNav, id}: any){
   return(
     <>
     <Head>
@@ -10,7 +10,7 @@ export function PageLayout({children, title, pageNav}: any){
     </Head>
 
       <div className="content-title">{title}</div>
-      {pageNav && <PageNavLayout page={pageNav}/>}
+      {pageNav && <PageNavLayout page={pageNav} id={id}/>}
       <div className={(title && "content ") + (!pageNav && "without-nav")}>
         {children}
       </div>

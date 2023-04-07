@@ -42,15 +42,18 @@ export const accountService = {
   async findUser(fio: string, inputPassword: string, callAuth: boolean){
     const response: any = await fetch(api.users.findUser + params.full_name + fio)
     const result = await response.json()
-    callAuth && result && this.auth(result, inputPassword)
-    return result 
+    if(callAuth && result){
+      const authResult = this.auth(result, inputPassword)
+      if(authResult) return result
+      return false
+    }
   },
   async findUserById(id: string){
     const response: any = await fetch(api.users.findUser + params.id + id)
     const result = await response.json()
     return result 
   },
-  async auth(result: any, inputPassword: string){
+  auth(result: any, inputPassword: string){
     if(md5(inputPassword) == result.password){
       sessionStorage.setItem("username", JSON.stringify(result))
       return true

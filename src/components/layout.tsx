@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useEffect } from "react";
-import Navbar from "./Sidebar";
+import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
 import { services } from "@/services";
 import { useSelector, useDispatch } from "react-redux"
@@ -9,7 +9,7 @@ export default function Layout({ children }: PropsWithChildren){
   const auth = useSelector((state: any) => state.auth.info[0])
   const router = useRouter();
   const dispatch = useDispatch()
-  
+
   const changeRoute = (path: string) => {
     path !== "/login" && (router.push("/login"))
   }
@@ -26,7 +26,7 @@ export default function Layout({ children }: PropsWithChildren){
 
   return (
     <>
-      {auth && <Navbar passedName={auth}/>}
+      <Sidebar/>
       {children}
     </>
   );

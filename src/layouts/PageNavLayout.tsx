@@ -3,7 +3,7 @@ import { PageLayout } from '@/layouts/PageLayout'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-export default function PageNavLayout({page}: any) {
+export default function PageNavLayout({page, id}: any) {
 
   // useEffect(()=>{
   //   const page = window.location.pathname.split("/")[2]
@@ -30,8 +30,8 @@ export default function PageNavLayout({page}: any) {
     case "account":
       return (
         <div className='nav'>
-          <Link href={"/account"} className='nav-page'>Профиль</Link>
-          <Link href={"/account/statistics"} className='nav-page'>Статистика</Link>
+          <Link href={`/account/${id}`} className='nav-page'>Профиль</Link>
+          <Link href={`/account/statistics/${id}`} className='nav-page'>Статистика</Link>
         </div>
       )
   }

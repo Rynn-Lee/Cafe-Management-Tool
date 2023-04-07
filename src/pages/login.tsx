@@ -23,9 +23,10 @@ export default function Login() {
     )
 
     if(!checkUserExistanse){
-      formResults['result'].value = "Произошла ошибка!"
+      formResults['result'].value = "Проверьте логин или пароль!"
       return
     }
+
     dispatch(setInfo(checkUserExistanse))
     router.push("/")
   }

@@ -1,44 +1,27 @@
-// export function activePage(passPage){
-//   const pageButtons = document.querySelectorAll(".sidebar-button")
-//   let page = passPage
-//   const pages = {
-//     "": 0,
-//     "login": 0,
-//     "main": 0,
-//     "administration": 1,
-//     "account": 2
-//   }
+const sidebar = {
+  undefined: 0, "": 0, "login": 0, null: 0,
+  "administration": 1,
+  "account": 2
+}
 
-//   if(!page){
-//     page = window.location.pathname.split("/")[1]
-//   }
-//   page = page.split("?")[0]
-//   console.log("page: ", page)
+const tabs = {
+  undefined: 0, "": 0, "my": 0, null: 0,
+  "menu": 1, "statistics": 1,
+  "employees": 2,
+  "service": 3
+}
 
-//   pageButtons.forEach((button)=>{
-//     button.classList.remove("active-page")
-//   })
+export function activePage(){
+  const sideBarButtons = document.querySelectorAll(".sidebar-button")
+  const path = window.location.pathname.split("/")[1] || ""
+  sideBarButtons.forEach((button) => button.classList.remove("active-page"))
+  sideBarButtons[sidebar[path]].classList.add("active-page")
+  if(path != "login"){ activeTab() }
+}
 
-//   pageButtons[pages[page]].classList.add("active-page")
-// }
-
-// export function activeTab(passTab){
-//   const pageButtons = document.querySelectorAll(".nav-page")
-//   let page = passTab
-//   passTab && (page = passTab.split("?")[0])
-//   const pages = {
-//     undefined: 0,
-//     "menu": 1,
-//     "statistics": 1,
-//     "employees": 1,
-//     "service":3,
-//   }
-
-//   pageButtons.forEach((button)=>{
-//     button.classList.remove("active-page2")
-//   })
-
-//   console.log("PAGE: ", page)
-
-//   pageButtons[pages[page]].classList.add("active-page2")
-// }
+export function activeTab(){
+  const tabButtons = document.querySelectorAll(".nav-page")
+  let path = tabs[window.location.pathname.split("/")[2]] || 0
+  tabButtons.forEach((button) => button.classList.remove("active-page2"))
+  tabButtons[path].classList.add("active-page2")
+}

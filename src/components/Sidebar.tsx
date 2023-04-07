@@ -1,26 +1,24 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
-// import { activePage } from "../utils/activePage"
 import mainIco from "../assets/icons/home.svg"
 import manageIco from "../assets/icons/manage.svg"
 import userIco from "../assets/icons/user.svg"
 import Image from "next/image";
+import { useEffect } from "react";
+import { activePage, activeTab } from '@/utils/activePage'
 
-export default function Sidebar({passedName}: any){
-  const[page, setPage] = useState("")
+export default function Sidebar(){
 
-  // useEffect(()=>{
-  //   activePage(null) ----- onClick={() => activePage("main")}
-  // },[])
-
+  useEffect(()=>{
+    activePage()
+  })
 
   return(
     <div className="sidebar">
       <span className="logo">Панель управления</span>
       <div className="sidebar-buttons">
-        <Link href="/" className="sidebar-button"><Image src={mainIco} className="ico" alt={"Главное меню"} />Главная</Link>
-        <Link href="/administration" className="sidebar-button"><Image src={manageIco} className="ico" alt={"Главное меню"} />Управление</Link>
-        <Link href="/account" className="sidebar-button"><Image src={userIco} className="ico" alt={"Главное меню"} />Аккаунт</Link>
+        <Link href="/" className="sidebar-button"><Image src={mainIco} className="ico" alt={"Главная"} />Главная</Link>
+        <Link href="/administration" className="sidebar-button"><Image src={manageIco} className="ico" alt={"Управление"} />Управление</Link>
+        <Link href={`/account/my`} className="sidebar-button"><Image src={userIco} className="ico" alt={"Аккаунт"} />Аккаунт</Link>
       </div>
       <div>
         <span className="logo version">RynnLee&apos;s Cafe Management Tool v0.0.1</span>
