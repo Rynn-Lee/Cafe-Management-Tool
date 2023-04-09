@@ -11,7 +11,7 @@ export function PageLayout({children, title, pageNav, id}: any){
 
       <div className="content-title">{title}</div>
       {pageNav && <PageNavLayout page={pageNav} id={id}/>}
-      <div className={(title && "content ") + (!pageNav && "without-nav")}>
+      <div className={(title && "content") + (!pageNav ? " without-nav" : "")}>
         {children}
       </div>
 
