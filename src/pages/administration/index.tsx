@@ -4,7 +4,7 @@ export default function Administration() {
 
   return (
     <>
-      <PageLayout title={"Меню - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Главная - Управление кафе"} pageNav={"administration"}>
         Администрация
       </PageLayout>
     </>

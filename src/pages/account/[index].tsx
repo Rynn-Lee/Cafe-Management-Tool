@@ -13,8 +13,12 @@ export default function Employee() {
   const { index }: any = router.query
 
   useEffect(()=>{
-    if(index === 'my'){ setUser(auth); setMyProfile(true); return }
-    const result = employees.find((element: { _id: any; }) => element._id === index)
+    if(index === 'my'){
+      setUser(auth)
+      setMyProfile(true)
+      return
+    }
+    const result = employees.find((element: { _id: any }) => element._id === index)
     setUser(result)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[index])

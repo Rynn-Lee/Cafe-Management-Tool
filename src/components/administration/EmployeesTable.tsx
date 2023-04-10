@@ -3,7 +3,6 @@ import eyeIco from '../../assets/icons/eye.svg'
 import userDeleteIco from '../../assets/icons/userDelete.svg'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { services } from '@/services'
 
 export default function EmployeesTable({employees, query, deleteUser}: any) {
 
@@ -11,8 +10,7 @@ export default function EmployeesTable({employees, query, deleteUser}: any) {
 
   const newQuery = () =>{
     if(query){
-      const result = employees.filter((item: any) => item.full_name.toLowerCase().includes(query.toLowerCase()))
-      setSearch(result)
+      setSearch(employees.filter((item: any) => item.full_name.toLowerCase().includes(query.toLowerCase())))
       return
     }
     setSearch(employees)

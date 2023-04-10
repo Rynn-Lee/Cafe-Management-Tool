@@ -8,9 +8,7 @@ import { activePage, activeTab } from '@/utils/activePage'
 
 export default function Sidebar(){
 
-  useEffect(()=>{
-    activePage()
-  })
+  useEffect(()=>activePage())
 
   return(
     <div className="sidebar">

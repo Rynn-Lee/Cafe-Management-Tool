@@ -1,6 +1,6 @@
 import '@/styles/index.sass'
 import type { AppProps } from 'next/app'
-import Layout from '../components/layout'
+import Layout from '@/components/layout'
 import { store } from '@/store/store'
 import { Provider } from 'react-redux'
 

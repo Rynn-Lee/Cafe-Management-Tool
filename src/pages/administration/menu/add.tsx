@@ -4,7 +4,7 @@ export default function Add() {
 
   return (
     <>
-      <PageLayout title={"Меню - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Меню > Просмотр - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/menu"} nav2>
           Добавить
         </PageLayout>

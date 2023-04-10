@@ -1,7 +1,4 @@
-import { PageLayout } from '@/layouts/PageLayout'
-// import { activePage, activeTab } from '@/utils/activePage'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
 export default function PageNavLayout({page, id, nav2}: any) {
 

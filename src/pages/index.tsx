@@ -4,9 +4,9 @@ export default function Home() {
 
   return (
     <>
-    <PageLayout title={"Главная - Управление кафе"} pageNav={"main"}>
-      Главная страница
-    </PageLayout>
+      <PageLayout title={"Главная - Управление кафе"} pageNav={"main"}>
+        Главная страница
+      </PageLayout>
     </>
   )
 }

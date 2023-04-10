@@ -7,36 +7,34 @@ import EmployeesTable from '@/components/administration/EmployeesTable';
 
 export default function Employees() {
   const employees = useSelector((state: any) => state.employees.list)
-  const [query, setQuery] = useState<any>("")
   const [users, setUsers] = useState<any>(employees)
+  const [query, setQuery] = useState<any>("")
   const dispatch = useDispatch()
 
-  const getList = async() => {
+  const setList = async() => {
     dispatch(setEmployees(await services.account.getUsers()))
     setUsers(employees)
   }
-  
+
+  useEffect(()=>{
+    if(!employees.length || employees.lenght !== users.length) {setList()}
+  })
+
   const deleteUser = (id: string) =>{
     services.account.deleteUser(id)
     const filtered = users.filter((user: any) => user._id != id)
+    dispatch(setEmployees(filtered))
     setUsers(filtered)
   }
 
-  useEffect(()=>{
-    !employees.length && getList()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
-
   return (
     <>
-      <PageLayout title={"Сотрудники - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Сотрудники  > Просмотр - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
           <div className='fancy-input'>
             <input value='Поиск' disabled className='left-input'/><input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
-            <button onClick={getList}>Обновить</button>
           </div>
           <EmployeesTable employees={users} query={query} deleteUser={deleteUser}/>
-
         </PageLayout>
       </PageLayout>
     </>

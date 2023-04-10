@@ -1,6 +1,5 @@
-import users from '@/models/userModel';
 import type { NextApiRequest, NextApiResponse } from 'next'
-import connectDB from '@/lib/mongodb'
+import users from '@/models/userModel'
 
 type Data = {
   name: String,
@@ -10,15 +9,10 @@ export default async function findOne(req: NextApiRequest, res: NextApiResponse<
   try{
     const query = req.query;
     const user = query
-
-    await connectDB()
-    console.log("Searching for exact user!")
     let foundUser
 
-    if(user.full_name)
-      foundUser = await users.findOne({'full_name': user.full_name})
-    else
-      foundUser = await users.findById(user.id)
+    if(user.full_name) foundUser = await users.findOne({'full_name': user.full_name})
+    else foundUser = await users.findById(user.id)
 
     res.json(foundUser as unknown as Data)
   }

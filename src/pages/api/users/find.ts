@@ -1,6 +1,5 @@
-import users from '@/models/userModel';
 import type { NextApiRequest, NextApiResponse } from 'next'
-import connectDB from '@/lib/mongodb'
+import users from '@/models/userModel'
 
 type Data = {
   name: String,
@@ -8,10 +7,7 @@ type Data = {
 
 export default async function addUser(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
-    await connectDB()
-    console.log("Finding!")
     const foundUsers = await users.find({})
-
     res.json(foundUsers as unknown as Data)
   }
   catch(error){

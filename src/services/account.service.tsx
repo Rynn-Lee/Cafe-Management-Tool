@@ -61,7 +61,7 @@ export const accountService = {
     }
     return false
   },
-  async deleteAllUser(){
+  async deleteAllUsers(){
     const response = await fetch(api.users.removeAll,{
       method: 'DELETE'
     })
