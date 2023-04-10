@@ -26,7 +26,7 @@ export default function Layout({ children }: PropsWithChildren){
 
   return (
     <>
-      <Sidebar/>
+      {auth && <Sidebar/>}
       {children}
     </>
   );

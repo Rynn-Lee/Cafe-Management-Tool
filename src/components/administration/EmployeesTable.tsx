@@ -1,8 +1,28 @@
 import Image from 'next/image'
 import eyeIco from '../../assets/icons/eye.svg'
+import userDeleteIco from '../../assets/icons/userDelete.svg'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { services } from '@/services'
 
-export default function EmployeesTable({employees}: any) {
+export default function EmployeesTable({employees, query, deleteUser}: any) {
+
+  const [search, setSearch] = useState<any>([])
+
+  const newQuery = () =>{
+    if(query){
+      const result = employees.filter((item: any) => item.full_name.toLowerCase().includes(query.toLowerCase()))
+      setSearch(result)
+      return
+    }
+    setSearch(employees)
+  }
+
+  useEffect(()=>{
+    newQuery()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, employees])
+
   return (
     <table>
     <thead>
@@ -16,14 +36,14 @@ export default function EmployeesTable({employees}: any) {
     </thead>
     <tbody>
     {
-      employees?.map((employee: any, index: any)=>{
+      search?.map((employee: any, index: any)=>{
         return(
           <tr key={index}>
-            <td><Link href={`/account/${employee._id}`}>{employee.full_name}</Link></td>
+            <td><Link href={`/account/${employee._id}`}><Image src={eyeIco} alt="eye" className='ico'/>{employee.full_name}</Link></td>
             <td>{employee.hire_date}</td>
             <td>{employee.job}</td>
             <td>{employee.email}</td>
-            <td><Image src={eyeIco} alt="eye" className='ico'/>Посмотреть</td>
+            <td className='actions'><Image src={userDeleteIco} alt="Удалить пользователя" className='ico' onClick={()=>deleteUser(employee._id)}/></td>
           </tr>
         )
       }).reverse()

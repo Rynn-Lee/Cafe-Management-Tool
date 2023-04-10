@@ -3,7 +3,7 @@ import mainIco from "../assets/icons/home.svg"
 import manageIco from "../assets/icons/manage.svg"
 import userIco from "../assets/icons/user.svg"
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { activePage, activeTab } from '@/utils/activePage'
 
 export default function Sidebar(){

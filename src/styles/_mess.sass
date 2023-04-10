@@ -53,6 +53,28 @@ a
   background: $gray3
   &:hover:is(button)
     background: $gray4
+    background: #ff6b6b
+
+.fancy-input
+  margin: 0px 5px
+  display: inline-flex
+  align-items: center
+  max-width: max-content
+  button
+    border-radius: 10px
+    margin: 5px
+  .left-input
+    background: $themeDark2
+    height: min-content
+    padding: 10px
+    border-radius: 10px 0px 0px 10px
+    width: 100px
+    &:placeholder-shown
+      max-width: 100px
+  .right-input
+    outline: none
+    border-radius: 0px 10px 10px 0px
+    width: 300px
 
 .left-input
   margin: 0px
@@ -86,12 +108,10 @@ a
   background: $gray6
 
 .active-page
-  transition: 200ms
   background: $themeDark2 !important
   border-right: 2px $theme solid !important
 
 .active-page2
-  transition: 200ms
   background: $themeDark2 !important
   border-bottom: 1px $theme solid !important
 

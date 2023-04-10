@@ -33,7 +33,7 @@ export default function Login() {
 
   return (
     <>
-      <PageLayout>
+      <PageLayout noContent>
         <div className='login-content'>
           <div className='login-block'>
             <form className='vertical' ref={loginForm as any} onSubmit={handleLoginForm}>

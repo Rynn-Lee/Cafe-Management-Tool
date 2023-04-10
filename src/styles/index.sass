@@ -1,4 +1,5 @@
 $theme: coral
+$action: #ff3c000a
 $themeDark: #ca7a5d 
 $themeDark2: #ca7a5d23 
 $themeDark3: #ca7a5d71 
@@ -23,12 +24,15 @@ body
     family: monospace
     size: 13pt
 
-button
+button, input
   color: #fff
   padding: 10px
   border: none
   border-radius: 0px
   background: $gray3
+input
+  border: 1px solid $gray1
+  background: $gray2
 
 .sidebar
   z-index: 1000
@@ -56,7 +60,8 @@ button
   padding: 0px
   position: absolute
 .top
-  top: 110px
+  top: 42px
+  left: 0px
 .content-title
   z-index: 998
   &::first-letter
@@ -120,14 +125,13 @@ button
   &>div
     margin: 5px 0px
 
-.nav
+.nav, .nav2
   overflow-x: auto
   z-index: 999
-  transition: 200ms
   position: fixed
   left: 200px
   top: 40px
-  background: $gray2
+  background: $gray3
   right: 0px
   height: auto
   display: flex
@@ -140,12 +144,14 @@ button
     border-bottom: 1px #00000000 solid
     padding: 10px 20px 10px 20px
     background: $gray25
-  .nav-page2
-    padding: 5px 15px 5px 15px
-    position: fixed
-    top: 83px
-    background: $gray15
-    
+    &:hover
+      background: $gray4
+
+.nav2
+  background: $gray2
+  top: 83px
+  .nav-page
+    padding: 8px 10px 8px 10px
     
 table
   table-layout: auto
@@ -159,6 +165,10 @@ table
     padding: 10px
   td
     padding: 10px
+  .actions
+    background: $action !important
+    & .ico
+      cursor: pointer
     &>a
       font-weight: 900
       transition: 200ms

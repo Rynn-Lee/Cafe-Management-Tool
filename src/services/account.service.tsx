@@ -3,15 +3,16 @@ const md5 = require('md5')
 
 const api = {
   "users": {
-    "add": "../api/users/add",
-    "find": "../api/users/find",
-    "findUser": "../api/users/findUser",
-    "delete": "../api/users/remove"
+    "add": "../../api/users/add",
+    "find": "../../api/users/find",
+    "findUser": "../../api/users/findUser",
+    "removeAll": "../../api/users/remove",
+    "removeOne": "../../api/users/removeOne"
   }
 }
 
 const params = {
-  "id": "?id=",
+  "id": "?_id=",
   "full_name": "?full_name="
 }
 
@@ -61,7 +62,13 @@ export const accountService = {
     return false
   },
   async deleteAllUser(){
-    const response = await fetch(api.users.delete,{
+    const response = await fetch(api.users.removeAll,{
+      method: 'DELETE'
+    })
+    return response.json()
+  },
+  async deleteUser(id: string){
+    const response = await fetch(api.users.removeOne + params.id + id,{
       method: 'DELETE'
     })
     return response.json()
