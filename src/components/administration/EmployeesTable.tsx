@@ -37,7 +37,7 @@ export default function EmployeesTable({employees, query, deleteUser}: any) {
       search?.map((employee: any, index: any)=>{
         return(
           <tr key={index}>
-            <td><Link href={`/account/${employee._id}`}><Image src={eyeIco} alt="eye" className='ico'/>{employee.full_name}</Link></td>
+            <td><Link href={`/account/${employee._id}`} title={`ID: ${employee._id}`}><Image src={eyeIco} alt="eye" className='ico'/>{employee.full_name}</Link></td>
             <td>{employee.hire_date}</td>
             <td>{employee.job}</td>
             <td>{employee.email}</td>

@@ -1,6 +1,6 @@
 import { PageLayout } from '@/layouts/PageLayout'
 import { useDispatch } from 'react-redux';
-import { removeEmployees, setEmployees } from '@/reducers/employeesSlice';
+import { removeEmployees } from '@/reducers/employeesSlice';
 import { services } from '@/services'
 import { useState } from 'react'
 
