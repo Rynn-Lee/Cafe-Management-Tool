@@ -11,12 +11,11 @@ export default function Add() {
     dispatch(setEmployees(await services.account.getUsers()))
   }
 
-
   return (
     <>
       <PageLayout title={"Сотрудники > Добавить - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
-          <button onClick={addUser}>Add user</button>
+          <button onClick={()=>addUser()}>Add user</button>
         </PageLayout>
       </PageLayout>
     </>

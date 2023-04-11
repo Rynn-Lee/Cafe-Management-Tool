@@ -11,14 +11,13 @@ export default function Employees() {
   const [query, setQuery] = useState<any>("")
   const dispatch = useDispatch()
 
-  const setList = async() => {
-    dispatch(setEmployees(await services.account.getUsers()))
-    setUsers(employees)
-  }
+  const updateStorage = async() => dispatch(setEmployees(await services.account.getUsers()))
 
   useEffect(()=>{
-    if(!employees.length || employees.lenght !== users.length) {setList()}
-  })
+    console.log("length: ", employees.length)
+    !employees.length && updateStorage()
+    !users.length || users.length !== employees.length && setUsers(employees)
+  },[employees])
 
   const deleteUser = (id: string) =>{
     services.account.deleteUser(id)
