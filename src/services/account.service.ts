@@ -16,24 +16,28 @@ const params = {
   "full_name": "?full_name="
 }
 
+interface data{
+  full_name: string,
+  job: string
+}
+
 export const accountService = {
-  async addUser(){
-    const randomNum = Math.floor(Math.random()*1000)
+  async addUser(data: data){
     const res = await fetch(api.users.add,{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        full_name: `Сотрудник ${randomNum}`,
-        password: md5(`123456`),
+        full_name: data.full_name,
+        password: md5(`123`),
         hire_date: getDateNow(),
-        email: `test${randomNum}@gmail.com`,
-        job: `Официант`
+        email: `example@gmail.com`,
+        job: data.job
       }),
     })
-    const data = await res.json()
-    return data
+    const response = await res.json()
+    return response
   },
   async getUsers(){
     const response = await fetch(api.users.find)

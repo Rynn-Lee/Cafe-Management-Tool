@@ -7,23 +7,19 @@ import EmployeesTable from '@/components/administration/EmployeesTable';
 
 export default function Employees() {
   const employees = useSelector((state: any) => state.employees.list)
-  const [users, setUsers] = useState<any>(employees)
   const [query, setQuery] = useState<any>("")
   const dispatch = useDispatch()
-
+  
   const updateStorage = async() => dispatch(setEmployees(await services.account.getUsers()))
-
   useEffect(()=>{
-    console.log("length: ", employees.length)
     !employees.length && updateStorage()
-    !users.length || users.length !== employees.length && setUsers(employees)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[employees])
 
   const deleteUser = (id: string) =>{
     services.account.deleteUser(id)
-    const filtered = users.filter((user: any) => user._id != id)
+    const filtered = employees.filter((user: any) => user._id != id)
     dispatch(setEmployees(filtered))
-    setUsers(filtered)
   }
 
   return (
@@ -33,7 +29,7 @@ export default function Employees() {
           <div className='fancy-input'>
             <input value='Поиск' disabled className='left-input'/><input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
           </div>
-          <EmployeesTable employees={users} query={query} deleteUser={deleteUser}/>
+          <EmployeesTable employees={employees} query={query} deleteUser={deleteUser}/>
         </PageLayout>
       </PageLayout>
     </>

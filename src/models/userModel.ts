@@ -4,7 +4,7 @@ const userSchema: any = new Schema({
     full_name: {type: String, required: true},
     password: {type: String, required: true},
     hire_date: String,
-    email: {type: String, unique: true},
+    email: String,
     job: String
 })
 

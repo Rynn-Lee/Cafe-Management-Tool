@@ -18,8 +18,12 @@ a
   background: #404040
 
 .horizontal
+  margin: 0px
+  display: flex
   flex-direction: row
 .vertical
+  margin: 0px
+  display: flex
   flex-direction: column
 
 .version
@@ -58,8 +62,8 @@ a
 .fancy-input
   margin: 5px 5px
   display: inline-flex
-  align-items: center
-  max-width: max-content
+  align-items: left
+  width: auto
   button
     border-radius: 10px
     margin: 5px
@@ -68,13 +72,14 @@ a
     height: min-content
     padding: 10px
     border-radius: 10px 0px 0px 10px
-    width: 100px
-    &:placeholder-shown
-      max-width: 100px
+    min-width: 180px
+    width: max-content
+    margin: 5px 0px
   .right-input
     outline: none
+    margin: 5px 0px
     border-radius: 0px 10px 10px 0px
-    width: 300px
+    min-width: 300px
 
 .left-input
   margin: 0px
@@ -88,7 +93,7 @@ a
   display: block
   border-radius: 0px 0px 10px 10px
   padding: 10px 10px 10px 15px
-  background: $gray2
+  background: $gray3
   width: 100%
   
 ::-webkit-scrollbar

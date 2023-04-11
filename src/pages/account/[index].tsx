@@ -31,7 +31,7 @@ export default function Employee() {
   return (
     <>
       <PageLayout title={user?.full_name + " - Профиль"} pageNav={"account"} id={index}>
-        <div className='about vertical'>
+        <div className='fancy-input about vertical'>
           <div className='horizontal'><span className="left-input">ФИО</span><span className="right-input">{user?.full_name}</span></div>
           <div className='horizontal'><span className="left-input">Дата устройства</span><span className="right-input">{user?.hire_date}</span></div>
           <div className='horizontal'><span className="left-input">Email</span><span className="right-input">{user?.email}</span></div>
