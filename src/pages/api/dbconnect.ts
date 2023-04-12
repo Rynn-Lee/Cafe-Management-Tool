@@ -5,7 +5,8 @@ type Data = {
 }
 
 export default function handler(req: NextApiRequest,res: NextApiResponse<Data>){
+  console.log("Incoming connection request!")
   connectDB()
-  console.log("connected!")
+  console.log("Connected!")
   res.status(200).json({ DBresponse: 'Lemmi sleep! What do you want???' })
 }

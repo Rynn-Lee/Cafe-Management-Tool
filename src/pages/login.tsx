@@ -16,10 +16,10 @@ export default function Login() {
     const formResults: any = loginForm.current
     formResults['result'].value = "Проверка..."
 
-    const checkUserExistanse: any = await services.account.findUser(
+    const checkUserExistanse: any = await services.account.findUsers(
       formResults['FIO'].value,
-      formResults['Password'].value,
-      true
+      false,
+      formResults['Password'].value
     )
 
     if(!checkUserExistanse){

@@ -116,17 +116,6 @@ input
     text-align: center
     width: 500px
 
-.about
-  position: fixed
-  display: flex
-  left: 200px
-  right: 0px
-  border-radius: 15px
-  background: $transparent
-  padding: 10px
-  &>div
-    margin: 5px 0px
-
 .nav, .nav2
   overflow-x: auto
   z-index: 999
@@ -145,15 +134,16 @@ input
     overflow: hidden
     border-bottom: 1px #00000000 solid
     padding: 10px 20px 10px 20px
-    background: $gray25
+    background: $gray3
     &:hover
       background: $gray4
 
 .nav2
   background: $gray2
   top: 83px
-  .nav-page
-    padding: 8px 10px 8px 10px
+  .nav-page2
+    background: $gray2
+    padding: 10px 10px 10px 10px
     
 table
   table-layout: auto
@@ -178,4 +168,5 @@ table
         color: $themeDark
   tr:nth-child(2n+2)
     background: $gray25
+    
 @import '_mess.sass'

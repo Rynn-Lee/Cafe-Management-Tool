@@ -7,8 +7,21 @@ type Data = {
 
 export default async function Remove(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
-    const foundUser = await users.deleteMany({})
-    res.json(foundUser as unknown as Data)
+
+    const query = req.query;
+    const id = query
+    let result
+    
+    if(id._id){
+      console.log(`Incoming request: Remove one user - ${id._id}`)
+      result = await users.deleteOne(id)
+    }
+    else{
+      console.log(`Incoming request: Remove ALL users`)
+      result = await users.deleteMany({})
+    }
+
+    res.json(result as unknown as Data)
   }
   catch(error){
     console.log(error)

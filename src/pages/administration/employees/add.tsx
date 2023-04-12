@@ -19,7 +19,7 @@ export default function Add() {
       job: employeeInfo['job'].value
     }
     const result = await services.account.addUser(data)
-    dispatch(setEmployees(await services.account.getUsers()))
+    dispatch(setEmployees(await services.account.findUsers()))
     result && setLoading(0)
   }
 
@@ -29,16 +29,16 @@ export default function Add() {
         <PageLayout pageNav={"administration/employees"} nav2>
           {loading ? <LoadingScreen/> : ""}
           <form className='fancy-input vertical' ref={addEmployee} onSubmit={addNewEmployee}>
-            <div className='horizontal'><input value="ФИО" className='left-input' disabled/><input className='right-input' name="full_name"/></div>
-            <div className='horizontal'><input value="Пароль" className='left-input' disabled/><input className='right-input' placeholder="По умолчанию! 123" disabled/></div>
-            <div className='horizontal'><input value="Должность" className='left-input' disabled/>
+            <div className='horizontal margin'><input value="ФИО" className='left-input' disabled/><input className='right-input' name="full_name"/></div>
+            <div className='horizontal margin'><input value="Пароль" className='left-input' disabled/><input className='right-input' placeholder="По умолчанию! 123" disabled/></div>
+            <div className='horizontal margin'><input value="Должность" className='left-input' disabled/>
             <select name="job" className='right-input'>
               <option>Официант</option>
               <option>Повар</option>
               <option>Кассир</option>
               <option>Администратор</option>
             </select></div>
-          <button type='submit'>Add user</button>
+          <button type='submit' className='margin'>Add user</button>
           </form>
         </PageLayout>
       </PageLayout>

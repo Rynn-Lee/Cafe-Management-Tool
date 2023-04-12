@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import eyeIco from '../../assets/icons/eye.svg'
-import userDeleteIco from '../../assets/icons/userDelete.svg'
+import deleteIco from '../../assets/icons/userDelete.svg'
+import editIco from '../../assets/icons/edit.svg'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-export default function EmployeesTable({employees, query, deleteUser}: any) {
+export default function EmployeesTable({employees, query, deleteUser, editUser}: any) {
 
   const [search, setSearch] = useState<any>([])
 
@@ -41,7 +42,10 @@ export default function EmployeesTable({employees, query, deleteUser}: any) {
             <td>{employee.hire_date}</td>
             <td>{employee.job}</td>
             <td>{employee.email}</td>
-            <td className='actions'><Image src={userDeleteIco} alt="Удалить пользователя" className='ico' onClick={()=>deleteUser(employee._id)}/></td>
+            <td className='actions'>
+              <Image src={deleteIco} alt="Удалить" className='ico' onClick={()=>deleteUser(employee._id)}/>
+              <Image src={editIco} alt="Редактировать" className='ico' onClick={()=>editUser(employee._id)}/>
+            </td>
           </tr>
         )
       }).reverse()

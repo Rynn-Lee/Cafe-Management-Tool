@@ -5,9 +5,7 @@ const api = {
   "users": {
     "add": "../../api/users/add",
     "find": "../../api/users/find",
-    "findUser": "../../api/users/findUser",
-    "removeAll": "../../api/users/remove",
-    "removeOne": "../../api/users/removeOne"
+    "remove": "../../api/users/remove"
   }
 }
 
@@ -39,24 +37,22 @@ export const accountService = {
     const response = await res.json()
     return response
   },
-  async getUsers(){
-    const response = await fetch(api.users.find)
+  async findUsers(fio: any = null, id: any = null, inputPassword: any = null){
+    let query: any
+
+    fio && (query = api.users.find + params.full_name + fio)
+    id && (query = api.users.find + params.id + id)
+    !fio && !id && (query = api.users.find)
+
+    const response: any = await fetch(query)
     const result = await response.json()
-    return result
-  },
-  async findUser(fio: string, inputPassword: string, callAuth: boolean){
-    const response: any = await fetch(api.users.findUser + params.full_name + fio)
-    const result = await response.json()
-    if(callAuth && result){
+
+    if(inputPassword && result){
       const authResult = this.auth(result, inputPassword)
       if(authResult) return result
       return false
     }
-  },
-  async findUserById(id: string){
-    const response: any = await fetch(api.users.findUser + params.id + id)
-    const result = await response.json()
-    return result 
+    return result
   },
   auth(result: any, inputPassword: string){
     if(md5(inputPassword) == result.password){
@@ -65,16 +61,12 @@ export const accountService = {
     }
     return false
   },
-  async deleteAllUsers(){
-    const response = await fetch(api.users.removeAll,{
-      method: 'DELETE'
-    })
-    return response.json()
-  },
-  async deleteUser(id: string){
-    const response = await fetch(api.users.removeOne + params.id + id,{
-      method: 'DELETE'
-    })
+  async deleteUsers(id: any = null){
+    let query: any
+    id && (query = api.users.remove + params.id + id)
+    !id && (query = api.users.remove)
+
+    const response = await fetch(query,{method: 'DELETE'})
     return response.json()
   },
   unauth(){

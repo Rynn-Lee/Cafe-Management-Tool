@@ -8,8 +8,8 @@ export default function Service() {
   const [users, setUsers] = useState([])
   const dispatch = useDispatch()
 
-  const getUsers = async() => setUsers(await services.account.getUsers())
-  const deleteAllUsers = async() => await services.account.deleteAllUsers()
+  const getUsers = async() => setUsers(await services.account.findUsers())
+  const deleteAllUsers = async() => await services.account.deleteUsers()
 
   return (
     <>
