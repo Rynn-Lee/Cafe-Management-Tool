@@ -52,6 +52,7 @@ export const accountService = {
       if(authResult) return result
       return false
     }
+    if(!result){return[{}]}
     return result
   },
   auth(result: any, inputPassword: string){

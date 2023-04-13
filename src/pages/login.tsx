@@ -37,10 +37,10 @@ export default function Login() {
         <div className='login-content'>
           <div className='login-block'>
             <form className='vertical' ref={loginForm as any} onSubmit={handleLoginForm}>
-              <div className='horizontal'><input value="Cafe Management Tool" className="input-placeholder status" name={'result'} disabled/></div>
-              <div className='horizontal'><input value="ФИО" className="input-placeholder" disabled/><input name={'FIO'} placeholder='Введите ФИО'/></div>
-              <div className='horizontal'><input value="Пароль" className="input-placeholder" disabled/><input name={'Password'} type="password" placeholder='Введите пароль'/></div>
-              <button name={'button'}>Вход</button>
+              <div className='horizontal'><input value="Cafe Management Tool" className="input-placeholder status width-500" name={'result'} disabled/></div>
+              <div className='horizontal'><input value="ФИО" className="input-placeholder width-100" disabled/><input name={'FIO'} placeholder='Введите ФИО' className='width-400'/></div>
+              <div className='horizontal'><input value="Пароль" className="input-placeholder width-100" disabled/><input name={'Password'} type="password" placeholder='Введите пароль' className='width-400'/></div>
+              <button name={'button'} className='width-500'>Вход</button>
             </form>
           </div>
         </div>

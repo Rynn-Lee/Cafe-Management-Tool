@@ -1,21 +1,6 @@
-$theme: coral
-$action: #ff3c000a
-$themeDark: #ca7a5d 
-$themeDark2: #ca7a5d23 
-$themeDark3: #ca7a5d71 
-$inputPlaceholder: #c58c5d 
-$transparent: #30304020 
-$loading: #181824a8
-$gray1: #181824
-$gray15: #20202b
-$gray2: #222230
-$gray25: #242431
-$gray3: #262632
-$gray35: #282836
-$gray4: #303040
-$gray5: #343444
-$gray6: #383848
-  
+// @import 'themes/aqua.sass'
+@import 'themes/coral.sass'
+
 body
   padding: 0px
   margin: 0px
@@ -25,17 +10,13 @@ body
     family: monospace
     size: 13pt
 
-button, input
-  color: #fff
-  padding: 10px
-  border: none
-  border-radius: 0px
-  background: $gray3
-input
+input, select, button
   border: 1px solid $gray1
   background: $gray2
 
+
 .sidebar
+  border-right: 1px solid $themeDark15
   z-index: 1000
   display: flex
   flex-direction: column
@@ -65,12 +46,12 @@ input
   top: 42px
   left: 0px
 .content-title
-  z-index: 998
+  z-index: 1001
   &::first-letter
     color: $themeDark
 
 .login-content
-  z-index: 1000
+  z-index: 1003
   display: flex
   justify-content: center
   align-items: center
@@ -91,7 +72,6 @@ input
     outline: 0px
     border: none
     background: $gray3
-    width: 400px
     color: #fff
     padding: 10px
     &:hover
@@ -100,25 +80,21 @@ input
       color: #fff !important
   button
     border-radius: 10px
-    width: 500px
   .input-placeholder
     border-radius: 10px 0px 0px 10px
-    width: 100px
     text-align: left
     background: $themeDark3
   .label
     display: block
     position: relative
-    width: 100px
     text-align: left
   .status
     border-radius: 10px !important
     text-align: center
-    width: 500px
 
 .nav, .nav2
   overflow-x: auto
-  z-index: 999
+  z-index: 1002
   position: fixed
   left: 200px
   top: 40px
@@ -136,7 +112,7 @@ input
     padding: 10px 20px 10px 20px
     background: $gray3
     &:hover
-      background: $gray4
+      background: $themeDark15
 
 .nav2
   background: $gray2
@@ -157,6 +133,12 @@ table
     padding: 10px
   td
     padding: 10px
+    border-right: 1px solid $themeDark15
+    &>a
+      font-weight: 600
+      transition: 200ms
+      &:hover
+        color: $themeDark
   .actions
     background: $action !important
     & .ico
@@ -165,8 +147,9 @@ table
       font-weight: 900
       transition: 200ms
       &:hover
-        color: $themeDark
-  tr:nth-child(2n+2)
-    background: $gray25
+        color: $themeDark2
     
-@import '_mess.sass'
+
+
+@import 'mess.sass'
+@import 'preparedStyles.sass'

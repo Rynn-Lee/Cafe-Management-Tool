@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import eyeIco from '../../assets/icons/eye.svg'
-import deleteIco from '../../assets/icons/userDelete.svg'
-import editIco from '../../assets/icons/edit.svg'
+import eyeIco from '@/assets/icons/eye.svg'
+import deleteIco from '@/assets/icons/userDelete.svg'
+import editIco from '@/assets/icons/edit.svg'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 

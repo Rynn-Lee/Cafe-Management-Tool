@@ -36,12 +36,12 @@ export default function Employee() {
   return (
     <>
       <PageLayout title={user?.full_name + " - Профиль"} pageNav={"account"} id={index}>
-        <div className='fancy-input vertical'>
-          <div className='horizontal margin'><span className="left-input">ФИО</span><span className="right-input">{user?.full_name}</span></div>
-          <div className='horizontal margin'><span className="left-input">Дата устройства</span><span className="right-input">{user?.hire_date}</span></div>
-          <div className='horizontal margin'><span className="left-input">Email</span><span className="right-input">{user?.email}</span></div>
-          <div className='horizontal margin'><span className="left-input">Должность</span><span className="right-input">{user?.job}</span></div>
-          {myProfile && <button onClick={()=>unauth()} className='margin'>Выход</button>}
+        <div className='vertical padding-2'>
+          <div className='horizontal margin-2'><input className="left-input width-150" value='ФИО' disabled/><input className="right-input width-450" value={user?.full_name} disabled/></div>
+          <div className='horizontal margin-2'><input className="left-input width-150" value='Дата устройства' disabled/><input className="right-input width-450" value={user?.hire_date} disabled/></div>
+          <div className='horizontal margin-2'><input className="left-input width-150" value='Email' disabled/><input className="right-input width-450" value={user?.email} disabled/></div>
+          <div className='horizontal margin-2'><input className="left-input width-150" value='Должность' disabled/><input className="right-input width-450" value={user?.job} disabled/></div>
+          {myProfile && <button onClick={()=>unauth()} className='button width-600 margin-2'>Выход</button>}
         </div>
       </PageLayout>
     </>

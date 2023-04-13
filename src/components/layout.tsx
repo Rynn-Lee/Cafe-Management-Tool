@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { services } from "@/services";
 import { useSelector, useDispatch } from "react-redux"
 import { setInfo } from '@/reducers/authSlice'
+import Login from "@/pages/login";
 
 export default function Layout({ children }: PropsWithChildren){
   const auth = useSelector((state: any) => state.auth.info[0])
@@ -22,8 +23,9 @@ export default function Layout({ children }: PropsWithChildren){
 
   return (
     <>
+      {!auth && <Login />}
       {auth && <Sidebar/>}
-      {children}
+      {auth && children}
     </>
   );
 };

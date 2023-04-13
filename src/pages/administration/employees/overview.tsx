@@ -32,8 +32,9 @@ export default function Employees() {
     <>
       <PageLayout title={"Сотрудники  > Просмотр - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
-          <div className='fancy-input'>
-            <input value='Поиск' disabled className='left-input'/><input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
+          <div className='margin-5'>
+            <input value='Поиск' disabled className='left-input width-75'/>
+            <input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input width-300'/>
           </div>
           <EmployeesTable employees={employees} query={query} deleteUser={deleteUser} editUser={editUser}/>
         </PageLayout>

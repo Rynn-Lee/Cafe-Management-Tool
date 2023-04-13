@@ -28,17 +28,17 @@ export default function Add() {
       <PageLayout title={"Сотрудники > Добавить - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
           {loading ? <LoadingScreen/> : ""}
-          <form className='fancy-input vertical' ref={addEmployee} onSubmit={addNewEmployee}>
-            <div className='horizontal margin'><input value="ФИО" className='left-input' disabled/><input className='right-input' name="full_name"/></div>
-            <div className='horizontal margin'><input value="Пароль" className='left-input' disabled/><input className='right-input' placeholder="По умолчанию! 123" disabled/></div>
-            <div className='horizontal margin'><input value="Должность" className='left-input' disabled/>
-            <select name="job" className='right-input'>
+          <form className='vertical padding-5' ref={addEmployee} onSubmit={addNewEmployee}>
+            <div className='horizontal margin margin-2'><input value="ФИО" className='left-input width-100' disabled/><input className='right-input width-400' name="full_name"/></div>
+            <div className='horizontal margin margin-2'><input value="Пароль" className='left-input width-100' disabled/><input className='right-input width-400' placeholder="По умолчанию! 123" disabled/></div>
+            <div className='horizontal margin margin-2'><input value="Должность" className='left-input width-100' disabled/>
+            <select name="job" className='right-input width-400'>
               <option>Официант</option>
               <option>Повар</option>
               <option>Кассир</option>
               <option>Администратор</option>
             </select></div>
-          <button type='submit' className='margin'>Add user</button>
+          <button type='submit' className='button width-500 margin-2'>Добавить сотрудника</button>
           </form>
         </PageLayout>
       </PageLayout>
