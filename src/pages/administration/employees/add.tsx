@@ -29,9 +29,9 @@ export default function Add() {
         <PageLayout pageNav={"administration/employees"} nav2>
           {loading ? <LoadingScreen/> : ""}
           <form className='vertical padding-5' ref={addEmployee} onSubmit={addNewEmployee}>
-            <div className='horizontal margin margin-2'><input value="ФИО" className='left-input width-100' disabled/><input className='right-input width-400' name="full_name"/></div>
-            <div className='horizontal margin margin-2'><input value="Пароль" className='left-input width-100' disabled/><input className='right-input width-400' placeholder="По умолчанию! 123" disabled/></div>
-            <div className='horizontal margin margin-2'><input value="Должность" className='left-input width-100' disabled/>
+            <div className='horizontal margin-2'><input value="ФИО" className='left-input width-100' disabled/><input className='right-input width-400' name="full_name"/></div>
+            <div className='horizontal margin-2'><input value="Пароль" className='left-input width-100' disabled/><input className='right-input width-400' placeholder="По умолчанию! 123" disabled/></div>
+            <div className='horizontal margin-2'><input value="Должность" className='left-input width-100' disabled/>
             <select name="job" className='right-input width-400'>
               <option>Официант</option>
               <option>Повар</option>

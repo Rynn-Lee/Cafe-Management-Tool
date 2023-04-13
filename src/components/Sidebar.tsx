@@ -12,11 +12,11 @@ export default function Sidebar(){
 
   return(
     <div className="sidebar">
-      <span className="logo">Панель управления</span>
+      <span className="logo"><span>Панель управления</span></span>
       <div className="sidebar-buttons">
-        <Link href="/" className="sidebar-button"><Image src={mainIco} className="ico" alt={"Главная"} />Главная</Link>
-        <Link href="/administration" className="sidebar-button"><Image src={manageIco} className="ico" alt={"Управление"} />Управление</Link>
-        <Link href={`/account/my`} className="sidebar-button"><Image src={userIco} className="ico" alt={"Аккаунт"} />Аккаунт</Link>
+        <Link href="/" className="sidebar-button"><Image src={mainIco} className="ico" alt={"Главная"} /><span>Главная</span></Link>
+        <Link href="/administration" className="sidebar-button"><Image src={manageIco} className="ico" alt={"Управление"} /><span>Управление</span></Link>
+        <Link href={`/account/my`} className="sidebar-button"><Image src={userIco} className="ico" alt={"Аккаунт"} /><span>Аккаунт</span></Link>
       </div>
       <div>
         <span className="logo version">RynnLee&apos;s Cafe Management Tool v0.0.1</span>
