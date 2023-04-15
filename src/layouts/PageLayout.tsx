@@ -11,7 +11,7 @@ export function PageLayout({children, title, pageNav, id, nav2, noContent}: any)
 
       {title && <div className="content-title">{title}</div>}
       {pageNav && <TabsLayout page={pageNav} id={id} nav2={nav2}/>}
-      <div className={(!noContent && "content") + (!pageNav ? " without-nav" : "") + (nav2 ? " top" : "")}>
+      <div className={(!noContent && "content bubble") + (!pageNav ? " without-nav" : "") + (nav2 ? " top" : "")}>
         {children}
       </div>
     </>

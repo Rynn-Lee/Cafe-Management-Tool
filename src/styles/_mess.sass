@@ -68,11 +68,11 @@ a
   background: $gray6
 
 .active-page
-  background: $themeDark2 !important
+  background: $lineRight !important
   border-right: 2px $theme solid !important
 
 .active-page2
-  background: $themeDark2 !important
+  background: $lineBottom !important
   border-bottom: 1px $theme solid !important
 
 .without-nav
@@ -89,3 +89,13 @@ a
   right: 0px
   top: 0px
   bottom: 0px
+
+.spin
+  padding: 10px
+  animation: spin-anim 0.3s infinite linear
+
+@keyframes spin-anim 
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)

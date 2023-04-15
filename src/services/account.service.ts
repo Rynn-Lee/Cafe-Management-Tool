@@ -37,7 +37,7 @@ export const accountService = {
     const response = await res.json()
     return response
   },
-  async findUsers(fio: any = null, id: any = null, inputPassword: any = null){
+  async findUsers(fio: any = null, id: any = null, inputPassword: any = null, auth: boolean = false){
     let query: any
 
     fio && (query = api.users.find + params.full_name + fio)
@@ -47,12 +47,12 @@ export const accountService = {
     const response: any = await fetch(query)
     const result = await response.json()
 
-    if(inputPassword && result){
+    if(auth){
       const authResult = this.auth(result, inputPassword)
       if(authResult) return result
       return false
     }
-    if(!result){return[{}]}
+    if(!result && auth){return[{}]}
     return result
   },
   auth(result: any, inputPassword: string){

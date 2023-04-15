@@ -16,18 +16,19 @@ export default function Login() {
     const formResults: any = loginForm.current
     formResults['result'].value = "Проверка..."
 
-    const checkUserExistanse: any = await services.account.findUsers(
+    const result: any = await services.account.findUsers(
       formResults['FIO'].value,
       false,
-      formResults['Password'].value
+      formResults['Password'].value,
+      true
     )
 
-    if(!checkUserExistanse){
+    if(!result){
       formResults['result'].value = "Проверьте логин или пароль!"
       return
     }
-
-    dispatch(setInfo(checkUserExistanse))
+    
+    dispatch(setInfo(result))
     router.push("/")
   }
 

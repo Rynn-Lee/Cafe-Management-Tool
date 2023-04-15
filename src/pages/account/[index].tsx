@@ -41,7 +41,7 @@ export default function Employee() {
           <div className='horizontal margin-2'><input className="left-input width-150" value='Дата устройства' disabled/><input className="right-input width-450" value={user?.hire_date} disabled/></div>
           <div className='horizontal margin-2'><input className="left-input width-150" value='Email' disabled/><input className="right-input width-450" value={user?.email} disabled/></div>
           <div className='horizontal margin-2'><input className="left-input width-150" value='Должность' disabled/><input className="right-input width-450" value={user?.job} disabled/></div>
-          {myProfile && <button onClick={()=>unauth()} className='button width-600 margin-2'>Выход</button>}
+          {myProfile && <button onClick={()=>unauth()} className='button fill max-width-600 margin-2'>Выход</button>}
         </div>
       </PageLayout>
     </>

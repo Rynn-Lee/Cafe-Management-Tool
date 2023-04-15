@@ -1,5 +1,6 @@
 @import 'themes/aqua.sass'
 // @import 'themes/coral.sass'
+// @import 'themes/magic.sass'
 
 body
   padding: 0px
@@ -42,7 +43,6 @@ input, select, button
   left: 200px
   padding: 0px
   position: absolute
-  background: $gray15
 .top
   top: 42px
   left: 0px
@@ -142,6 +142,7 @@ table
         color: $themeDark
   .actions
     background: $action !important
+    border-right: none
     & .ico
       cursor: pointer
     &>a
@@ -150,7 +151,11 @@ table
       &:hover
         color: $themeDark2
     
-
+.bubble
+  margin: 15px
+  padding: 5px
+  background: $gray15
+  border-radius: 15px
 
 @import 'mess.sass'
 @import 'preparedStyles.sass'

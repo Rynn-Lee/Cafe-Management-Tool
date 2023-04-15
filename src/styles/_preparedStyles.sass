@@ -3,7 +3,11 @@
 .width-min
   width: min-content !important
 .width-max
-  width: max-content !important
+  width: 100%
+  position: relative
+  display: block !important
+  left: 0px !important
+  right: 0px !important
 .width-25
   width: 25px !important
 .width-50
@@ -57,6 +61,127 @@
 .width-1100
   width: 1100px !important
 
+.width-auto
+  width: auto !important
+.width-min
+  width: min-content !important
+.width-max
+  width: 100%
+  position: relative
+  display: block !important
+  left: 0px !important
+  right: 0px !important
+  
+.max-width-25
+  max-width: 25px !important
+.max-width-50
+  max-width: 50px !important
+.max-width-75
+  max-width: 75px !important
+.max-width-100
+  max-width: 100px !important
+.max-width-125
+  max-width: 125px !important
+.max-width-150
+  max-width: 150px !important
+.max-width-175
+  max-width: 175px !important
+.max-width-200
+  max-width: 200px !important
+.max-width-250
+  max-width: 250px !important
+.max-width-300
+  max-width: 300px !important
+.max-width-350
+  max-width: 350px !important
+.max-width-400
+  max-width: 400px !important
+.max-width-450
+  max-width: 450px !important
+.max-width-500
+  max-width: 500px !important
+.max-width-550
+  max-width: 550px !important
+.max-width-600
+  max-width: 600px !important
+.max-width-650
+  max-width: 650px !important
+.max-width-700
+  max-width: 700px !important
+.max-width-750
+  max-width: 750px !important
+.max-width-800
+  max-width: 800px !important
+.max-width-850
+  max-width: 850px !important
+.max-width-900
+  max-width: 900px !important
+.max-width-950
+  max-width: 950px !important
+.max-width-1000
+  max-width: 1000px !important
+.max-width-1050
+  max-width: 1050px !important
+.max-width-1100
+  max-width: 1100px !important
+
+
+.height-25
+  height: 25px !important
+.height-50
+  height: 50px !important
+.height-75
+  height: 75px !important
+.height-100
+  height: 100px !important
+.height-125
+  height: 125px !important
+.height-150
+  height: 150px !important
+.height-175
+  height: 175px !important
+.height-200
+  height: 200px !important
+.height-250
+  height: 250px !important
+.height-300
+  height: 300px !important
+.height-350
+  height: 350px !important
+.height-400
+  height: 400px !important
+.height-450
+  height: 450px !important
+.height-500
+  height: 500px !important
+.height-550
+  height: 550px !important
+.height-600
+  height: 600px !important
+.height-650
+  height: 650px !important
+.height-700
+  height: 700px !important
+.height-750
+  height: 750px !important
+.height-800
+  height: 800px !important
+.height-850
+  height: 850px !important
+.height-900
+  height: 900px !important
+.height-950
+  height: 950px !important
+.height-1000
+  height: 1000px !important
+.height-1050
+  height: 1050px !important
+.height-1100
+  height: 1100px !important
+
+
+.margin-0
+  margin: 0px !important
 .margin-2
   margin: 2px !important
 .margin-5
@@ -68,6 +193,8 @@
 .margin-20
   margin: 20px !important
 
+.padding-0
+  padding: 0px !important
 .padding-2
   padding: 2px !important
 .padding-5
@@ -165,6 +292,21 @@
 .square-30
   width: 30px !important
   height: 30px !important
+.square-100
+  width: 100px !important
+  height: 100px !important
+.square-125
+  width: 125px !important
+  height: 125px !important
+.square-150
+  width: 150px !important
+  height: 150px !important
+.square-175
+  width: 175px !important
+  height: 175px !important
+.square-200
+  width: 200px !important
+  height: 200px !important
 
 .center
   display: flex
@@ -172,11 +314,39 @@
   flex-direction: column
   align-items: center
 
+.round-5
+  border-radius: 5px !important
+.round-10
+  border-radius: 10px !important
+.round-15
+  border-radius: 15px !important
+.round-20
+  border-radius: 20px !important
+.round-25
+  border-radius: 25px !important
+.round-30
+  border-radius: 35px !important
+
+.img-fill
+  object-fit: contain
+  width: 100% !important
+  position: relative !important
+  height: unset !important
+  max-height: 150px !important
+  max-width: 150px !important
+
+.fill
+  position: relative
+  display: block
+  height: 100%
+  left: 0px !important
+  right: 0px !important
+
 .left-input
   border-top: 1px solid $themeDark2
   border-left: 1px solid $themeDark2
   border-bottom: 1px solid $themeDark2
-  background: $themeDark2
+  background: $lineRight2
   height: min-content
   padding: 10px
   border-radius: 10px 0px 0px 10px
@@ -198,10 +368,12 @@
   &:hover
     background: $themeDark3
 
-button, input, select, option
+button, input, select, option, textarea
+  background: none
   box-sizing: border-box
   outline: none
   border: 1px solid #00000000
+  resize: none
   color: #ccc
 
 select

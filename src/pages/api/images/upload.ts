@@ -14,7 +14,7 @@ const readFile = (req: NextApiRequest, saveLocally?: boolean):Promise<{fields: f
   if(saveLocally){
     options.uploadDir = path.join(process.cwd(), "/public/images")
     options.filename = (name, ext, path, form) => {
-      return Date.now().toString() + "_" + path.originalFilename
+      return "_" + path.originalFilename
     }
   }
 

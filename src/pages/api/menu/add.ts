@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import users from '@/models/userModel'
+import menu from '@/models/menuModel'
 
 type Data = {
   name: String,
@@ -7,10 +7,10 @@ type Data = {
 
 export default async function addUSer(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
-    const { full_name, password, hire_date, email, job} = req.body
-    console.log(`Incoming request: Add new user - ${full_name}`)
-    const userResult= await users.create(req.body)
-    res.json(userResult)
+    const { name, cost, category, description, filename} = req.body
+    console.log(`Incoming request: Add new dish - ${name}`)
+    const result = await menu.create(req.body)
+    res.json(result)
   }
   catch(error){
     console.log(error)
