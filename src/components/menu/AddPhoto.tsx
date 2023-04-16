@@ -12,7 +12,7 @@ export default function AddPhoto({setSelectedImage, setSelectedFile, selectedIma
             if(!file){return}
             setSelectedImage(URL.createObjectURL(file))
             setSelectedFile(file)
-            setFileName(`${Date.now().toString()}_${target.files[0].name}`)
+            setFileName(`${Date.now().toString()}_${file.name}`)
           }
         }}/>
         {selectedImage ? (

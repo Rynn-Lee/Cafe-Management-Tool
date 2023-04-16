@@ -20,8 +20,8 @@ export default function Add() {
       if(!selectedFile) return;
       const formData = new FormData()
       formData.append("image", selectedFile)
-      const { data } = await axios.post("/api/images/upload", formData)
-      console.log(data)
+      formData.append("filePrefix", fileName)
+      const data = await axios.post("/api/images/upload", formData)
     }
     catch(err: any){
       console.log(err.response?.data)
