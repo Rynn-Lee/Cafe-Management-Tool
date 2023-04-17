@@ -20,7 +20,6 @@ export default function Add() {
       if(!selectedFile) return;
       const formData = new FormData()
       formData.append("image", selectedFile)
-      formData.append("filePrefix", fileName)
       const data = await axios.post("/api/images/upload", formData)
     }
     catch(err: any){
@@ -36,7 +35,6 @@ export default function Add() {
         description: dishInfo.current['description'].value,
         fileName
       }
-      console.log(fileName)
       const response = await services.menu.add(info)
     }
     catch(err){

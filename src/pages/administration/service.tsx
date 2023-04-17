@@ -10,14 +10,17 @@ export default function Service() {
 
   const getUsers = async() => setUsers(await services.account.findUsers())
   const deleteAllUsers = async() => await services.account.deleteUsers()
+  const deleteMenu = async() => await services.menu.deleteAll()
 
   return (
     <>
       <PageLayout title={"Сервисное меню - Управление кафе"} pageNav={"administration"}>
-      <button onClick={getUsers}>Get users</button>
-      <button onClick={deleteAllUsers}>Delete users</button><br/>
-      <button onClick={()=>dispatch(removeEmployees())}>Clear Redux Store</button>
-
+      <div className='horizontal'>
+        <button className='button padding-10' onClick={getUsers}>Get users</button>
+        <button className='button padding-10' onClick={deleteAllUsers}>Delete users</button><br/>
+        <button className='button padding-10' onClick={deleteMenu}>Delete menu</button><br/>
+        <button className='button padding-10' onClick={()=>dispatch(removeEmployees())}>Clear Redux Store</button>
+      </div>
       <ul>
         {users.map((user: any, index: number)=>{
           return(

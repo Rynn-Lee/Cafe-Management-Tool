@@ -1,6 +1,7 @@
 import Image from "next/image"
 
 export default function AddPhoto({setSelectedImage, setSelectedFile, selectedImage, setFileName}: any){
+
   return(
     <fieldset className='padding-5 margin-10 b-radius-10 square-175 center'>
     <legend>Фото</legend> 
@@ -8,11 +9,11 @@ export default function AddPhoto({setSelectedImage, setSelectedFile, selectedIma
         <input type='file' hidden onChange={({ target }) => {
           if(target.files){
             const file = target.files[0];
-            console.log(target.files[0])
             if(!file){return}
-            setSelectedImage(URL.createObjectURL(file))
-            setSelectedFile(file)
-            setFileName(`${Date.now().toString()}_${file.name}`)
+            const newFile = new File([file], Date.now().toString() + "_" + file.name)
+            setSelectedImage(URL.createObjectURL(newFile))
+            setSelectedFile(newFile)
+            setFileName(newFile.name)
           }
         }}/>
         {selectedImage ? (

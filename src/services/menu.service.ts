@@ -1,6 +1,7 @@
 const api = {
   "menu": {
     "add": "../../api/menu/add",
+    "remove": "../../api/menu/remove",
   }
 }
 
@@ -21,5 +22,9 @@ export const menuService = {
     })
     const response = await res.json()
     return response
+  },
+  async deleteAll(){
+    const response = await fetch(api.menu.remove,{method: 'DELETE'})
+    return response.json()
   }
 }
