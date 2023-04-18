@@ -21,7 +21,7 @@ hr
   color: #ffffff0a
   background: #ffffff0a
   border: none
-  border-top: 1px dashed #ffffff48
+  border-top: 2px outset #ffffff48
 
 
 .sidebar
@@ -167,21 +167,25 @@ table
   grid-template-columns: repeat(4, 1fr)
   grid-template-rows: 1fr
   grid-column-gap: 10px
-  grid-row-gap: 20px
+  grid-row-gap: 30px
 
 .dish-info
   text-align: center
 
 .menu-card>div
-  border-radius: 10px
+  border-radius: 0px 0px 10px 10px
   &:hover
     cursor: pointer
 .menu-card
+  top: 20px
   width: 100%
   position: relative
+  &>img
+    border-radius: 0px 0px 0px 10px
+    z-index: 5
 
 .menu-card-info
-  border-radius: 10px
+  border-radius: 0px 0px 10px 10px
   padding: 10px
   background: $gray2
   display: flex
@@ -192,27 +196,43 @@ table
   max-height: 130px
   flex-direction: column
   .name
+    z-index: 10
     font-weight: 900
-    color: #ffaf64
     text-align: center
+    padding: 5px 0px 5px 0px
+    color: #ffaf64
+    background: $gray2
+    border-radius: 10px 10px 0px 0px
+    width: 100%
+    top: -15px
+    left: 0px
+    position: absolute
+    font-size: 11pt
   .category
     position: relative
     font-size: 10pt
     text-align: center
   .description
-    max-height: 100px
+    max-height: 105px
     font-size: 10pt
+    word-break: break-word
     overflow: hidden
     text-overflow: ellipsis
   .cost
-    padding: 5px 10px 0px 10px
+    width: 125px
+    z-index: 6
+    text-align: center
+    padding: 5px 8px 0px 8px
     color: lightgreen
-    background: $gray2
-    border-radius: 10px
-    top: -10px
-    right: 0px
+    font-weight: 600
+    background: #272735c5
+    border-radius: 0px 20px 0px 8px
+    bottom: 0px
+    left: 0px
     position: absolute
-    font-size: 11pt
+    font-size: 10pt
+    &>span
+      color: #fff
   
 @import 'mess.sass'
 @import 'preparedStyles.sass'

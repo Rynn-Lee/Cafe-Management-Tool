@@ -2,13 +2,18 @@
   .menu-body
     grid-template-columns: repeat(3, 1fr)
     grid-column-gap: 5px
-    grid-row-gap: 20px
+    grid-row-gap: 30px
 @media screen and (max-width: 1220px)
   .menu-body
     grid-template-columns: repeat(2, 1fr)
 @media screen and (max-width: 890px)
   .menu-body
     grid-template-columns: repeat(1, 1fr)
+    grid-row-gap: 30px
+  .nav
+    top: 39px
+  .nav2
+    top: 82px
   table>td>a
     font-size: 10pt
   body
@@ -37,6 +42,8 @@
     right: 0px !important
     &>div, &>div>input
       width: 100% !important
+  .menu-body
+    padding: 0px 0px 80px 0px
   .padding-m
     padding: 0px !important
   .logo, .version
@@ -65,9 +72,10 @@
   .content, .content-title, .nav, .nav2
     left: 0px !important
   .content
-    padding: 5px 0px 60px 0px
-    top: 70px !important
+    padding: 5px 0px 100px 0px
+    top: 90px !important
   .top
+    padding: 5px 0px 100px 0px
     left: 0px
     top: 31px !important
   .nav-page
@@ -88,7 +96,7 @@
     left: 0px !important
     right: 0px !important
   .horizontal
-    flex-direction: column
+    flex-direction: row
     width: 100%
   fieldset
     left: 0px !important
