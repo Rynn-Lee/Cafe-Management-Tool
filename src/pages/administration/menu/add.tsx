@@ -1,16 +1,21 @@
 import LoadingScreen from '@/components/LoadingScreen'
 import AddPhoto from '@/components/menu/AddPhoto'
 import { PageLayout } from '@/layouts/PageLayout'
+import { setMenu } from '@/reducers/menuSlice'
 import { services } from '@/services'
 import axios from 'axios'
 import { useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 export default function Add() {
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(0)
   const [selectedImage, setSelectedImage] = useState("")
   const [fileName, setFileName] = useState("")
   const [selectedFile, setSelectedFile] = useState<File>()
   const dishInfo = useRef<any>()
+
+  const updateStorage = async() => dispatch(setMenu(await services.menu.findMenu()))
 
   const handleUpload = async(e: any) => {
     e.preventDefault()
@@ -36,6 +41,7 @@ export default function Add() {
         fileName
       }
       const response = await services.menu.add(info)
+      updateStorage()
     }
     catch(err){
       console.warn(err)
@@ -49,8 +55,8 @@ export default function Add() {
       <PageLayout title={"Меню > Просмотр - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/menu"} nav2>
           {loading ? <LoadingScreen/> : ""}
-          <form ref={dishInfo} onSubmit={handleUpload}>
-          <div className='horizontal padding-5'>
+          <form ref={dishInfo} onSubmit={handleUpload} className='bg-2'>
+          <div className='horizontal padding-5 bg-5'>
             <AddPhoto
               handleUpload={handleUpload}
               setSelectedImage={setSelectedImage}
@@ -70,6 +76,8 @@ export default function Add() {
                   <option>Закуски</option>
                   <option>Напитки</option>
                   <option>Выпечка</option>
+                  <option>Компоты</option>
+                  <option>Пицца</option>
                   <option>Сладкая выпечка</option>
                   <option>Салаты</option>
                   <option>Соусы</option>

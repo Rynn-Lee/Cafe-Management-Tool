@@ -9,6 +9,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <div className='bg'/>
       </body>
     </Html>
   )

@@ -9,7 +9,7 @@ export default function Add() {
   const [loading, setLoading] = useState(0)
   const dispatch = useDispatch()
   const addEmployee: any = useRef()
-  
+
   const addNewEmployee = async(e: any) =>{
     setLoading(1)
     e.preventDefault()
@@ -28,7 +28,7 @@ export default function Add() {
       <PageLayout title={"Сотрудники > Добавить - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
           {loading ? <LoadingScreen/> : ""}
-          <form className='vertical padding-5' ref={addEmployee} onSubmit={addNewEmployee}>
+          <form className='vertical padding-5 bg-3' ref={addEmployee} onSubmit={addNewEmployee}>
             <div className='horizontal margin-2'><input value="ФИО" className='left-input width-100' disabled/><input className='right-input width-400' name="full_name"/></div>
             <div className='horizontal margin-2'><input value="Пароль" className='left-input width-100' disabled/><input className='right-input width-400' placeholder="По умолчанию! 123" disabled/></div>
             <div className='horizontal margin-2'><input value="Должность" className='left-input width-100' disabled/>
