@@ -1,39 +1,75 @@
 import { PageLayout } from '@/layouts/PageLayout'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeEmployees } from '@/reducers/employeesSlice';
 import { services } from '@/services'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import fs from 'fs/promises'
+import path from 'path'
+import { GetServerSideProps } from 'next';
+import { setMenu } from '@/reducers/menuSlice';
 
-export default function Service() {
-  const [users, setUsers] = useState([])
+interface Props {
+  dirs: string[]
+}
+
+export default function Service({dirs}: Props) {
+  const [images, setImages] = useState<any>()
+  const menu = useSelector((state: any) => state.menu.list)
+  const [firstCheck, setFirstCheck] = useState(0)
   const dispatch = useDispatch()
 
-  const getUsers = async() => setUsers(await services.account.findUsers())
+  const updateStorage = async() => dispatch(setMenu(await services.menu.findMenu()))
+  
+  useEffect(()=>{
+    !menu.length && !firstCheck && updateStorage()
+    setFirstCheck(1)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[menu])
+
   const deleteAllUsers = async() => await services.account.deleteUsers()
   const deleteMenu = async() => await services.menu.deleteAll()
+  const deleteLeftovers = async () => {
+    const used = menu.map((item: any) => item.filename)
+    const result = images.filter((x: any) => !used.includes(x))
+    console.log(await services.images.delete(result))
+  }
+
+  useEffect(()=>{
+    setImages(dirs)
+  },[dirs])
 
   return (
     <>
       <PageLayout title={"Сервисное меню - Управление кафе"} pageNav={"administration"}>
       <div className='horizontal'>
-        <button className='button padding-10' onClick={getUsers}>Get users</button>
-        <button className='button padding-10' onClick={deleteAllUsers}>Delete users</button><br/>
-        <button className='button padding-10' onClick={deleteMenu}>Delete menu</button><br/>
-        <button className='button padding-10' onClick={()=>dispatch(removeEmployees())}>Clear Redux Store</button>
+        <fieldset>
+          <legend>Other deletions</legend>
+          <button className='button padding-10' onClick={deleteAllUsers}>Delete users</button><br/>
+          <button className='button padding-10' onClick={deleteMenu}>Delete menu</button><br/>
+          <button className='button padding-10' onClick={()=>dispatch(removeEmployees())}>Clear Redux Store</button>
+        </fieldset>
+        <fieldset>
+          <legend>images</legend>
+          <button className='button padding-10' onClick={deleteLeftovers}>Delete unused images</button><br/>
+        </fieldset>
       </div>
       <ul>
-        {users.map((user: any, index: number)=>{
-          return(
-            <li key={user._id}>
-              Name: {user.full_name}<br/>
-              Hire date: {user.hire_date}<br/>
-              email: {user.email}<br/>
-              job: {user.job}
-            </li>
-          )
-        })}
+        {images?.map((item: string)=>(
+          <li key={item}>{item}</li>
+        ))}
       </ul>
       </PageLayout>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const props = {dirs:[]}
+  try{
+    const dirs = await fs.readdir(path.join(process.cwd(), "/public/images"))
+    props.dirs = dirs as any
+    return {props}
+  } catch (err) {
+    return {props}
+  }
 }

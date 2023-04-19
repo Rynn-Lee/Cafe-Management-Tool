@@ -5,7 +5,8 @@ const menuSchema: any = new Schema({
   cost: Number,
   category: String,
   description: String,
-  filename: String
+  available: Boolean,
+  filename: String,
 })
 
 const menu = models.menu || model('menu', menuSchema)

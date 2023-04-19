@@ -7,8 +7,8 @@ type Data = {
 
 export default async function addUSer(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
-    const { name, cost, category, description, filename} = req.body
-    console.log(`Incoming request: Add new dish - ${name}`)
+    const { name, cost, category, description, available, filename} = req.body
+    console.log(`Incoming request: Add new dish - ${name} - AVA: ${available}`)
     const result = await menu.create(req.body)
     res.json(result)
   }

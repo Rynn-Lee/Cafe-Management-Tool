@@ -20,6 +20,24 @@ export default function Add() {
   const handleUpload = async(e: any) => {
     e.preventDefault()
     setLoading(1)
+    //* SENDING DATA TO MONGO
+    try{
+      const info = {
+        name: dishInfo.current['name'].value,
+        cost: dishInfo.current['cost'].value,
+        category: dishInfo.current['category'].value,
+        description: dishInfo.current['description'].value,
+        available: dishInfo.current['available'].checked,
+        fileName
+      }
+      const response = await services.menu.add(info)
+      console.log(response)
+      updateStorage()
+    }
+    catch(err){
+      console.warn(err)
+    }
+    
     //* SENDING PHOTO TO IMAGES FOLDER
     try{
       if(!selectedFile) return;
@@ -30,23 +48,6 @@ export default function Add() {
     catch(err: any){
       console.log(err.response?.data)
     }
-
-    //* SENDING DATA TO MONGO
-    try{
-      const info = {
-        name: dishInfo.current['name'].value,
-        cost: dishInfo.current['cost'].value,
-        category: dishInfo.current['category'].value,
-        description: dishInfo.current['description'].value,
-        fileName
-      }
-      const response = await services.menu.add(info)
-      updateStorage()
-    }
-    catch(err){
-      console.warn(err)
-    }
-
     setLoading(0)
   }
 
@@ -67,7 +68,7 @@ export default function Add() {
             <fieldset className='padding-5 margin-10 b-radius-10 center fill padding-m'>
             <legend>Основная информация</legend>
               <div className='horizontal margin-2'><input className='left-input width-125' value='Название' disabled/><input className='right-input width-max' name='name'/></div>
-              <div className='horizontal margin-2'><input className='left-input width-125' value='Цена (тг)' disabled/><input className='right-input width-max' name='cost'/></div>
+              <div className='horizontal margin-2'><input className='left-input width-125' value='Цена (тг)' disabled/><input type='number' className='right-input width-max' name='cost'/></div>
               <div className='horizontal margin-2'><input className='left-input width-125' value='Категория' disabled/>
                 <select className='right-input width-max' name='category'>
                   <option>Вторые блюда</option>
@@ -85,6 +86,7 @@ export default function Add() {
                   <option>Хеллоуин</option>
                 </select>
               </div>
+              <div className='horizontal margin-2'><input className='left-input width-250' value='Доступно после добавления?' disabled/><input type='checkbox' name='available'/></div>
             </fieldset>
           </div>
             <fieldset className='padding-5 margin-10 b-radius-10 fill height-300'>

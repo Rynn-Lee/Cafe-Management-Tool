@@ -5,7 +5,10 @@ const api = {
     "remove": "../../api/menu/remove",
   }
 }
-
+const params = {
+  "id": "?_id=",
+  "name": "?name="
+}
 export const menuService = {
   async add(data: any){
     const res = await fetch(api.menu.add,{
@@ -18,6 +21,7 @@ export const menuService = {
         cost: data.cost,
         category: data.category,
         description: data.description,
+        available: data.available,
         filename: data.fileName
       }),
     })
@@ -26,6 +30,10 @@ export const menuService = {
   },
   async deleteAll(){
     const response = await fetch(api.menu.remove,{method: 'DELETE'})
+    return response.json()
+  },
+  async deleteDish(id: any){
+    const response = await fetch(api.menu.remove + params.id + id,{method: 'DELETE'})
     return response.json()
   },
   async findMenu(){

@@ -90,6 +90,30 @@ a
   top: 0px
   bottom: 0px
 
+.unavailable
+  transition: 100ms
+  filter: contrast(70%) brightness(70%)
+  border-bottom: 1px solid #fc5858
+  .name
+    border-top: 1px solid #fc5858
+    border-left: 1px solid #fc5858
+    color: #fc5858
+  .cost
+    border-top: 2px solid #fc5858
+  .dishActions
+    border-top: 2px solid #fc5858
+  &:hover
+    filter: contrast(100%) brightness(100%)
+  &::after
+    z-index: 9999
+    position: absolute
+    bottom: 20px
+    right: 0px
+    padding: 5px 10px
+    border-radius: 10px 0px 0px 10px
+    background: #fc5858
+    content: "Отключено!"
+
 .spin
   padding: 10px
   animation: spin-anim 0.3s infinite linear

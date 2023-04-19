@@ -17,7 +17,7 @@ export default async function findMenu(req: NextApiRequest, res: NextApiResponse
     }
     else{
       console.log(`Incoming request: Find ALL dishes`)
-      result = await menu.find({})
+      result = await menu.find().sort({available: -1})
     }
     res.json(result as unknown as Data)
   }

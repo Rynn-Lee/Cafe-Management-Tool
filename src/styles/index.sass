@@ -163,6 +163,7 @@ table
   border-radius: 15px
 
 .menu-body
+  margin: 0px 0px 30px 0px !important
   display: grid
   grid-template-columns: repeat(4, 1fr)
   grid-template-rows: 1fr
@@ -172,10 +173,15 @@ table
 .dish-info
   text-align: center
 
-.menu-card>div
+.menu-card
+  transition: 100ms
   border-radius: 0px 0px 10px 10px
   &:hover
     cursor: pointer
+    transform: scale(1.012)
+    img
+      transform: scale(0.995)
+
 .menu-card
   top: 20px
   width: 100%
@@ -203,7 +209,7 @@ table
     color: #ffaf64
     background: $gray2
     border-radius: 10px 10px 0px 0px
-    width: 100%
+    right: 0px
     top: -15px
     left: 0px
     position: absolute
@@ -218,7 +224,25 @@ table
     word-break: break-word
     overflow: hidden
     text-overflow: ellipsis
+  .dishActions
+    z-index: -1
+    transition: 100ms
+    opacity: 0
+    position: absolute
+    top: 0px
+    right: 0px
+    padding: 5px
+    background: $gray2
+    border-radius: 10px
+    .remove:hover
+      filter: brightness(0) invert(1)
+  &:hover
+    .dishActions
+      top: -10px
+      z-index: -1
+      opacity: 1
   .cost
+    border-top: 2px solid lightgreen
     width: 125px
     z-index: 6
     text-align: center
