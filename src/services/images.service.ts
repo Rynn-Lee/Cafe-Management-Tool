@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const api = {
   "images": {
     "delete": "../../api/images/delete"
@@ -6,16 +8,10 @@ const api = {
 
 export const imagesService = {
   async delete(photos: string[]){
-    const result = await fetch(api.images.delete, {
-      method: 'POST',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    const response = await axios.post(api.images.delete, {
         arr: photos
-      }),
     })
-    const response = await result.json()
-    return response
+    const result = await response.data
+    return result
   }
 }

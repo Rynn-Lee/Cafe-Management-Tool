@@ -28,6 +28,7 @@ export default function Service({dirs}: Props) {
 
   const deleteAllUsers = async() => await services.account.deleteUsers()
   const deleteMenu = async() => await services.menu.deleteAll()
+
   const deleteLeftovers = async () => {
     const used = menu.map((item: any) => item.filename)
     const result = images.filter((x: any) => !used.includes(x))

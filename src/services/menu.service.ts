@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const api = {
   "menu": {
     "add": "../../api/menu/add",
@@ -11,33 +13,27 @@ const params = {
 }
 export const menuService = {
   async add(data: any){
-    const res = await fetch(api.menu.add,{
-      method: 'POST',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    const response = await axios.post(api.menu.add,{
         name: data.name,
         cost: data.cost,
         category: data.category,
         description: data.description,
         available: data.available,
         filename: data.fileName
-      }),
     })
-    const response = await res.json()
-    return response
+    const result = await response.data
+    return result
   },
   async deleteAll(){
-    const response = await fetch(api.menu.remove,{method: 'DELETE'})
-    return response.json()
+    const response = await axios.delete(api.menu.remove)
+    return response.data
   },
   async deleteDish(id: any){
-    const response = await fetch(api.menu.remove + params.id + id,{method: 'DELETE'})
-    return response.json()
+    const response = await axios.delete(api.menu.remove + params.id + id)
+    return response.data
   },
   async findMenu(){
-    const response = await fetch(api.menu.find,{method: 'GET'})
-    return response.json()
+    const response = await axios.get(api.menu.find)
+    return response.data
   }
 }

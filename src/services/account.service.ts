@@ -1,4 +1,5 @@
 import { getDateNow } from '@/utils/getDate'
+import axios from 'axios'
 const md5 = require('md5')
 
 const api = {
@@ -21,21 +22,15 @@ interface data{
 
 export const accountService = {
   async addUser(data: data){
-    const res = await fetch(api.users.add,{
-      method: 'POST',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    const response = await axios.post(api.users.add,{
         full_name: data.full_name,
         password: md5(`123`),
         hire_date: getDateNow(),
         email: `example@gmail.com`,
         job: data.job
-      }),
-    })
-    const response = await res.json()
-    return response
+      })
+    const result = await response.data
+    return result
   },
   async findUsers(fio: any = null, id: any = null, inputPassword: any = null, auth: boolean = false){
     let query: any
@@ -44,8 +39,8 @@ export const accountService = {
     id && (query = api.users.find + params.id + id)
     !fio && !id && (query = api.users.find)
 
-    const response: any = await fetch(query)
-    const result = await response.json()
+    const response: any = await axios.get(query)
+    const result = await response.data
 
     if(auth){
       const authResult = this.auth(result, inputPassword)
@@ -67,8 +62,8 @@ export const accountService = {
     id && (query = api.users.remove + params.id + id)
     !id && (query = api.users.remove)
 
-    const response = await fetch(query,{method: 'DELETE'})
-    return response.json()
+    const response = await axios.delete(query)
+    return response.data
   },
   unauth(){
     sessionStorage.removeItem("username")
