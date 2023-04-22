@@ -31,7 +31,7 @@ export default function Employees() {
     <>
       <PageLayout title={"Сотрудники  > Просмотр - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
-          <div className='padding-5 bg-3'>
+          <div className='form employees-form bg-3'>
             <div>
               <span className='left-input'>Поиск</span>
               <input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input'/>

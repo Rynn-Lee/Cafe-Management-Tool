@@ -19,7 +19,7 @@ export default function AddPhoto({setSelectedImage, setSelectedFile, selectedIma
         {selectedImage ? (
           <Image src={selectedImage} alt="" fill className="img-fill round-10"/>
         ):(
-          <span className='padding-5 width-150 height-150 center'>Выберите фото</span>
+          <span className='photo'>Выберите фото</span>
         )}
       </label>
     </fieldset>

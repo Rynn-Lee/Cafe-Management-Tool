@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.3",
     "@tanstack/react-query": "^4.29.3",
     "@tanstack/react-query-devtools": "^4.29.3",
     "@types/formidable": "^2.0.5",
@@ -26,7 +25,6 @@
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-redux": "^8.0.5",
     "sass": "^1.60.0",
     "typescript": "5.0.2"
   }

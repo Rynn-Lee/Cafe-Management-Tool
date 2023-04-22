@@ -1,12 +1,10 @@
 import { PageLayout } from '@/layouts/PageLayout'
-import { useDispatch, useSelector } from 'react-redux';
-import { removeEmployees } from '@/reducers/employeesSlice';
 import { services } from '@/services'
 import { useEffect, useState } from 'react'
 import fs from 'fs/promises'
 import path from 'path'
+import { useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
-import { setMenu } from '@/reducers/menuSlice';
 
 interface Props {
   dirs: string[]
@@ -14,15 +12,16 @@ interface Props {
 
 export default function Service({dirs}: Props) {
   const [images, setImages] = useState<any>()
-  const menu = useSelector((state: any) => state.menu.list)
-  const [firstCheck, setFirstCheck] = useState(0)
-  const dispatch = useDispatch()
 
-  const updateStorage = async() => dispatch(setMenu(await services.menu.findMenu()))
+  const menu = useQuery({
+    queryKey: ["menu"],
+    queryFn: () => services.menu.findMenu(),
+    enabled: false
+  })
+  
   
   useEffect(()=>{
-    !menu.length && !firstCheck && updateStorage()
-    setFirstCheck(1)
+    !menu.isFetched && menu.refetch()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[menu])
 
@@ -30,7 +29,7 @@ export default function Service({dirs}: Props) {
   const deleteMenu = async() => await services.menu.deleteAll()
 
   const deleteLeftovers = async () => {
-    const used = menu.map((item: any) => item.filename)
+    const used = menu.data.map((item: any) => item.filename)
     const result = images.filter((x: any) => !used.includes(x))
     console.log(await services.images.delete(result))
   }
@@ -42,15 +41,15 @@ export default function Service({dirs}: Props) {
   return (
     <>
       <PageLayout title={"Сервисное меню - Управление кафе"} pageNav={"administration"}>
-      <div className='horizontal'>
+      <div className='horizontal form'>
         <fieldset>
           <legend>Other deletions</legend>
-          <button className='button padding-10' onClick={deleteAllUsers}>Delete users</button><br/>
-          <button className='button padding-10' onClick={deleteMenu}>Delete menu</button><br/>
+          <button onClick={deleteAllUsers}>Delete users</button><br/>
+          <button onClick={deleteMenu}>Delete menu</button><br/>
         </fieldset>
         <fieldset>
           <legend>images</legend>
-          <button className='button padding-10' onClick={deleteLeftovers}>Delete unused images</button><br/>
+          <button onClick={deleteLeftovers}>Delete unused images</button><br/>
         </fieldset>
       </div>
       <ul>

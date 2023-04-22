@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
 import { services } from "@/services";
 import { useQuery } from '@tanstack/react-query';
-import LoadingScreen from "./LoadingScreen";
+import Login from "@/pages/login";
 
 export default function Layout({ children }: PropsWithChildren){
   const router = useRouter();
@@ -25,6 +25,7 @@ export default function Layout({ children }: PropsWithChildren){
 
   return (
     <>
+      {!auth && <Login />}
       {auth && <Sidebar/>}
       {auth && children}
     </>

@@ -3,7 +3,7 @@ import AddPhoto from '@/components/menu/AddPhoto'
 import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
 import axios from 'axios'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 
 export default function Add() {
