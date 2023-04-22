@@ -45,7 +45,7 @@ export const accountService = {
     if(auth){
       const authResult = this.auth(result, inputPassword)
       if(authResult) return result
-      return false
+      throw new Error("Пароль не верный")
     }
     if(!result && auth){return[{}]}
     return result
@@ -55,7 +55,7 @@ export const accountService = {
       sessionStorage.setItem("username", JSON.stringify(result))
       return true
     }
-    return false
+    throw new Error("Пароль неверный")
   },
   async deleteUsers(id: any = null){
     let query: any

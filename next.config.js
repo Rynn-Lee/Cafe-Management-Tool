@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    minimumCacheTTL: 200, //In seconds
+    dangerouslyAllowSVG: true,
+    minimumCacheTTL: 5000, //In seconds
   },
 }
 

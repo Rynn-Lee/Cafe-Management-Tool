@@ -2,28 +2,29 @@ import React, { PropsWithChildren, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
 import { services } from "@/services";
-import { useSelector, useDispatch } from "react-redux"
-import { setInfo } from '@/reducers/authSlice'
-import Login from "@/pages/login";
+import { useQuery } from '@tanstack/react-query';
+import LoadingScreen from "./LoadingScreen";
 
 export default function Layout({ children }: PropsWithChildren){
-  const auth = useSelector((state: any) => state.auth.info[0])
   const router = useRouter();
-  const dispatch = useDispatch()
 
-  const changeRoute = (path: string) => path !== "/login" && (router.push("/login"))
+  const auth = useQuery({
+    queryKey: ["auth"],
+    queryFn: () => services.account.checkLogin(),
+    onError: () => router.push("/login"),
+    enabled: true
+  })
 
   useEffect(()=>{
     const userData = services.account.checkLogin()
     const path = router.pathname
     if(path === "/login") return
-    !auth && userData ? dispatch(setInfo(userData)) : changeRoute(path)
+    !userData && router.push("/login")
       // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (
     <>
-      {!auth && <Login />}
       {auth && <Sidebar/>}
       {auth && children}
     </>

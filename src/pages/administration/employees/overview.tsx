@@ -1,30 +1,28 @@
 import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { setEmployees } from '@/reducers/employeesSlice';
+import { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query';
 import EmployeesTable from '@/components/administration/EmployeesTable';
+import LoadingScreen from '@/components/LoadingScreen';
 
 export default function Employees() {
-  const employees = useSelector((state: any) => state.employees.list)
-  const [firstCheck, setFirstCheck] = useState(0)
   const [query, setQuery] = useState<any>("")
-  const dispatch = useDispatch()
   
-  const updateStorage = async() => dispatch(setEmployees(await services.account.findUsers()))
-  
+  const employees = useQuery({
+    queryKey: ["employees"],
+    queryFn: () => services.account.findUsers(),
+    enabled: false
+  })
+
   useEffect(()=>{
-    !employees.length && !firstCheck && updateStorage()
-    setFirstCheck(1)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    !employees.data && employees.refetch()
   },[employees])
 
-  const deleteUser = (id: string) =>{
-    services.account.deleteUsers(id)
-    const filtered = employees.filter((user: any) => user._id != id)
-    dispatch(setEmployees(filtered))
+  const deleteUser = async (id: string) =>{
+    await services.account.deleteUsers(id)
+    employees.refetch()
   }
-
+  
   const editUser = (id: string) => {
     alert(`Coming soon! ID: ${id}`)
   }
@@ -34,14 +32,15 @@ export default function Employees() {
       <PageLayout title={"Сотрудники  > Просмотр - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
           <div className='padding-5 bg-3'>
-          <div>
-            <input value='Поиск' disabled className='left-input width-75'/>
-            <input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input width-300'/>
-          </div>
-          <EmployeesTable employees={employees} query={query} deleteUser={deleteUser} editUser={editUser}/>
+            <div>
+              <span className='left-input'>Поиск</span>
+              <input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
+            </div>
+            <EmployeesTable employees={employees.data} query={query} deleteUser={deleteUser} editUser={editUser}/>
           </div>
         </PageLayout>
       </PageLayout>
+      {employees.isFetching && <LoadingScreen />}
     </>
   )
 }

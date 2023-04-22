@@ -1,47 +1,48 @@
-import LoadingScreen from '@/components/LoadingScreen'
 import { PageLayout } from '@/layouts/PageLayout'
-import { setEmployees } from '@/reducers/employeesSlice'
+import { useQuery } from '@tanstack/react-query';
 import { services } from '@/services'
-import { useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react'
+import LoadingScreen from '@/components/LoadingScreen';
 
 export default function Add() {
-  const [loading, setLoading] = useState(0)
-  const dispatch = useDispatch()
-  const addEmployee: any = useRef()
+  const [newEmployee, setNewEmployee] = useState<any>({job: "Официант"})
+
+  const employees = useQuery({
+    queryKey: ["employees"],
+    queryFn: () => services.account.findUsers(),
+    onSuccess: (data) => console.log(data),
+    enabled: false
+  })
 
   const addNewEmployee = async(e: any) =>{
-    setLoading(1)
     e.preventDefault()
-    const employeeInfo = addEmployee.current
     const data = {
-      full_name: employeeInfo['full_name'].value,
-      job: employeeInfo['job'].value
+      full_name: newEmployee.full_name,
+      job: newEmployee.job
     }
-    const result = await services.account.addUser(data)
-    dispatch(setEmployees(await services.account.findUsers()))
-    result && setLoading(0)
+    await services.account.addUser(data)
+    employees.refetch()
   }
 
   return (
     <>
       <PageLayout title={"Сотрудники > Добавить - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
-          {loading ? <LoadingScreen/> : ""}
-          <form className='vertical padding-5 bg-3' ref={addEmployee} onSubmit={addNewEmployee}>
-            <div className='horizontal margin-2'><input value="ФИО" className='left-input width-100' disabled/><input className='right-input width-400' name="full_name"/></div>
-            <div className='horizontal margin-2'><input value="Пароль" className='left-input width-100' disabled/><input className='right-input width-400' placeholder="По умолчанию! 123" disabled/></div>
-            <div className='horizontal margin-2'><input value="Должность" className='left-input width-100' disabled/>
-            <select name="job" className='right-input width-400'>
+          <form onSubmit={addNewEmployee} className='form'>
+            <div className='fields'><span>Фио</span><input onChange={(e) => setNewEmployee({...newEmployee, full_name: e.target.value})}/></div>
+            <div className='fields'><span>Пароль</span><input placeholder="По умолчанию! 123" readOnly/></div>
+            <div className='fields'><span>Должность</span>
+            <select onChange={(e) => setNewEmployee({...newEmployee, job: e.target.value})}>
               <option>Официант</option>
               <option>Повар</option>
               <option>Кассир</option>
               <option>Администратор</option>
             </select></div>
-          <button type='submit' className='button width-500 margin-2'>Добавить сотрудника</button>
+          <button type='submit'>Добавить сотрудника</button>
           </form>
         </PageLayout>
       </PageLayout>
+      {employees.isFetching && <LoadingScreen />}
     </>
   )
 }

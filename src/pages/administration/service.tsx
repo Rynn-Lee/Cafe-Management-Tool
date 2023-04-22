@@ -47,7 +47,6 @@ export default function Service({dirs}: Props) {
           <legend>Other deletions</legend>
           <button className='button padding-10' onClick={deleteAllUsers}>Delete users</button><br/>
           <button className='button padding-10' onClick={deleteMenu}>Delete menu</button><br/>
-          <button className='button padding-10' onClick={()=>dispatch(removeEmployees())}>Clear Redux Store</button>
         </fieldset>
         <fieldset>
           <legend>images</legend>

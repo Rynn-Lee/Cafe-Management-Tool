@@ -60,6 +60,7 @@ hr
     color: $themeDark
 
 .login-content
+  font-size: 12pt
   z-index: 1003
   display: flex
   justify-content: center
@@ -69,37 +70,88 @@ hr
   width: 100%
   text-align: center
   height: 100vh
-  form
-    display: flex
-    margin: 20px
-  input, button
-    transition: 200ms
-    text-align: center
-    margin: 0px 0px 10px 0px
-    box-sizing: border-box
-    border-radius: 0px 10px 10px 0px
-    outline: 0px
-    border: none
-    background: $gray3
-    color: #fff
-    padding: 10px
-    &:hover
-      background: #303030
-    &:disabled
-      color: #fff !important
-  button
-    border-radius: 10px
-  .input-placeholder
-    border-radius: 10px 0px 0px 10px
-    text-align: left
-    background: $themeDark3
-  .label
-    display: block
-    position: relative
-    text-align: left
+
+.photo-form
+  width: auto !important
+.form, .form>div, .account-form
+  width: 500px
   .status
-    border-radius: 10px !important
-    text-align: center
+    padding: 10px 0px 10px 0px
+    border-radius: 10px 10px 0px 0px
+    background: $themeDark2
+  &>span, .fields>span
+    box-sizing: border-box
+    display: inline-block
+    background: $themeDark2
+    padding: 10px
+    min-width: 100px
+    max-width: max-content
+    width: 650px
+    min-width: 150px
+  .fields
+    display: flex
+    text-align: left
+    &>input
+      box-sizing: border-box
+      position: relative
+      display: block
+      background: $gray2
+      padding: 10px
+      width: 100%
+      &:hover
+        border-top: 1px solid $themeDark3
+      &:focus
+        border-top: 1px solid $themeDark
+    &>select
+      box-sizing: border-box
+      position: relative
+      display: block
+      background: $gray2
+      padding: 10px
+      height: 20px
+      width: 100%
+  &>fieldset
+    border: none
+    border-top: 1px solid $themeDark3
+    border-bottom: 1px solid $themeDark3
+    margin: 10px
+    border-radius: 10px
+    &>div
+      ьфкпшт
+      border-top: 1px solid $themeDark3
+    &>textarea
+      width: 100%
+      min-height: 300px
+
+  button
+    transition: 200ms
+    border-radius: 0px 0px 10px 10px
+    background: $themeDark2
+    display: inline-block
+    padding: 10px
+    width: 100%
+    &:hover
+      background: $themeDark3
+
+.add-photo
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 15px
+
+.account-form
+  width: max-content
+  display: flex
+  font-size: 12pt
+  .fields
+    &>span:first-child
+      display: block
+      background: $themeDark2
+      min-width: 200px
+    &>span:last-child
+      display: block
+      background: $gray3
+      min-width: 400px
 
 .nav, .nav2
   overflow-x: auto

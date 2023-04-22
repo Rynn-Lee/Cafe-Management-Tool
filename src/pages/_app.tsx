@@ -5,16 +5,15 @@ import { store } from '@/store/store'
 import { Provider } from 'react-redux'
 import { useEffect } from 'react'
 import { services } from '@/services'
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient,  QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+defaultOptions: {
+  queries: {
+    refetchOnWindowFocus: false, // default: true
+  },
+},})
 
 export default function App({ Component, pageProps }: AppProps) { 
   const connect = async() => await services.db.connect()

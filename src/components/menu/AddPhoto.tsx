@@ -3,7 +3,7 @@ import Image from "next/image"
 export default function AddPhoto({setSelectedImage, setSelectedFile, selectedImage, setFileName}: any){
 
   return(
-    <fieldset className='padding-5 margin-10 b-radius-10 square-175 center'>
+    <fieldset className='add-photo'>
     <legend>Фото</legend> 
       <label>
         <input type='file' hidden onChange={({ target }) => {

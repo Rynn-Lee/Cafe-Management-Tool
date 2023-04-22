@@ -1,51 +1,41 @@
 import { services } from '@/services';
 import { useRouter } from 'next/router'
-import { useRef} from 'react'
-import { useDispatch } from "react-redux"
-import { setInfo } from '@/reducers/authSlice'
+import { useState } from 'react'
 import { PageLayout } from '@/layouts/PageLayout';
+import { useQuery } from '@tanstack/react-query';
+import LoadingScreen from '@/components/LoadingScreen';
 let md5 = require('md5');
 
 export default function Login() {
+  const [authFields, setAuthFields] = useState<any>({})
   const router = useRouter();
-  const dispatch = useDispatch()
-  const loginForm = useRef()
 
-  const handleLoginForm = async(e: any) => {
+  const auth = useQuery({
+    queryKey: ["auth"],
+    queryFn: () => services.account.findUsers(authFields.name,false,authFields.password,true),
+    onSuccess: (data) => data && router.push("/"),
+    enabled: false,
+  })
+
+
+  const handleLoginForm = (e: any) => {
     e.preventDefault()
-    const formResults: any = loginForm.current
-    formResults['result'].value = "Проверка..."
-
-    const result: any = await services.account.findUsers(
-      formResults['FIO'].value,
-      false,
-      formResults['Password'].value,
-      true
-    )
-
-    if(!result){
-      formResults['result'].value = "Проверьте логин или пароль!"
-      return
-    }
-    
-    dispatch(setInfo(result))
-    router.push("/")
+    auth.refetch()
   }
 
   return (
     <>
       <PageLayout noContent>
         <div className='login-content'>
-          <div className='login-block'>
-            <form className='vertical' ref={loginForm as any} onSubmit={handleLoginForm}>
-              <div className='horizontal'><input value="Cafe Management Tool" className="input-placeholder status width-500" name={'result'} disabled/></div>
-              <div className='horizontal'><input value="ФИО" className="input-placeholder width-100" disabled/><input name={'FIO'} placeholder='Введите ФИО' className='width-400'/></div>
-              <div className='horizontal'><input value="Пароль" className="input-placeholder width-100" disabled/><input name={'Password'} type="password" placeholder='Введите пароль' className='width-400'/></div>
-              <button name={'button'} className='width-500'>Вход</button>
-            </form>
-          </div>
+          <form className='form' onSubmit={handleLoginForm}>
+            <div className='status'>{`${auth.isError ? auth.error : "Cafe management tool"}`}</div>
+            <div className='fields'><span>Имя</span><input name={'FIO'} placeholder='Введите ФИО' onChange={(e) => setAuthFields({...authFields, name: e.target.value})}/></div>
+            <div className='fields'><span>Пароль</span><input name={'Password'} type="password" placeholder='Введите пароль'  onChange={(e) => setAuthFields({...authFields, password: e.target.value})}/></div>
+            <button>Вход</button>
+          </form>
         </div>
       </PageLayout>
+      {auth.isFetching && <LoadingScreen/>}
     </>
   )
 }

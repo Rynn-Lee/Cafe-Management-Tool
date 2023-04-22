@@ -1,63 +1,49 @@
 import LoadingScreen from '@/components/LoadingScreen'
 import AddPhoto from '@/components/menu/AddPhoto'
 import { PageLayout } from '@/layouts/PageLayout'
-import { setMenu } from '@/reducers/menuSlice'
 import { services } from '@/services'
 import axios from 'axios'
 import { useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useQuery } from '@tanstack/react-query';
 
 export default function Add() {
-  const dispatch = useDispatch()
-  const [loading, setLoading] = useState(0)
+  const [info, setInfo] = useState<any>({available: false, category: "Вторые блюда"})
   const [selectedImage, setSelectedImage] = useState("")
   const [fileName, setFileName] = useState("")
   const [selectedFile, setSelectedFile] = useState<File>()
-  const dishInfo = useRef<any>()
 
-  const updateStorage = async() => dispatch(setMenu(await services.menu.findMenu()))
+  const menu = useQuery({
+    queryKey: ["menu"],
+    queryFn: () => services.menu.findMenu(),
+    onSuccess: (data) => console.log(data),
+    enabled: false
+  })
 
   const handleUpload = async(e: any) => {
     e.preventDefault()
-    setLoading(1)
-    //* SENDING DATA TO MONGO
-    try{
-      const info = {
-        name: dishInfo.current['name'].value,
-        cost: dishInfo.current['cost'].value,
-        category: dishInfo.current['category'].value,
-        description: dishInfo.current['description'].value,
-        available: dishInfo.current['available'].checked,
-        fileName
-      }
-      const response = await services.menu.add(info)
-      console.log(response)
-      updateStorage()
+    if(!selectedFile) return;
+    console.log(info)
+    const data = {
+      name: info.name,
+      cost: info.cost,
+      category: info.category,
+      description: info.description,
+      available: info.available,
+      fileName
     }
-    catch(err){
-      console.warn(err)
-    }
-    
-    //* SENDING PHOTO TO IMAGES FOLDER
-    try{
-      if(!selectedFile) return;
-      const formData = new FormData()
-      formData.append("image", selectedFile)
-      const data = await axios.post("/api/images/upload", formData)
-    }
-    catch(err: any){
-      console.log(err.response?.data)
-    }
-    setLoading(0)
+    await services.menu.add(data)
+    const formData = new FormData()
+    formData.append("image", selectedFile)
+    await axios.post("/api/images/upload", formData)
+    menu.refetch()
   }
 
   return (
     <>
       <PageLayout title={"Меню > Просмотр - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/menu"} nav2>
-          {loading ? <LoadingScreen/> : ""}
-          <form ref={dishInfo} onSubmit={handleUpload} className='bg-2'>
-          <div className='horizontal padding-5 bg-5'>
+          <form onSubmit={handleUpload} className='bg-2 form photo-form'>
+            <div className='horizontal'>
             <AddPhoto
               handleUpload={handleUpload}
               setSelectedImage={setSelectedImage}
@@ -65,12 +51,12 @@ export default function Add() {
               selectedImage={selectedImage}
               setFileName={setFileName}
             />
-            <fieldset className='padding-5 margin-10 b-radius-10 center fill padding-m'>
+            <fieldset>
             <legend>Основная информация</legend>
-              <div className='horizontal margin-2'><input className='left-input width-125' value='Название' disabled/><input className='right-input width-max' name='name'/></div>
-              <div className='horizontal margin-2'><input className='left-input width-125' value='Цена (тг)' disabled/><input type='number' className='right-input width-max' name='cost'/></div>
-              <div className='horizontal margin-2'><input className='left-input width-125' value='Категория' disabled/>
-                <select className='right-input width-max' name='category'>
+              <div className='fields'><span>Название</span><input className='right-input' onChange={(e) => setInfo({...info, name: e.target.value})}/></div>
+              <div className='fields'><span>Цена</span><input type='number' className='right-input' onChange={(e) => setInfo({...info, cost: e.target.value})}/></div>
+              <div className='fields'><span>Категория</span>
+                <select className='right-input' onChange={(e) => setInfo({...info, category: e.target.value})}>
                   <option>Вторые блюда</option>
                   <option>Десерты</option>
                   <option>Завтраки</option>
@@ -86,17 +72,17 @@ export default function Add() {
                   <option>Хеллоуин</option>
                 </select>
               </div>
-              <div className='horizontal margin-2'><input className='left-input width-250' value='Доступно после добавления?' disabled/><input type='checkbox' name='available'/></div>
-            </fieldset>
-          </div>
-            <fieldset className='padding-5 margin-10 b-radius-10 fill height-300'>
+              <div className='fields'><span>Доступно после добавления? <input type='checkbox' onChange={(e) => setInfo({...info, available: e.target.checked})}/></span></div>
+            </fieldset></div>
+            <fieldset>
               <legend>Краткое описание</legend>
-              <textarea className='width-max fill' name='description'></textarea>
+              <textarea onChange={(e) => setInfo({...info, description: e.target.value})}></textarea>
             </fieldset>
-            <button className='button padding-20 margin-10'>Добавить товар</button>
+            <button>Добавить товар</button>
           </form>
         </PageLayout>
       </PageLayout>
+      {menu.isFetching && <LoadingScreen />}
     </>
   )
 }
