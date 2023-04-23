@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import EmployeesTable from '@/components/administration/EmployeesTable';
 import LoadingScreen from '@/components/LoadingScreen';
+import { Input } from '@styles/input';
 
 export default function Employees() {
   const [query, setQuery] = useState<any>("")
@@ -31,11 +32,8 @@ export default function Employees() {
     <>
       <PageLayout title={"Сотрудники  > Просмотр - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
-          <div className='form employees-form bg-3'>
-            <div>
-              <span className='left-input'>Поиск</span>
-              <input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
-            </div>
+          <div className='form employees-form bg-3 p-1'>
+            <Input placeholder="Поиск" className='w-300' onChange={(e) => setQuery(e.target.value)}/>
             <EmployeesTable employees={employees.data} query={query} deleteUser={deleteUser} editUser={editUser}/>
           </div>
         </PageLayout>

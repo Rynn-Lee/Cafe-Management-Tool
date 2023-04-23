@@ -2,6 +2,64 @@
 // @import 'themes/coral.sass'
 // @import 'themes/magic.sass'
 
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+@layer base
+  :root
+    --background: 0 0% 100%
+    --foreground: 222.2 47.4% 11.2%
+    --muted: 210 40% 96.1%
+    --muted-foreground: 215.4 16.3% 46.9%
+    --popover: 0 0% 100%
+    --popover-foreground: 222.2 47.4% 11.2%
+    --card: 0 0% 100%
+    --card-foreground: 222.2 47.4% 11.2%
+    --border: 214.3 31.8% 91.4%
+    --input: 214.3 31.8% 91.4%
+    --primary: 222.2 47.4% 11.2%
+    --primary-foreground: 210 40% 98%
+    --secondary: 210 40% 96.1%
+    --secondary-foreground: 222.2 47.4% 11.2%
+    --accent: 210 40% 96.1%
+    --accent-foreground: 222.2 47.4% 11.2%
+    --destructive: 0 100% 50%
+    --destructive-foreground: 210 40% 98%
+    --ring: 215 20.2% 65.1%
+    --radius: 0.5rem
+
+  .dark 
+    --background: 224 71% 4%
+    --foreground: 213 31% 91%
+    --muted: 223 47% 11%
+    --muted-foreground: 215.4 16.3% 56.9%
+    --popover: 224 71% 4%
+    --popover-foreground: 215 20.2% 65.1%
+    --card: 0 0% 100%
+    --card-foreground: 222.2 47.4% 11.2%
+    --border: 216 34% 17%
+    --input: 216 34% 17%
+    --primary: 210 40% 98%
+    --primary-foreground: 222.2 47.4% 1.2%
+    --secondary: 222.2 47.4% 11.2%
+    --secondary-foreground: 210 40% 98%
+    --accent: 216 34% 17%
+    --accent-foreground: 210 40% 98%
+    --destructive: 0 63% 31%
+    --destructive-foreground: 210 40% 98%
+    --ring: 216 34% 17%
+    --radius: 0.5rem
+@layer base
+  *
+    @apply border-border
+  body 
+    @apply bg-background text-foreground
+    font-feature-settings: "rlig" 1, "calt" 1
+
+:root
+  color-scheme: dark
+
 body
   padding: 0px
   margin: 0px
@@ -11,10 +69,8 @@ body
     family: monospace
     size: 13pt
 
-input, select, button
-  border: 1px solid $gray1
-  background: $gray2
-
+img
+  display: inline-block !important
 
 hr
   margin: 3px
@@ -68,13 +124,15 @@ hr
   background: $gray1
   position: fixed
   width: 100%
-  text-align: center
+  text-align: left
   height: 100vh
+  &>form
+    width: 400px
 
 .photo-form
   width: auto !important
 .form, .form>div, .account-form
-  width: 500px
+  // width: 500px
   .status
     padding: 10px 0px 10px 0px
     border-radius: 10px 10px 0px 0px
@@ -99,17 +157,9 @@ hr
       padding: 10px
       width: 100%
       &:hover
-        border-top: 1px solid $themeDark3
+        background: $gray4
       &:focus
-        border-top: 1px solid $themeDark
-    &>select
-      box-sizing: border-box
-      position: relative
-      display: block
-      background: $gray2
-      padding: 10px
-      height: 20px
-      width: 100%
+        background: $gray6
   &>fieldset
     border: none
     border-top: 1px solid $themeDark3
@@ -117,21 +167,20 @@ hr
     margin: 10px
     border-radius: 10px
     &>div
-      ьфкпшт
       border-top: 1px solid $themeDark3
     &>textarea
       width: 100%
       min-height: 300px
 
-  button
-    transition: 200ms
-    border-radius: 0px 0px 10px 10px
-    background: $themeDark2
-    display: inline-block
-    padding: 10px
-    width: 100%
-    &:hover
-      background: $themeDark3
+  // button
+  //   transition: 200ms
+  //   border-radius: 0px 0px 10px 10px
+  //   background: $themeDark2
+  //   display: inline-block
+  //   padding: 10px
+  //   width: 100%
+  //   &:hover
+  //     background: $themeDark3
 
 .add-photo
   display: flex
@@ -167,7 +216,7 @@ hr
   top: 40px
   background: $gray3
   right: 0px
-  height: auto
+  height: 43px
   display: flex
   align-items: center
   .nav-page, .nav-page2
@@ -291,13 +340,14 @@ table
     right: 0px
     padding: 5px
     background: $gray2
-    border-radius: 10px
+    border-radius: 10px 10px 0px 0px
     .remove:hover
+      z-index: 1001
       filter: brightness(0) invert(1)
   &:hover
     .dishActions
       top: -10px
-      z-index: -1
+      z-index: 1000
       opacity: 1
   .cost
     border-top: 2px solid lightgreen
