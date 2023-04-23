@@ -5,7 +5,6 @@ import { services } from '@/services'
 import axios from 'axios'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
-import { Button } from '@styles/button'
 
 export default function Add() {
   const [info, setInfo] = useState<any>({available: false, category: "Вторые блюда"})
@@ -52,7 +51,7 @@ export default function Add() {
               selectedImage={selectedImage}
               setFileName={setFileName}
             />
-            <fieldset className=''>
+            <fieldset>
             <legend>Основная информация</legend>
               <div className='fields'><span>Название</span><input className='right-input' onChange={(e) => setInfo({...info, name: e.target.value})}/></div>
               <div className='fields'><span>Цена</span><input type='number' className='right-input' onChange={(e) => setInfo({...info, cost: e.target.value})}/></div>
@@ -77,9 +76,9 @@ export default function Add() {
             </fieldset></div>
             <fieldset>
               <legend>Краткое описание</legend>
-              <textarea className='bg-transparent p-2' onChange={(e) => setInfo({...info, description: e.target.value})}></textarea>
+              <textarea onChange={(e) => setInfo({...info, description: e.target.value})}></textarea>
             </fieldset>
-            <Button variant={"teal"}>Добавить товар</Button>
+            <button>Добавить товар</button>
           </form>
         </PageLayout>
       </PageLayout>

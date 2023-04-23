@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { PageLayout } from '@/layouts/PageLayout';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Button } from '@styles/button';
 
 export default function Employee() {
   const [user, setUser] = useState<any>()
@@ -52,7 +51,7 @@ export default function Employee() {
           <div className='fields'><span>Дата трудоустройства</span><span>{user?.hire_date}</span></div>
           <div className='fields'><span>Email</span><span>{user?.email}</span></div>
           <div className='fields'><span>Должность</span><span>{user?.job}</span></div>
-          {myProfile && <Button variant={"teal"} onClick={()=>unauth()}>Выход</Button>}
+          {myProfile && <button onClick={()=>unauth()}>Выход</button>}
         </div>
       </PageLayout>
     </>

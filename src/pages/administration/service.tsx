@@ -5,7 +5,6 @@ import fs from 'fs/promises'
 import path from 'path'
 import { useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
-import { Button } from '@styles/button'
 
 interface Props {
   dirs: string[]
@@ -45,12 +44,12 @@ export default function Service({dirs}: Props) {
       <div className='horizontal form'>
         <fieldset>
           <legend>Other deletions</legend>
-          <Button variant={"teal"} onClick={deleteAllUsers}>Delete users</Button><br/>
-          <Button variant={"teal"} onClick={deleteMenu}>Delete menu</Button><br/>
+          <button onClick={deleteAllUsers}>Delete users</button><br/>
+          <button onClick={deleteMenu}>Delete menu</button><br/>
         </fieldset>
         <fieldset>
           <legend>images</legend>
-          <Button variant={"teal"} onClick={deleteLeftovers}>Delete unused images</Button><br/>
+          <button onClick={deleteLeftovers}>Delete unused images</button><br/>
         </fieldset>
       </div>
       <ul>

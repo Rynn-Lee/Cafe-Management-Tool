@@ -4,9 +4,6 @@ import { useState } from 'react'
 import { PageLayout } from '@/layouts/PageLayout';
 import { useQuery } from '@tanstack/react-query';
 import LoadingScreen from '@/components/LoadingScreen';
-import { Input } from "@styles/input"
-import { Label } from "@styles/label"
-import { Button } from "@styles/button"
 let md5 = require('md5');
 
 export default function Login() {
@@ -29,14 +26,12 @@ export default function Login() {
   return (
     <>
       <PageLayout noContent>
-        <div className='login-content items-center gap-1.5'>
-          <form onSubmit={handleLoginForm}>
-            <Label>{`${auth.isError ? auth.error : "Cafe Management tool"}`}</Label><br/>
-            <Label htmlFor="name">ФИО</Label>
-            <Input id="name" placeholder="ФИО" onChange={(e) => setAuthFields({...authFields, name: e.target.value})}/>
-            <Label htmlFor="password">Пароль</Label>
-            <Input type="password" id="password" placeholder="Пароль" onChange={(e) => setAuthFields({...authFields, password: e.target.value})}/>
-            <Button size={"auto"} variant={"teal"}>Войти</Button>
+        <div className='login-content'>
+          <form className='form' onSubmit={handleLoginForm}>
+            <div className='status'>{`${auth.isError ? auth.error : "Cafe management tool"}`}</div>
+            <div className='fields'><span>Имя</span><input name={'FIO'} placeholder='Введите ФИО' onChange={(e) => setAuthFields({...authFields, name: e.target.value})}/></div>
+            <div className='fields'><span>Пароль</span><input name={'Password'} type="password" placeholder='Введите пароль'  onChange={(e) => setAuthFields({...authFields, password: e.target.value})}/></div>
+            <button>Вход</button>
           </form>
         </div>
       </PageLayout>
