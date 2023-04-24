@@ -30,7 +30,7 @@ export default function Menu() {
         <PageLayout pageNav={"administration/menu"} nav2>
           <div className='form'>
             <span>Блюдо</span>
-            <input placeholder='Введите название' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
+            <input placeholder='Введите название' onChange={(e) => setQuery(e.target.value)} className='right-input bg-slate-950'/>
           </div>
           <MenuList menu={menu.data} query={query} deleteDish={deleteDish}/>
         </PageLayout>

@@ -2,6 +2,10 @@
 // @import 'themes/coral.sass'
 // @import 'themes/magic.sass'
 
+@tailwind base
+@tailwind components
+@tailwind utilities
+
 body
   padding: 0px
   margin: 0px
@@ -11,9 +15,9 @@ body
     family: monospace
     size: 13pt
 
-input, select, button
-  border: 1px solid $gray1
-  background: $gray2
+// input, select, button
+//   border: 1px solid $gray1
+//   background: $gray2
 
 
 hr
@@ -81,10 +85,8 @@ hr
     background: $themeDark2
   &>span, .fields>span
     box-sizing: border-box
-    display: inline-block
-    background: $themeDark2
-    padding: 10px
-    min-width: 100px
+    background: $gray4
+    padding: 6px
     max-width: max-content
     width: 650px
     min-width: 150px

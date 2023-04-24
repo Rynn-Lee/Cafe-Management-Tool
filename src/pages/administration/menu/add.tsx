@@ -51,7 +51,7 @@ export default function Add() {
               selectedImage={selectedImage}
               setFileName={setFileName}
             />
-            <fieldset>
+            <fieldset className='px-6 py-2'>
             <legend>Основная информация</legend>
               <div className='fields'><span>Название</span><input className='right-input' onChange={(e) => setInfo({...info, name: e.target.value})}/></div>
               <div className='fields'><span>Цена</span><input type='number' className='right-input' onChange={(e) => setInfo({...info, cost: e.target.value})}/></div>

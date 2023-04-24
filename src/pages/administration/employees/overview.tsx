@@ -34,7 +34,7 @@ export default function Employees() {
           <div className='form employees-form bg-3'>
             <div>
               <span className='left-input'>Поиск</span>
-              <input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
+              <input placeholder='Введите имя' onChange={(e) => setQuery(e.target.value)} className='right-input p-1'/>
             </div>
             <EmployeesTable employees={employees.data} query={query} deleteUser={deleteUser} editUser={editUser}/>
           </div>
