@@ -21,7 +21,7 @@ export default function MenuList({menu, query, deleteDish}: any){
   return(
     <div className="menu-body">
       {search?.map((item: any, index: number)=>(
-        <div className={`bg-3 horizontal menu-card ${!item.available ? "unavailable" : ""}`} key={index}>
+        <div className={`horizontal menu-card ${!item.available ? "unavailable" : ""}`} key={index}>
           <Image src={"/images/" + item.filename} alt="image" width={300} height={300} className="img-fill"/>
           <div className="vertical menu-card-info">
             <div className="name">

@@ -2,9 +2,13 @@ import LoadingScreen from '@/components/LoadingScreen'
 import AddPhoto from '@/components/menu/AddPhoto'
 import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
-import axios from 'axios'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
+import lightbulbIco from '@icons/lightbulb.svg'
+import messageIco from '@icons/message.svg'
+import plusIco from '@icons/plus.svg'
+import Image from 'next/image'
+import axios from 'axios'
 
 export default function Add() {
   const [info, setInfo] = useState<any>({available: false, category: "Вторые блюда"})
@@ -52,7 +56,7 @@ export default function Add() {
               setFileName={setFileName}
             />
             <fieldset className='px-6 py-2'>
-            <legend>Основная информация</legend>
+            <legend><Image src={lightbulbIco} alt="Image" className="ico"/>Основная информация</legend>
               <div className='fields'><span>Название</span><input className='right-input' onChange={(e) => setInfo({...info, name: e.target.value})}/></div>
               <div className='fields'><span>Цена</span><input type='number' className='right-input' onChange={(e) => setInfo({...info, cost: e.target.value})}/></div>
               <div className='fields'><span>Категория</span>
@@ -72,13 +76,13 @@ export default function Add() {
                   <option>Хеллоуин</option>
                 </select>
               </div>
-              <div className='fields'><span>Доступно после добавления? <input type='checkbox' onChange={(e) => setInfo({...info, available: e.target.checked})}/></span></div>
+              <div className='fields'><span>Доступно после добавления? | <input type='checkbox' onChange={(e) => setInfo({...info, available: e.target.checked})}/></span></div>
             </fieldset></div>
             <fieldset>
-              <legend>Краткое описание</legend>
+              <legend><Image src={messageIco} alt="Image" className="ico"/>Краткое описание</legend>
               <textarea onChange={(e) => setInfo({...info, description: e.target.value})}></textarea>
             </fieldset>
-            <button>Добавить товар</button>
+            <button><Image src={plusIco} alt="Image" className="ico"/>Добавить товар</button>
           </form>
         </PageLayout>
       </PageLayout>

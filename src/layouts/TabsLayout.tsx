@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function PageNavLayout({page, id, nav2}: any) {
+export default function TabsLayout({page, id, nav2}: any) {
 
   const styleClass = nav2 ? "nav2" : "nav"
 

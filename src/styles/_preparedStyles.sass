@@ -15,25 +15,23 @@
   right: 0px !important
 
 .left-input, .left-input2
+  border-bottom: 1px solid $Accent2
   vertical-align: middle
-  border-top: 1px solid $themeDark2
-  border-left: 1px solid $themeDark2
-  border-bottom: 1px solid $themeDark2
-  background: $lineRight2
+  width: max-content
+  height: 40px
   padding: 10px
-  border-radius: 10px 0px 0px 10px
 .right-input, .right-input2
-  background: $gray3
+  height: 40px
+  min-width: 250px
+  border-bottom: 1px solid $Accent2
   padding: 10px
-  border-radius: 0px 10px 10px 0px
 
 button, input, select, option, textarea
   background: none
   box-sizing: border-box
   outline: none
-  border: 1px solid #00000000
   resize: none
-  color: #ccc
+  color: $textColor
 
 select
   height: 40px !important
@@ -42,27 +40,35 @@ legend
   margin-left: 10px
   padding: 0px 10px
 
+textarea
+  padding: 5px 15px
+
+button
+  background: $button
+  &:hover
+    background: $buttonHover
+
 .bg-1
-  background: $gray1
+  background: $Accent1
   border-radius: 10px
 .bg-2
-  background: $gray15
+  background: $Accent1
   border-radius: 10px
 .bg-3
-  background: $gray2
+  background: $Accent1
   border-radius: 10px
 .bg-4
-  background: $gray3
+  background: $Accent1
   border-radius: 10px
 .bg-5
-  background: $gray35
+  background: $Accent1
   border-radius: 10px
 .bg-6
-  background: $gray4
+  background: $Accent1
   border-radius: 10px
 .bg-7
-  background: $gray5
+  background: $Accent1
   border-radius: 10px
 .bg-8
-  background: $gray6
+  background: $Accent1
   border-radius: 10px

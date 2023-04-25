@@ -3,14 +3,12 @@
   right: 0px
   text-align: center
   padding: 12px 0px 12px 0px
-  &::first-letter
-    color: $themeDark
 
 a
   text-decoration: none
   font:
     size: 14pt
-  color: #fff
+  color: $textColor
 
 .disabled
   pointer-events: none
@@ -27,7 +25,7 @@ a
   flex-direction: column
 
 .version
-  color: #ffffff0f
+  color: $textColor
   font-size: 10pt
 
 .ico
@@ -35,7 +33,7 @@ a
   position: relative 
   width: 18px
   height: 18px
-  margin: 0px 5px 0px 0px
+  margin: 0px 5px 0px 5px
 
 .content-title
   position: fixed
@@ -43,7 +41,7 @@ a
   right: 0px
   padding: 10px
   text-align: center
-  background: $gray3
+  background: $Accent1
 
 .fancy-input
   margin: 5px 5px
@@ -57,23 +55,22 @@ a
 
 /* Track */
 ::-webkit-scrollbar-track
-  background: $gray3
+  background: $Accent1
 
 /* Handle */
 ::-webkit-scrollbar-thumb
-  background: $gray5
+  background: $Accent1
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover
-  background: $gray6
+  background: $Accent1
 
 .active-page
   background: $lineRight !important
-  border-right: 2px $theme solid !important
 
 .active-page2
+  border-radius: 10px
   background: $lineBottom !important
-  border-bottom: 1px $theme solid !important
 
 .without-nav
   top: 40px !important
@@ -91,13 +88,14 @@ a
   bottom: 0px
 
 .unavailable
+  background: $Accent2
   transition: 100ms
   filter: contrast(70%) brightness(70%)
   border-bottom: 1px solid #fc5858
   .name
     border-top: 1px solid #fc5858
     border-left: 1px solid #fc5858
-    color: #fc5858
+    color: $textColor
   .cost
     border-top: 2px solid #fc5858
   .dishActions

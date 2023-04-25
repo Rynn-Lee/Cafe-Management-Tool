@@ -1,10 +1,11 @@
 import Link from "next/link";
-import mainIco from "../assets/icons/home.svg"
-import manageIco from "../assets/icons/manage.svg"
-import userIco from "../assets/icons/user.svg"
-import Image from "next/image";
+import mainIco from "@icons/home.svg"
+import manageIco from "@icons/manage.svg"
+import userIco from "@icons/user.svg"
+import codeIco from "@icons/code.svg"
 import { useEffect } from "react";
 import { activePage } from '@/utils/activePage'
+import Image from "next/image";
 
 export default function Sidebar(){
 
@@ -12,7 +13,7 @@ export default function Sidebar(){
 
   return(
     <div className="sidebar">
-      <span className="logo"><span>Панель управления</span></span>
+      <span className="logo"><span>Ry<Image src={codeIco} alt="code" className="ico"/>Panel</span></span>
       <div className="sidebar-buttons">
         <Link href="/" className="sidebar-button"><Image src={mainIco} className="ico" alt={"Главная"} /><span>Главная</span></Link>
         <Link href="/administration" className="sidebar-button"><Image src={manageIco} className="ico" alt={"Управление"} /><span>Управление</span></Link>

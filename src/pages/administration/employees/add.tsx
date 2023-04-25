@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { services } from '@/services'
 import { useState } from 'react'
 import LoadingScreen from '@/components/LoadingScreen';
+import Image from 'next/image';
+import plusIco from '@icons/plus.svg'
 
 export default function Add() {
   const [newEmployee, setNewEmployee] = useState<any>({job: "Официант"})
@@ -38,7 +40,7 @@ export default function Add() {
               <option>Кассир</option>
               <option>Администратор</option>
             </select></div>
-          <button type='submit'>Добавить сотрудника</button>
+          <button type='submit'><Image src={plusIco} alt="Image" className="ico"/>Добавить сотрудника</button>
           </form>
         </PageLayout>
       </PageLayout>

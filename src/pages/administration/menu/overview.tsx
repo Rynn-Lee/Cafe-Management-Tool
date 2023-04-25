@@ -4,6 +4,8 @@ import { services } from '@/services'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import LoadingScreen from '@/components/LoadingScreen';
+import searchIco from '@icons/search.svg'
+import Image from 'next/image';
 
 export default function Menu() {
   const [query, setQuery] = useState<any>("")
@@ -29,8 +31,7 @@ export default function Menu() {
       <PageLayout title={"Меню > Добавить - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/menu"} nav2>
           <div className='form'>
-            <span>Блюдо</span>
-            <input placeholder='Введите название' onChange={(e) => setQuery(e.target.value)} className='right-input bg-slate-950'/>
+            <Image src={searchIco} alt="search" className="ico" /><input placeholder='Поиск по названию' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
           </div>
           <MenuList menu={menu.data} query={query} deleteDish={deleteDish}/>
         </PageLayout>

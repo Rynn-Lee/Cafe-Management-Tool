@@ -1,10 +1,11 @@
 import Image from "next/image"
+import imageIco from "@icons/image.svg"
 
 export default function AddPhoto({setSelectedImage, setSelectedFile, selectedImage, setFileName}: any){
 
   return(
     <fieldset className='add-photo'>
-    <legend>Фото</legend> 
+    <legend><Image src={imageIco} alt="Image" className="ico"/>Фото</legend> 
       <label>
         <input type='file' hidden onChange={({ target }) => {
           if(target.files){

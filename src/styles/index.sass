@@ -1,6 +1,6 @@
 @import 'themes/aqua.sass'
-// @import 'themes/coral.sass'
-// @import 'themes/magic.sass'
+@import 'themes/white.sass'
+@import 'themes/dark.sass'
 
 @tailwind base
 @tailwind components
@@ -9,27 +9,22 @@
 body
   padding: 0px
   margin: 0px
-  background: $gray1
-  color: #fff
+  background: $Accent1
+  color: $textColor
   font:
     family: monospace
     size: 13pt
 
-// input, select, button
-//   border: 1px solid $gray1
-//   background: $gray2
-
 
 hr
   margin: 3px
-  color: #ffffff0a
+  color: $textColor
   background: #ffffff0a
   border: none
   border-top: 2px outset #ffffff48
 
 
 .sidebar
-  border-right: 1px solid $themeDark15
   z-index: 1000
   display: flex
   flex-direction: column
@@ -37,7 +32,7 @@ hr
   justify-content: space-between
   height: 100vh
   width: 200px
-  background: $gray3
+  background: $navbar
   .sidebar-buttons
     font-size: 14pt
     display: flex
@@ -60,8 +55,6 @@ hr
   left: 0px
 .content-title
   z-index: 1001
-  &::first-letter
-    color: $themeDark
 
 .login-content
   font-size: 12pt
@@ -69,7 +62,7 @@ hr
   display: flex
   justify-content: center
   align-items: center
-  background: $gray1
+  background: $Accent1
   position: fixed
   width: 100%
   text-align: center
@@ -82,10 +75,13 @@ hr
   .status
     padding: 10px 0px 10px 0px
     border-radius: 10px 10px 0px 0px
-    background: $themeDark2
+    background: $Accent1
   &>span, .fields>span
+    display: flex
+    align-items: center
     box-sizing: border-box
-    background: $gray4
+    border-bottom: 1px solid $Accent2tr
+    background: $Accent1
     padding: 6px
     max-width: max-content
     width: 650px
@@ -94,46 +90,45 @@ hr
     display: flex
     text-align: left
     &>input
+      border-bottom: 1px solid $Accent3
       box-sizing: border-box
       position: relative
       display: block
-      background: $gray2
+      height: 40px
+      background: $Accent1
       padding: 10px
       width: 100%
       &:hover
-        border-top: 1px solid $themeDark3
+        border-top: 1px solid $Accent1
       &:focus
-        border-top: 1px solid $themeDark
+        border-top: 1px solid $Accent1
     &>select
+      border-bottom: 1px solid $Accent3
       box-sizing: border-box
       position: relative
       display: block
-      background: $gray2
+      background: $Accent1
       padding: 10px
       height: 20px
       width: 100%
   &>fieldset
-    border: none
-    border-top: 1px solid $themeDark3
-    border-bottom: 1px solid $themeDark3
+    border-left: 1px solid $Accent2
+    border-right: 1px solid $Accent2
     margin: 10px
     border-radius: 10px
     &>div
-      ьфкпшт
-      border-top: 1px solid $themeDark3
+      border-top: 1px solid $Accent1
     &>textarea
       width: 100%
       min-height: 300px
 
   button
+    background: $button
     transition: 200ms
-    border-radius: 0px 0px 10px 10px
-    background: $themeDark2
     display: inline-block
-    padding: 10px
+    margin: 10px 0px
+    padding: 5px
     width: 100%
-    &:hover
-      background: $themeDark3
 
 .add-photo
   display: flex
@@ -154,11 +149,11 @@ hr
   .fields
     &>span:first-child
       display: block
-      background: $themeDark2
+      background: $Accent1
       min-width: 200px
     &>span:last-child
       display: block
-      background: $gray3
+      background: $Accent1
       min-width: 400px
 
 .nav, .nav2
@@ -167,9 +162,10 @@ hr
   position: fixed
   left: 200px
   top: 40px
-  background: $gray3
+  background: $Accent1
   right: 0px
   height: auto
+  height: 40px
   display: flex
   align-items: center
   .nav-page, .nav-page2
@@ -177,18 +173,16 @@ hr
     text-overflow: ellipsis
     white-space: nowrap
     overflow: hidden
-    border-bottom: 1px #00000000 solid
-    padding: 10px 20px 10px 20px
-    background: $gray3
+    padding: 5px 20px 5px 20px
+    background: $Accent1
     &:hover
-      background: $themeDark15
+      background: $Accent1
 
 .nav2
-  background: $gray2
-  top: 83px
+  background: $Accent1
+  top: 80px
   .nav-page2
-    background: $gray2
-    padding: 10px 10px 10px 10px
+    background: $Accent1
     
 table
   table-layout: auto
@@ -199,14 +193,14 @@ table
     padding: 10px
   td
     padding: 10px
-    border-right: 1px solid $themeDark15
+    border-right: 1px solid $Accent1
     &>a
       font-weight: 600
       transition: 200ms
       &:hover
-        color: $themeDark
+        color: $textColor
   .actions
-    background: $action !important
+    background: $Accent1 !important
     border-right: none
     & .ico
       cursor: pointer
@@ -214,10 +208,10 @@ table
       font-weight: 900
       transition: 200ms
       &:hover
-        color: $themeDark2
+        color: $textColor
     
 .bubble
-  margin: 5px
+  margin: 0px 5px
   padding: 5px
   // background: $gray15
   border-radius: 15px
@@ -251,9 +245,9 @@ table
     z-index: 5
 
 .menu-card-info
-  border-radius: 0px 0px 10px 10px
+  border-radius: 0px 0px 10px 0px
+  background: $Accent2tr
   padding: 10px
-  background: $gray2
   display: flex
   left: 0px
   right: 0px
@@ -266,8 +260,8 @@ table
     font-weight: 900
     text-align: center
     padding: 5px 0px 5px 0px
-    color: #ffaf64
-    background: $gray2
+    color: $textColor
+    background: $Accent2
     border-radius: 10px 10px 0px 0px
     right: 0px
     top: -15px
@@ -292,7 +286,7 @@ table
     top: 0px
     right: 0px
     padding: 5px
-    background: $gray2
+    background: $Accent2
     border-radius: 10px
     .remove:hover
       filter: brightness(0) invert(1)
@@ -302,21 +296,20 @@ table
       z-index: -1
       opacity: 1
   .cost
-    border-top: 2px solid lightgreen
     width: 125px
     z-index: 6
     text-align: center
     padding: 5px 8px 0px 8px
-    color: lightgreen
+    color: $textColor
     font-weight: 600
-    background: #272735c5
+    background: $Accent1tr
     border-radius: 0px 20px 0px 8px
     bottom: 0px
     left: 0px
     position: absolute
-    font-size: 10pt
+    font-size: 9pt
     &>span
-      color: #fff
+      color: $textColor
   
 @import 'mess.sass'
 @import 'preparedStyles.sass'
