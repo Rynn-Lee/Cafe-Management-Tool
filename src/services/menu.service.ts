@@ -5,6 +5,7 @@ const api = {
     "add": "../../api/menu/add",
     "find": "../../api/menu/find",
     "remove": "../../api/menu/remove",
+    "visibility": "../../api/menu/visibility",
   }
 }
 const params = {
@@ -34,6 +35,10 @@ export const menuService = {
   },
   async findMenu(){
     const response = await axios.get(api.menu.find)
+    return response.data
+  },
+  async changeVisibility(id: string, visibility: boolean){
+    const response = await axios.post(api.menu.visibility, {id, visibility})
     return response.data
   }
 }

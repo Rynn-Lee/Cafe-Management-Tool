@@ -1,4 +1,11 @@
 import Link from 'next/link'
+import plusIco from "@icons/plus-square.svg"
+import homeIco from "@icons/home.svg"
+import listIco from "@icons/list.svg"
+import userIco from "@icons/user.svg"
+import wrenchIco from "@icons/wrench.svg"
+import chartIco from "@icons/chart.svg"
+import Image from 'next/image'
 
 export default function TabsLayout({page, id, nav2}: any) {
 
@@ -14,34 +21,42 @@ export default function TabsLayout({page, id, nav2}: any) {
     case "administration":
       return (
         <div className={styleClass}>
-          <Link href={"/administration"} className='nav-page'>Главная</Link>
-          <Link href={"/administration/menu/overview"} className='nav-page'>Меню</Link>
-          <Link href={"/administration/employees/overview"} className='nav-page'>Сотрудники</Link>
-          <Link href={"/administration/service"} className='nav-page'>Сервисное Меню</Link>
+          <Link href={"/administration"} className='nav-page'><Image src={homeIco} alt="plus" className='ico'/>Главная</Link>
+          <Link href={"/administration/menu/viewdishes"} className='nav-page'><Image src={listIco} alt="plus" className='ico'/>Меню</Link>
+          <Link href={"/administration/employees/overview"} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Сотрудники</Link>
+          <Link href={"/administration/service"} className='nav-page'><Image src={wrenchIco} alt="plus" className='ico'/>Сервисное Меню</Link>
         </div>
       )
     case "account":
       return (
         <div className={styleClass}>
-          <Link href={`/account/${id}`} className='nav-page'>Профиль</Link>
-          <Link href={`/account/statistics/${id}`} className='nav-page'>Статистика</Link>
+          <Link href={`/account/${id}`} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Профиль</Link>
+          <Link href={`/account/statistics/${id}`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Статистика</Link>
+        </div>
+      )
+    case "account/statistics":
+      return (
+        <div className={styleClass}>
+          <Link href={`/account/${id}`} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Посещаемость</Link>
+          <Link href={`/account/statistics/${id}`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Производительность</Link>
         </div>
       )
     case "administration/menu":
       return (
         <div className={styleClass}>
-          <Link href={`/administration/menu/overview`} className='nav-page2'>Просмотр</Link>
-          <Link href={`/administration/menu/add`} className='nav-page2'>Добавить</Link>
+          <Link href={`/administration/menu/viewdishes`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Меню</Link>
+          <Link href={`/administration/menu/newdish`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Блюдо</Link>
+          <Link href={`/administration/menu/categories`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Категории</Link>
         </div>
       )
     case "administration/employees":
       return (
         <div className={styleClass}>
-          <Link href={`/administration/employees/overview`} className='nav-page2'>Просмотр</Link>
-          <Link href={`/administration/employees/add`} className='nav-page2'>Добавить</Link>
+          <Link href={`/administration/employees/overview`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Сотрудники</Link>
+          <Link href={`/administration/employees/add`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Добавить</Link>
         </div>
       )
   }
-
+{/* <Image src={listIco} alt="plus" className='ico'/> */}
   return(<></>)
 }

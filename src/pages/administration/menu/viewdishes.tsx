@@ -21,6 +21,10 @@ export default function Menu() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
+  const changeVisibility = async (id: any, visibility: boolean) => {
+    await services.menu.changeVisibility(id, visibility)
+    menu.refetch()
+  }
   const deleteDish = async (id: any) => {
     await services.menu.deleteDish(id)
     menu.refetch()
@@ -33,7 +37,7 @@ export default function Menu() {
           <div className='form'>
             <Image src={searchIco} alt="search" className="ico" /><input placeholder='Поиск по названию' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
           </div>
-          <MenuList menu={menu.data} query={query} deleteDish={deleteDish}/>
+          <MenuList menu={menu.data} query={query} deleteDish={deleteDish} changeVisibility={changeVisibility}/>
         </PageLayout>
       </PageLayout>
       {menu.isFetching && <LoadingScreen />}

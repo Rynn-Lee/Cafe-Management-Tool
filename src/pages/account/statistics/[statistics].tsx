@@ -38,7 +38,9 @@ export default function AccountStatistics() {
   return (
     <>
       <PageLayout title={user?.full_name + " - Статистика"} pageNav={"account"} id={statistics}>
+        {/* <PageLayout pageNav={"administration/employees"} nav2> */}
         Статистика пользователя {user?.full_name}
+        {/* </PageLayout> */}
       </PageLayout>
     </>
   )
