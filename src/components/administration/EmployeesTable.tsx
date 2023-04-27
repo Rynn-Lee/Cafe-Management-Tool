@@ -5,19 +5,11 @@ import editIco from '@/assets/icons/edit.svg'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Dialog from '../modal/Dialog'
+import useDialog from '@/hooks/useDialog'
 
 export default function EmployeesTable({employees, query, deleteUser, editUser}: any) {
   const [search, setSearch] = useState<any>([])
-  const [showDialog, setShowDialog] = useState<any>({})
-
-  const deleteDialog = (id: string, full_name: string, message: string) => {
-    setShowDialog({id, full_name, progress: true, message})
-  }
-
-  const confirmDialog = (choose: boolean) => {
-    choose && deleteUser(showDialog.id)
-    setShowDialog({progress: false})
-  }
+  const { DialogWindow, ask } = useDialog()
 
   const newQuery = () =>{
     if(query){
@@ -54,7 +46,7 @@ export default function EmployeesTable({employees, query, deleteUser, editUser}:
               <td>{employee.job}</td>
               <td>{employee.email}</td>
               <td className='actions'>
-                <Image src={deleteIco} alt="Удалить" className='ico' onClick={()=>deleteDialog(employee._id, employee.full_name, `Удалить пользователя: ${employee?.full_name}`)}/>
+                <Image src={deleteIco} alt="Удалить" className='ico' onClick={() => ask(`Удалить пользователя: ${employee.full_name}`, ()=>deleteUser(employee._id))}/>
                 <Image src={editIco} alt="Редактировать" className='ico' onClick={()=>editUser(employee._id)}/>
               </td>
             </tr>
@@ -63,7 +55,7 @@ export default function EmployeesTable({employees, query, deleteUser, editUser}:
       }
       </tbody>
     </table>
-    <Dialog show={showDialog?.progress} message={showDialog?.message} confirmDialog={confirmDialog}/>
+    <DialogWindow />
   </>
   )
 }

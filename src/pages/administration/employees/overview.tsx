@@ -21,7 +21,6 @@ export default function Employees() {
   },[employees])
 
   const deleteUser = async (id: string) =>{
-
     await services.account.deleteUsers(id)
     employees.refetch()
   }

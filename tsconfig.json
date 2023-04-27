@@ -18,7 +18,8 @@
       "@/*": ["./src/*"],
       "@icons/*": ["./src/assets/icons/*"],
       "@modals/*": ["./src/components/modal/*"],
-      "@api/*": ["./src/pages/api/*"]
+      "@api/*": ["./src/pages/api/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/index.tsx", "src/pages/api/users/add.js", "src/pages/api/images/upload.js", "src/pages/api/images/upload.js"],

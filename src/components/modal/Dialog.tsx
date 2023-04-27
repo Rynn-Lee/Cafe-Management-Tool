@@ -1,8 +1,8 @@
 import exclamIco from '@icons/triangle-excl.svg'
 import Image from 'next/image'
 
-export default function Dialog({show, message, confirmDialog}:any) {
-  if(!show){
+export default function Dialog({message, confirmDialog}:any) {
+  if(!message){
     return null
   }
 
