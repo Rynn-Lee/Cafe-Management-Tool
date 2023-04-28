@@ -2,21 +2,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import removeIco from '@icons/removeFile.svg'
 import eyeIco from '@icons/eye-coral.svg'
-import Dialog from "../modal/Dialog";
+import useDialog from "@hooks/useDialog";
 
 export default function MenuList({menu, query, deleteDish, changeVisibility}: any){
   const [search, setSearch] = useState<any>([])
-  const [showDialog, setShowDialog] = useState<any>({})
-
-  const prepareDialog = (id: string, name: string, message: string, func: any, funcParam: boolean = false) => {
-    setShowDialog({id, name, progress: true, message, func, funcParam})
-  }
-
-  const confirmDialog = (choose: boolean) => {
-    choose && showDialog.func(showDialog.id, showDialog.funcParam)
-    setShowDialog({progress: false})
-  }
-
+  const { DialogWindow, ask } = useDialog()
 
   const newQuery = () =>{
     if(query){
@@ -40,8 +30,8 @@ export default function MenuList({menu, query, deleteDish, changeVisibility}: an
             <div className="name">
               {item.name}
               <span className="dishActions">
-                <Image src={eyeIco} width={18} height={18} className="icon visibility" alt="ico" onClick={()=>prepareDialog(item._id, item.name, `Изменить видимость: ${item.name}`, changeVisibility, !item.available)}/>
-                <Image src={removeIco} width={18} height={18} className="icon remove" alt="ico" onClick={()=>prepareDialog(item._id, item.name, `Удалить блюдо: ${item.name}`, deleteDish)}/>
+                <Image src={eyeIco} width={18} height={18} className="icon visibility" alt="ico" onClick={()=>ask(`Изменить видимость: ${item.name}`, ()=>changeVisibility(item._id, !item.available))}/>
+                <Image src={removeIco} width={18} height={18} className="icon remove" alt="ico" onClick={()=>ask(`Удалить блюдо: ${item.name}`, ()=>deleteDish(item._id))}/>
               </span>
             </div><hr/>
             <div className="description">{item.description}</div>
@@ -49,7 +39,7 @@ export default function MenuList({menu, query, deleteDish, changeVisibility}: an
           </div>
         </div>
       ))}
-      <Dialog show={showDialog?.progress} message={showDialog?.message} confirmDialog={confirmDialog}/>
+      <DialogWindow />
     </div>
   )
 }

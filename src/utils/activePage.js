@@ -1,7 +1,8 @@
 const sidebar = {
   undefined: 0, "": 0, "login": 0, null: 0,
-  "administration": 1,
-  "account": 2
+  "orders": 1,
+  "administration": 2,
+  "account": 3,
 }
 
 const tabs = {

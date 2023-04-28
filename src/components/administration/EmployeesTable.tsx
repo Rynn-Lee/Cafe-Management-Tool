@@ -4,7 +4,6 @@ import deleteIco from '@/assets/icons/userDelete.svg'
 import editIco from '@/assets/icons/edit.svg'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import Dialog from '../modal/Dialog'
 import useDialog from '@/hooks/useDialog'
 
 export default function EmployeesTable({employees, query, deleteUser, editUser}: any) {

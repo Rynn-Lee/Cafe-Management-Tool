@@ -12,7 +12,7 @@ export default async function RemoveMenu(req: NextApiRequest, res: NextApiRespon
     let result
     
     if(id._id){
-      console.log(`Incoming request: Remove category - ${id._id}`)
+      console.log(`Incoming request: Remove one category - ${id._id}`)
       result = await category.deleteOne(id)
     }
     else{

@@ -17,9 +17,13 @@ export default function Menu() {
     onSuccess: (data) => console.log(data),
     enabled: false
   })
-  const mutation = useMutation({
+  const addMutatuion = useMutation({
     mutationFn: () => services.category.add(newCategory),
-    // onSuccess: () => categories.refetch()
+    onSuccess: () => {categories.refetch(); setNewCategory("")}
+  })
+  const removeMutation = useMutation({
+    mutationFn: (id: string) => services.category.remove(id),
+    onSuccess: () => categories.refetch()
   })
   
   
@@ -31,23 +35,26 @@ export default function Menu() {
     <>
       <PageLayout title={"Меню > Категории - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/menu"} nav2>
-          <form onSubmit={(e)=>{e.preventDefault(); mutation.mutate()}} className='!w-max items-center form'>
-              <div className='fields'><span>Название</span><input onChange={(e)=>setNewCategory(e.target.value)} className='w-full'/></div>
-              <button>Добавить категорию</button>
+          <form onSubmit={(e)=>{e.preventDefault()}} className='!w-max items-center form'>
+              <div className='fields'><span>Название</span><input value={newCategory} onChange={(e)=>setNewCategory(e.target.value)} className='w-full'/></div>
+              <button onClick={() => ask(`Добавить категорию: ${newCategory}`, ()=>addMutatuion.mutate())}>Добавить категорию</button>
             <fieldset>
               <legend>Доступные категории</legend>
               <ul className='p-2 pl-7'>
                 {categories?.data?.map((category: any, index: number)=>(
-                  <><li key={index}>{category.title}<Image src={removeIco} className="ico2" alt='remove'/></li></>
+                  <span key={index}>
+                    <li>
+                      <Image src={removeIco} className="ico2" alt='remove' onClick={() => ask(`Удалить категорию: ${category.title}`, ()=>removeMutation.mutate(category._id))}/>{category.title}
+                    </li>
+                  </span>
                 )).reverse()}
               </ul>
             </fieldset>
-            <span onClick={()=>ask("Обновить?", ()=>categories.refetch())}>hehe?</span>
           </form>
           <DialogWindow />
         </PageLayout>
       </PageLayout>
-      {mutation.isLoading && categories.isFetching && <LoadingScreen />}
+      {removeMutation.isLoading && addMutatuion.isLoading && categories.isFetching && <LoadingScreen />}
     </>
   )
 }

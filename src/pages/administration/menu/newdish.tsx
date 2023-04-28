@@ -2,7 +2,7 @@ import LoadingScreen from '@/components/LoadingScreen'
 import AddPhoto from '@/components/menu/AddPhoto'
 import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import lightbulbIco from '@icons/lightbulb.svg'
 import messageIco from '@icons/message.svg'
@@ -22,6 +22,16 @@ export default function Add() {
     onSuccess: (data) => console.log(data),
     enabled: false
   })
+  
+  const categories = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => services.category.list(),
+    enabled: false
+  })
+
+  useEffect(()=>{
+    !categories.isFetched && categories.refetch()
+  }, [categories])
 
   const handleUpload = async(e: any) => {
     e.preventDefault()
@@ -61,19 +71,9 @@ export default function Add() {
               <div className='fields'><span>Цена</span><input type='number' className='right-input' onChange={(e) => setInfo({...info, cost: e.target.value})}/></div>
               <div className='fields'><span>Категория</span>
                 <select className='right-input' onChange={(e) => setInfo({...info, category: e.target.value})}>
-                  <option>Вторые блюда</option>
-                  <option>Десерты</option>
-                  <option>Завтраки</option>
-                  <option>Закуски</option>
-                  <option>Напитки</option>
-                  <option>Выпечка</option>
-                  <option>Компоты</option>
-                  <option>Пицца</option>
-                  <option>Сладкая выпечка</option>
-                  <option>Салаты</option>
-                  <option>Соусы</option>
-                  <option>Супы</option>
-                  <option>Хеллоуин</option>
+                  {categories?.data?.map((category: any) => (
+                    <option key={category?.title}>{category?.title}</option>
+                  ))}
                 </select>
               </div>
               <div className='fields'><span>Доступно после добавления? | <input type='checkbox' onChange={(e) => setInfo({...info, available: e.target.checked})}/></span></div>
