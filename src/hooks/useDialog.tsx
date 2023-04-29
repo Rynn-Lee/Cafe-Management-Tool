@@ -23,11 +23,10 @@ export default function useDialog(){
   }
 
 
-  function DialogWindow({children}: any){
+  function DialogWindow(){
     return(
       <>
         {isShown && <Dialog message={message} confirmDialog={confirmDialog}/>}
-        {children}
       </>
     )
   }
