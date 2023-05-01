@@ -38,8 +38,8 @@ export default function TabsLayout({page, id, nav2}: any) {
       return (
         <div className={styleClass}>
           <Link href={`/orders`} className='nav-page'><Image src={plusIco} alt="plus" className='ico'/>Создать</Link>
-          <Link href={`/orders/my`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Мои Заказы</Link>
-          <Link href={`/orders/all`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Все Заказы</Link>
+          <Link href={`/orders/myorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Мои Заказы</Link>
+          <Link href={`/orders/allorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Все Заказы</Link>
         </div>
       )
 

@@ -1,0 +1,1 @@
+export const calculateProgress = (step, total) => Math.floor((step+1)/total*100) + "%"
