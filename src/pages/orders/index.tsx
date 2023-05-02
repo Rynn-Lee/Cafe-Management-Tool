@@ -1,9 +1,9 @@
-import Stepper from '@/components/Stepper'
+import MenuStepper from '@/components/MenuStepper'
 import AdditionalInfo from '@/components/orders/AdditionalInfo'
-import SelectDish from '@/components/orders/SelectDish'
-import { calculateProgress } from '@utils/calculateProgress'
+import SelectOrder from '@/components/orders/SelectOrder'
 import { PageLayout } from '@/layouts/PageLayout'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import CompleteOrder from '@/components/orders/CompleteOrder'
 
 export default function Orders() {
   const [step, setStep] = useState(0)
@@ -14,10 +14,11 @@ export default function Orders() {
   return (
     <>
       <PageLayout title={`Шаг ${step+1} из 3 | Заказы - Управление кафе`} pageNav={"orders"}>
-        <Stepper step={step} nextStep={nextStep} prevStep={prevStep}>
-          <SelectDish />
+        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep}>
+          <SelectOrder />
           <AdditionalInfo />
-        </Stepper>
+          <CompleteOrder />
+        </MenuStepper>
       </PageLayout>
     </>
   )

@@ -33,8 +33,11 @@ export const menuService = {
     const response = await axios.delete(api.menu.remove + params.id + id)
     return response.data
   },
-  async findMenu(){
-    const response = await axios.get(api.menu.find)
+  async findMenu(filter?: any){
+    let response
+    filter
+    ? response = await axios.post(api.menu.find, filter)
+    : response = await axios.get(api.menu.find)
     return response.data
   },
   async changeVisibility(id: string, visibility: boolean){

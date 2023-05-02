@@ -3,13 +3,15 @@
     grid-template-columns: repeat(3, 1fr)
     grid-column-gap: 5px
     grid-row-gap: 30px
+  .menu-waiter
+    grid-template-columns: repeat(5, 1fr)
+    grid-column-gap: 5px
+    grid-row-gap: 30px
 @media screen and (max-width: 1220px)
   .menu-body
     grid-template-columns: repeat(2, 1fr)
-@media screen and (max-width: 890px)
-  .menu-body
-    grid-template-columns: repeat(1, 1fr)
-    grid-row-gap: 30px
+  .menu-waiter
+    grid-template-columns: repeat(4, 1fr)
   .nav
     top: 39px
   .nav2
@@ -23,8 +25,9 @@
     align-items: center
   .logo
     opacity: 0
+  .sidebar-buttons
+    width: 100%
   .sidebar-button
-    width: 180%
     text-align: center
     padding: 30px 0px !important
     left: 0px
@@ -34,8 +37,18 @@
     left: 70px !important
   .top
     left: 0px !important
-  
+@media screen and (max-width: 890px)
+  .menu-body
+    grid-template-columns: repeat(1, 1fr)
+    grid-row-gap: 30px
+  .menu-waiter
+    grid-template-columns: repeat(3, 1fr)
 @media screen and (max-width: 700px)
+  .menu-body
+    grid-template-columns: repeat(1, 1fr)
+    grid-row-gap: 30px
+  .menu-waiter
+    grid-template-columns: repeat(2, 1fr)
   .form
     width: 100% !important
   .menu-body
@@ -119,3 +132,6 @@
     border-color: $themeDark2
     width: 100% !important
     border-radius: 0px 0px 10px 10px !important
+
+  .menu-waiter
+    .menu-card
