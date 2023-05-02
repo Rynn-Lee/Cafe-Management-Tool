@@ -10,7 +10,8 @@ const api = {
 }
 const params = {
   "id": "?_id=",
-  "name": "?name="
+  "name": "?name=",
+  "filter": "?filter="
 }
 export const menuService = {
   async add(data: any){
@@ -36,11 +37,12 @@ export const menuService = {
   async findMenu(filter?: any){
     let response
     filter
-    ? response = await axios.post(api.menu.find, filter)
+    ? response = await axios.post(api.menu.find, {filter})
     : response = await axios.get(api.menu.find)
-    return response.data
+    return await response.data
   },
   async changeVisibility(id: string, visibility: boolean){
+    console.log("VIS: ", visibility)
     const response = await axios.post(api.menu.visibility, {id, visibility})
     return response.data
   }

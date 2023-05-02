@@ -13,7 +13,7 @@ export default function Orders() {
 
   return (
     <>
-      <PageLayout title={`Шаг ${step+1} из 3 | Заказы - Управление кафе`} pageNav={"orders"}>
+      <PageLayout title={<><span className="steps">Шаг {step+1} из 3</span>Заказы - Управление кафе</>} pageNav={"orders"}>
         <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep}>
           <SelectOrder />
           <AdditionalInfo />

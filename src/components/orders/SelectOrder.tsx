@@ -19,10 +19,16 @@ export default function SelectOrder() {
   
 
   return (
-    <div className="menu-body menu-waiter">
+    <div className="menu-waiter">
       {employeemenu.data?.map((item: any, index: number)=>(
-        <div className={`horizontal menu-card ${!item.available ? "unavailable" : ""}`} key={index}>
-          <Image src={"/images/" + item.filename} alt="image" width={300} height={300} className="img-fill"/>
+        <div className={`horizontal menu-waiter-dish${!item.available ? "unavailable" : ""}`} key={index}>
+          <div>
+            <div>
+              <span className="title">{item.name}</span>
+              <span className="cost">{item.cost} тг.</span>
+            </div>
+            <Image src={"/images/" + item.filename} alt="image" width={400} height={400} className="img-fill2"/>
+          </div>
         </div>
       ))}
       {employeemenu.isFetching && <LoadingScreen />}

@@ -25,7 +25,7 @@ export default function MenuList({menu, query, deleteDish, changeVisibility}: an
     <div className="menu-body">
       {search?.map((item: any, index: number)=>(
         <div className={`horizontal menu-card ${!item.available ? "unavailable" : ""}`} key={index}>
-          <Image src={"/images/" + item.filename} alt="image" width={300} height={300} className="img-fill"/>
+          <Image src={"/images/" + item.filename} alt="image" width={140} height={140} className="img-fill"/>
           <div className="vertical menu-card-info">
             <div className="name">
               {item.name}
