@@ -28,7 +28,8 @@ export default function SelectOrder({selectedItem, menu}:any) {
           <div>
             <div>
               <span className="title">{item.name}</span>
-              <span className="cost">{item.cost} тг.</span>
+              <span className="cost">{item.cost} тг. {item.amount && <>x{item.amount + 1}</>}</span>
+              
             </div>
             <Image src={"/images/" + item.filename} alt="image" width={400} height={400} className="img-fill2"/>
           </div>
