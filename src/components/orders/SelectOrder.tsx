@@ -1,27 +1,30 @@
-import { services } from "@/services"
-import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
-import { useEffect } from "react"
-import LoadingScreen from "../LoadingScreen"
+import { useEffect, useState } from "react"
+import searchIco from '@icons/search.svg'
 
 
-export default function SelectOrder() {
-  const employeemenu = useQuery({
-    queryKey: ["employeemenu"],
-    queryFn: () => services.menu.findMenu({available: true}),
-    onSuccess: (data) => console.log(data),
-    enabled: false
-  })
+export default function SelectOrder({selectedItem, menu}:any) {
+  const [query, setQuery] = useState<any>()
+  const [search, setSearch] = useState<any>()
 
-  useEffect(()=>{
-    !employeemenu.data && employeemenu.refetch()
-  }, [employeemenu])
   
+  useEffect(()=>{
+      if(query){
+        setSearch(menu.filter((item: any) => item.name.toLowerCase().includes(query.toLowerCase())))
+        return
+      }
+      setSearch(menu)
+      console.log(menu)
+  },[menu, query])
+
 
   return (
+    <><div className='form'>
+      <Image src={searchIco} alt="search" className="ico" /><input placeholder='Поиск по названию' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
+    </div>
     <div className="menu-waiter">
-      {employeemenu.data?.map((item: any, index: number)=>(
-        <div className={`horizontal menu-waiter-dish${!item.available ? "unavailable" : ""}`} key={index}>
+      {search?.map((item: any, index: number)=>(
+        <div className={`horizontal menu-waiter-dish${!item.available ? "unavailable" : ""}`} key={index} onClick={()=>selectedItem(item)}>
           <div>
             <div>
               <span className="title">{item.name}</span>
@@ -31,7 +34,6 @@ export default function SelectOrder() {
           </div>
         </div>
       ))}
-      {employeemenu.isFetching && <LoadingScreen />}
-    </div>
+    </div></>
   )
 }
