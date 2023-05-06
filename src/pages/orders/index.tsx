@@ -9,6 +9,7 @@ import { services } from '@/services'
 import LoadingScreen from '@/components/LoadingScreen'
 
 export default function Orders() {
+  const [total, setTotal] = useState()
   const [menu, setMenu] = useState<any>([])
   const [cart, setCart] = useState<any>([])
   const [step, setStep] = useState(0)
@@ -19,42 +20,61 @@ export default function Orders() {
     queryKey: ["employeemenu"],
     queryFn: () => services.menu.findMenu({available: true}),
     onSuccess: (data) => setMenu(data.map((item:any)=>{return{...item, amount:0}})),
-    enabled: false
+    enabled: true
   })
 
-  useEffect(()=>{
-    !employeemenu.data && employeemenu.refetch()
-  }, [employeemenu])
-
+  //!---------------------- SKILL ISSUE - CRINGE ZONE - REFACTOR LATER! ----------------------!//
   const selectedItem = (dish: any) => {
-    console.log("Passed order: ",dish)
-    console.log("CART: ",cart)
+    //! console.log("Passed order: ",dish)
+    //! console.log("CART: ",cart)
 
     const filtered = cart.filter((item: any) => item._id == dish._id)
+
     if(!filtered.length){
       setCart([...cart, {...dish, amount: 1}])
+
+      const newMenu2 = menu.map((item: any) => {
+        return dish._id == item._id ? {...item, amount: 1} : item
+      })
+      
+      setMenu(newMenu2)
       return
     }
+
     const changed = cart.map((item: any)=>{
       return item._id == dish._id ? {...item, amount: item.amount + 1} : item
     })
 
     const newMenu = menu.map((item: any) => {
-      return filtered[0]._id == item._id ? {...item, amount: filtered[0].amount} : item
+      return filtered[0]._id == item._id ? {...item, amount: filtered[0].amount + 1} : item
     })
 
     setMenu(newMenu)
     setCart(changed)
-    console.log("filtered: ", filtered)
-    console.log("changed: ", changed)
+    //! console.log("filtered: ", filtered)
+    //! console.log("changed: ", changed)
+  }
+  //!---------------------- SKILL ISSUE - CRINGE ZONE - REFACTOR LATER! ----------------------!//
+
+  const clearOrder = () =>{
+    employeemenu.refetch()
+    setCart([])
+  }
+
+  const removeOne = (id: string) => {
+    console.log("called!")
+    const newMenu = menu.map((item: any) => item._id == id ? {...item, amount: item.amount - 2} : item)
+    setMenu(newMenu)
+    const newCart = cart.map((item: any) => item._id == id ? {...item, amount: item.amount - 2} : item)
+    setCart(newCart)
   }
 
   return (
     <>
       <PageLayout title={<><span className="steps">Шаг {step+1} из 3</span>Заказы - Управление кафе</>} pageNav={"orders"}>
-        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep}>
-          <SelectOrder selectedItem={selectedItem} menu={menu}/>
-          <AdditionalInfo />
+        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} cart={cart?.length}>
+          <SelectOrder selectedItem={selectedItem} menu={menu} clearOrder={clearOrder} cart={cart.length} removeOne={removeOne}/>
+          <AdditionalInfo cart={cart} setTotal={setTotal} total={total}/>
           <CompleteOrder />
         </MenuStepper>
       </PageLayout>

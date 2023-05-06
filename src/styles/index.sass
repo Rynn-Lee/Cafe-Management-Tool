@@ -6,6 +6,7 @@
 
 $theme: aqua
 $themeDark: #5dc6ca 
+$themeLight: #b1fcff 
 $themeDark15: #377a7e2a 
 $themeDark2: #5dcab223 
 $themeDark3: #5dbdca71 
@@ -82,7 +83,7 @@ hr
 .photo-form
   width: auto !important
 .form, .form>div, .account-form
-  width: 500px
+  // width: 500px
   .status
     padding: 10px 0px 10px 0px
     border-radius: 10px 10px 0px 0px
@@ -406,15 +407,56 @@ table
       position: absolute
       font-size: 16px
       font-weight: 600
-      & .cost
+      .cost
         color: lightgreen
+    .cost-full
+      background: #000000d0
+      border-radius: 9px !important
+      top: 0px !important
+      // border: 1px solid $themeDark3
+      justify-content: space-between
+      font-weight: 300
+      .cost
+        display: none
+      .amount
+        display: flex
+        align-items: center
+        font-size: 13pt
+        height: 100%
+        font-weight: 600
+        color: $themeLight
+      .remove
+        width: 100%
+        display: flex
+        align-items: flex-end
+        font-size: 13pt
+        height: min-content !important
+        padding: 8px
+        justify-content: center
+        background: radial-gradient(circle at 100%, #00000000, #ff757550, #00000000)
+
     &>div>img
       border-radius: 10px
       max-width: 220px !important
       height: 200px !important
       object-fit: cover
 
-
+.menu-actions
+  position: relative
+  left: 0px
+  right: 0px
+  width: 100% !important
+  display: flex
+  justify-content: space-between
+  align-items: center
+  &>button
+    right: 30px
+    position: absolute
+    width: max-content !important
+    border-bottom: 1px solid $Accent2tr
+    border-radius: 0px !important
+    padding: 0px 15px 0px 10px !important
+    background: none !important
   
 @import 'mess.sass'
 @import 'preparedStyles.sass'
