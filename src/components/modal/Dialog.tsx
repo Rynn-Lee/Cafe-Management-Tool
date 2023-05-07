@@ -6,6 +6,7 @@ export default function Dialog({message, confirmDialog}:any) {
     return null
   }
 
+
   return (
     <div className="modal-window">
       <span className="modal-title"><Image src={exclamIco} alt="!" className='ico2'/>Подтвердите ваше действие<Image src={exclamIco} alt="!" className='ico2'/></span>

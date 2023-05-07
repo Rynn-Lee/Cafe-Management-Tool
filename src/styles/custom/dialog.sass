@@ -1,0 +1,29 @@
+.modal-window
+  flex-direction: column !important
+  position: fixed !important 
+  align-items: center !important
+  justify-content: center !important
+  top: 0px !important
+  left: 0px !important
+  z-index: 1000000 !important
+  display: flex !important
+  width: 100% !important
+  height: 100% !important
+  background: $modal !important
+  backdrop-filter: blur(3px) !important
+  .modal-title
+    color: #ff5555 !important
+    background: none !important
+    border: none !important
+  &>div>button
+    padding: 5px 10px !important
+    margin: 10px 15px !important
+    width: 180px !important
+  .accept
+    background: #8cff6f3d !important
+    &:hover
+      background: #8cff6f90 !important
+  .decline
+    background: #ff55553d !important
+    &:hover
+      background: #ff555590 !important

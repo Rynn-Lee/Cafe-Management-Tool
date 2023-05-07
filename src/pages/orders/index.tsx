@@ -62,11 +62,13 @@ export default function Orders() {
   }
 
   const removeOne = (id: string) => {
-    console.log("called!")
-    const newMenu = menu.map((item: any) => item._id == id ? {...item, amount: item.amount - 2} : item)
+    const newMenu = menu.map((item: any) => item._id == id ? {...item, amount: item.amount - 1} : item)
     setMenu(newMenu)
-    const newCart = cart.map((item: any) => item._id == id ? {...item, amount: item.amount - 2} : item)
+
+    const newCart = cart.map((item: any) => {item._id == id ? {...item, amount: item.amount - 1} : item})
     setCart(newCart)
+
+    console.log(cart)
   }
 
   return (
