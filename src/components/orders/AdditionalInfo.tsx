@@ -1,24 +1,23 @@
-export default function AdditionalInfo({cart, setTotal, total}: any) {
+import { useEffect, useState } from "react"
+import { OrderList } from "./parts/OrderList"
+
+export default function AdditionalInfo({cart, selectedItem, removeOne, setStep}: any) {
+  const [total, setTotal] = useState(0)
+
+  const calcTotal = cart.reduce((acc: any, item: any)=> (item.cost * item.amount) + acc, 0)
+  
+  useEffect(()=>{
+    setTotal(calcTotal)
+    !cart.length && setStep(0)
+  }, [calcTotal, cart, setStep])
+
+
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Действия</th>
-          <th>Блюдо</th>
-          <th>Количество</th>
-          <th>Цена в общем</th>
-        </tr>
-      </thead>
-      <tbody>
-      {cart.map((item: any)=>(
-        <tr key={item._id}>
-          <td><button>Добавить 1</button>  <button>Убрать 1</button></td>
-          <td>{item.name}</td>
-          <td>x{item.amount} ({item.cost}тг)</td>
-          <td>{item.cost * item.amount}тг.</td>
-        </tr>
-      ))}
-      </tbody>
-    </table>
+    <>
+      <span className="total-cost">Общая цена: <span>{total}</span> тг.</span>
+    
+      <OrderList selectedItem={selectedItem} removeOne={removeOne} cart={cart}/>
+    </>
   )
 }

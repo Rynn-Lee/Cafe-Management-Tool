@@ -47,7 +47,7 @@ export default function SelectOrder({selectedItem, menu, clearOrder, cart, remov
             {item.amount ?
             <div>
               <span className="amount">{item.amount}<span>шт.</span></span>
-              <span className="remove" onClick={()=>removeOne(item._id)}><Image src={closeIco} alt="remove" className="ico3"/>Убрать</span>
+              <span className="remove2" onClick={()=>removeOne(item._id)}><Image src={closeIco} alt="remove" className="ico3"/>Убрать</span>
             </div> : ""}
           </div>
         ))}

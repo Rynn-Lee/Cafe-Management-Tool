@@ -65,10 +65,8 @@ export default function Orders() {
     const newMenu = menu.map((item: any) => item._id == id ? {...item, amount: item.amount - 1} : item)
     setMenu(newMenu)
 
-    const newCart = cart.map((item: any) => {item._id == id ? {...item, amount: item.amount - 1} : item})
+    const newCart = cart.map((item: any) => item._id == id ? {...item, amount: item.amount - 1} : item).filter((item: any) => item.amount > 0)
     setCart(newCart)
-
-    console.log(cart)
   }
 
   return (
@@ -76,7 +74,7 @@ export default function Orders() {
       <PageLayout title={<><span className="steps">Шаг {step+1} из 3</span>Заказы - Управление кафе</>} pageNav={"orders"}>
         <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} cart={cart?.length}>
           <SelectOrder selectedItem={selectedItem} menu={menu} clearOrder={clearOrder} cart={cart.length} removeOne={removeOne}/>
-          <AdditionalInfo cart={cart} setTotal={setTotal} total={total}/>
+          <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} cart={cart} setTotal={setTotal} total={total} setStep={setStep}/>
           <CompleteOrder />
         </MenuStepper>
       </PageLayout>

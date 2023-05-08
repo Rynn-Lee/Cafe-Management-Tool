@@ -421,7 +421,8 @@ table
     background: none
   &>span
     font-size: 10pt
-.remove
+.remove2
+  border-radius: 0px 0px 9px 9px
   &>img::selection
     background: none
   cursor: pointer
@@ -478,6 +479,39 @@ table
       padding: 10px
       width: 50px
       background: $themeColor2
+
+.total-cost
+  font-size: 12pt
+  display: block
+  width: 100%
+  text-align: right
+  &>span
+    font-weight: 600
+    font-size: 15pt
+
+.additional-info-table
+  table-layout: auto
+  width: 100%
+  text-align: left
+  border-spacing: 0px
+  th
+    padding: 5px 15px 5px 15px
+    &:first-child
+      width: 150px
+  tr
+    padding: 5px 2px
+    &:nth-child(odd)
+      background: $Accent2tr
+    td
+      border-right: 1px solid $Accent1
+      &:first-child
+        display: flex
+        justify-content: space-evenly
+      &>a
+        font-weight: 600
+        transition: 200ms
+        &:hover
+          color: $textColor    
 
 @import 'mess.sass'
 @import 'preparedStyles.sass'
