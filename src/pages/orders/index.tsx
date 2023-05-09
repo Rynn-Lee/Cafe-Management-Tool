@@ -11,7 +11,12 @@ import LoadingScreen from '@/components/LoadingScreen'
 export default function Orders() {
   const [total, setTotal] = useState()
   const [menu, setMenu] = useState<any>([])
-  const [cart, setCart] = useState<any>([])
+  // const [cart, setCart] = useState<any>([])
+  const [order, setOrder] = useState<any>({
+    cart: [],
+    table: '1',
+    totalCost: 0,
+  })
   const [step, setStep] = useState(0)
   const nextStep = () => step < 2 && setStep(step + 1)
   const prevStep = () => step > 0 && setStep(step - 1)
@@ -23,15 +28,19 @@ export default function Orders() {
     enabled: true
   })
 
+  useEffect(()=>{
+    console.log("order", order)
+  }, [order])
+
   //!---------------------- SKILL ISSUE - CRINGE ZONE - REFACTOR LATER! ----------------------!//
   const selectedItem = (dish: any) => {
     //! console.log("Passed order: ",dish)
     //! console.log("CART: ",cart)
 
-    const filtered = cart.filter((item: any) => item._id == dish._id)
+    const filtered = order.cart.filter((item: any) => item._id == dish._id)
 
     if(!filtered.length){
-      setCart([...cart, {...dish, amount: 1}])
+      setOrder({...order, cart: [...order.cart, {...dish, amount: 1}]})
 
       const newMenu2 = menu.map((item: any) => {
         return dish._id == item._id ? {...item, amount: 1} : item
@@ -41,7 +50,7 @@ export default function Orders() {
       return
     }
 
-    const changed = cart.map((item: any)=>{
+    const changed = order.cart.map((item: any)=>{
       return item._id == dish._id ? {...item, amount: item.amount + 1} : item
     })
 
@@ -50,7 +59,7 @@ export default function Orders() {
     })
 
     setMenu(newMenu)
-    setCart(changed)
+    setOrder({...order, cart: changed})
     //! console.log("filtered: ", filtered)
     //! console.log("changed: ", changed)
   }
@@ -58,23 +67,22 @@ export default function Orders() {
 
   const clearOrder = () =>{
     employeemenu.refetch()
-    setCart([])
+    setOrder({cart: [], table: 1, totalCost: 0})
   }
 
   const removeOne = (id: string) => {
     const newMenu = menu.map((item: any) => item._id == id ? {...item, amount: item.amount - 1} : item)
     setMenu(newMenu)
-
-    const newCart = cart.map((item: any) => item._id == id ? {...item, amount: item.amount - 1} : item).filter((item: any) => item.amount > 0)
-    setCart(newCart)
+    const newCart = order.cart.map((item: any) => item._id == id ? {...item, amount: item.amount - 1} : item).filter((item: any) => item.amount > 0)
+    setOrder({...order, cart: newCart})
   }
 
   return (
     <>
       <PageLayout title={<><span className="steps">Шаг {step+1} из 3</span>Заказы - Управление кафе</>} pageNav={"orders"}>
-        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} cart={cart?.length}>
-          <SelectOrder selectedItem={selectedItem} menu={menu} clearOrder={clearOrder} cart={cart.length} removeOne={removeOne}/>
-          <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} cart={cart} setTotal={setTotal} total={total} setStep={setStep}/>
+        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} order={order.cart?.length}>
+          <SelectOrder selectedItem={selectedItem} menu={menu} clearOrder={clearOrder} order={order.cart.length} removeOne={removeOne}/>
+          <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} setTotal={setTotal} total={total} setStep={setStep} setOrder={setOrder} order={order}/>
           <CompleteOrder />
         </MenuStepper>
       </PageLayout>

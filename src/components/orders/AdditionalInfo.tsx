@@ -1,23 +1,28 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { OrderList } from "./parts/OrderList"
 
-export default function AdditionalInfo({cart, selectedItem, removeOne, setStep}: any) {
-  const [total, setTotal] = useState(0)
+export default function AdditionalInfo({selectedItem, removeOne, setStep, setOrder, order}: any) {
 
-  const calcTotal = cart.reduce((acc: any, item: any)=> (item.cost * item.amount) + acc, 0)
+  const calcTotal = order.cart.reduce((acc: any, item: any)=> (item.cost * item.amount) + acc, 0)
   
   useEffect(()=>{
-    setTotal(calcTotal)
-    !cart.length && setStep(0)
-  }, [calcTotal, cart, setStep])
-
-
+    setOrder({...order, totalCost: calcTotal})
+    !order.cart.length && setStep(0)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [calcTotal, order.cart, setStep])
 
   return (
     <>
-      <span className="total-cost">Общая цена: <span>{total}</span> тг.</span>
-    
-      <OrderList selectedItem={selectedItem} removeOne={removeOne} cart={cart}/>
+      <span className="total-cost">Общая цена: <span>{order.totalCost}</span> тг.</span>
+      <fieldset>
+        <legend>Дополнительная информация</legend>
+        <div className="form">
+          <div className="fields"><span>Выберите столик</span>
+          <input className="right-input" placeholder="Введите номер столика" onChange={(e)=>setOrder({...order, table: e.target.value})} type="number"/>
+          </div>
+        </div>
+      </fieldset>
+      <OrderList selectedItem={selectedItem} removeOne={removeOne} order={order}/>
     </>
   )
 }

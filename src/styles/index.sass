@@ -492,7 +492,7 @@ table
 .additional-info-table
   table-layout: auto
   width: 100%
-  text-align: left
+  text-align: center
   border-spacing: 0px
   th
     padding: 5px 15px 5px 15px
@@ -500,10 +500,13 @@ table
       width: 150px
   tr
     padding: 5px 2px
+    
     &:nth-child(odd)
       background: $Accent2tr
     td
       border-right: 1px solid $Accent1
+      &:nth-child(2)
+        text-align: left
       &:first-child
         display: flex
         justify-content: space-evenly
