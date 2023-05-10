@@ -41,22 +41,27 @@ export default function Service({dirs}: Props) {
   return (
     <>
       <PageLayout title={"Сервисное меню - Управление кафе"} pageNav={"administration"}>
-      <div className='horizontal form'>
-        <fieldset>
-          <legend>Other deletions</legend>
-          <button onClick={deleteAllUsers}>Delete users</button><br/>
-          <button onClick={deleteMenu}>Delete menu</button><br/>
-        </fieldset>
-        <fieldset>
-          <legend>images</legend>
-          <button onClick={deleteLeftovers}>Delete unused images</button><br/>
-        </fieldset>
-      </div>
-      <ul>
-        {images?.map((item: string)=>(
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
+        <PageLayout pageNav={"administration/service"} nav2>
+          <div className='horizontal form'>
+            <fieldset>
+              <legend>Очистка</legend>
+              <button onClick={deleteAllUsers}>Удалить всех пользователей</button><br/>
+              <button onClick={deleteMenu}>Удалить всё меню</button><br/>
+            </fieldset>
+            <fieldset>
+              <legend>Изображения</legend>
+              <button onClick={deleteLeftovers}>Удалить неиспользуемые изображения</button><br/>
+            </fieldset>
+          </div>
+          <fieldset>
+            <legend>Файлы изображений</legend>
+            <ul>
+              {images?.map((item: string)=>(
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </fieldset>
+        </PageLayout>
       </PageLayout>
     </>
   )

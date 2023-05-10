@@ -18,7 +18,7 @@ export default function AdditionalInfo({selectedItem, removeOne, setStep, setOrd
         <legend>Дополнительная информация</legend>
         <div className="form">
           <div className="fields"><span>Выберите столик</span>
-          <input className="right-input" placeholder="Введите номер столика" onChange={(e)=>setOrder({...order, table: e.target.value})} type="number"/>
+          <input className="right-input" placeholder="Введите номер столика" value={order.table} onChange={(e)=>setOrder({...order, table: e.target.value})} type="number"/>
           </div>
         </div>
       </fieldset>

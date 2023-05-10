@@ -91,7 +91,7 @@ a
   top: 40px !important
 
 .loading
-  z-index: 10000
+  z-index: 100000
   display: flex
   background: $loading
   justify-content: center
@@ -103,7 +103,8 @@ a
   bottom: 0px
 
 ul
-  list-style-type: circle
+  margin-left: 10px
+  list-style-type: none
 
 fieldset
   border-left: 1px solid $Accent2
@@ -148,3 +149,13 @@ fieldset
     transform: rotate(0deg)
   to
     transform: rotate(360deg)
+
+.categories-checkboxes
+  width: 15px !important
+  height: 15px !important
+.printers-form
+  &>fieldset
+    padding: 5px 20px
+  .fields>span
+    display: flex
+    align-items: flex-start

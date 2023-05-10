@@ -13,8 +13,8 @@ const tabs = {
 }
 
 const funcTabs = {
-  "overview": 0, "viewdishes": 0,
-  "add": 1, "newdish": 1,
+  "overview": 0, "viewdishes": 0, "cleanup": 0,
+  "add": 1, "newdish": 1, "printers": 1,
   "categories": 2
 }
 

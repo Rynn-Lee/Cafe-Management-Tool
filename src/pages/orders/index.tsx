@@ -3,7 +3,6 @@ import AdditionalInfo from '@/components/orders/AdditionalInfo'
 import SelectOrder from '@/components/orders/SelectOrder'
 import { PageLayout } from '@/layouts/PageLayout'
 import { useEffect, useState } from 'react'
-import CompleteOrder from '@/components/orders/CompleteOrder'
 import { useQuery } from '@tanstack/react-query'
 import { services } from '@/services'
 import LoadingScreen from '@/components/LoadingScreen'
@@ -14,12 +13,19 @@ export default function Orders() {
   // const [cart, setCart] = useState<any>([])
   const [order, setOrder] = useState<any>({
     cart: [],
-    table: '1',
+    waiter: {},
+    table: '',
     totalCost: 0,
   })
   const [step, setStep] = useState(0)
-  const nextStep = () => step < 2 && setStep(step + 1)
+  const nextStep = () => step < 1 && setStep(step + 1)
   const prevStep = () => step > 0 && setStep(step - 1)
+
+  const auth = useQuery({
+    queryKey: ["auth"],
+    queryFn: () => services.account.checkLogin(),
+    onSuccess: (data) => setOrder({...order, waiter: {full_name: data.full_name, _id: data._id}})
+  })
 
   const employeemenu = useQuery({
     queryKey: ["employeemenu"],
@@ -67,7 +73,7 @@ export default function Orders() {
 
   const clearOrder = () =>{
     employeemenu.refetch()
-    setOrder({cart: [], table: 1, totalCost: 0})
+    setOrder({...order, cart: [], table: "", totalCost: 0})
   }
 
   const removeOne = (id: string) => {
@@ -80,10 +86,9 @@ export default function Orders() {
   return (
     <>
       <PageLayout title={<><span className="steps">Шаг {step+1} из 3</span>Заказы - Управление кафе</>} pageNav={"orders"}>
-        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} order={order.cart?.length}>
+        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} order={order.cart?.length} table={order.table}>
           <SelectOrder selectedItem={selectedItem} menu={menu} clearOrder={clearOrder} order={order.cart.length} removeOne={removeOne}/>
           <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} setTotal={setTotal} total={total} setStep={setStep} setOrder={setOrder} order={order}/>
-          <CompleteOrder />
         </MenuStepper>
       </PageLayout>
       {employeemenu.isFetching && <LoadingScreen />}
