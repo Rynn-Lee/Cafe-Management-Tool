@@ -1,10 +1,19 @@
 import LoadingScreen from '@/components/LoadingScreen'
+import { AddNewPrinter } from '@/components/printers/AddNewPrinter'
 import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import billIco from '@icons/bill.svg'
+import Image from 'next/image'
 
 export default function Administration() {
+  const [vacantCategories, setVacantCategories] = useState([])
+  const [newPrinter, setNewPrinter] = useState<any>({
+    name: "",
+    categories: [],
+    ip: "192.1.1.0"
+  })
 
   const printers = useQuery({
     queryKey: ["printers"],
@@ -25,25 +34,57 @@ export default function Administration() {
     !categories.isFetched && categories.refetch()
   }, [categories, printers])
 
+  const addPrinter = (e: any) => {
+    e.preventDefault()
+
+    const checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+    let cats: String[] = []
+    checkboxes.forEach((item: any)=>{
+      cats.push(item.value)
+    })
+    console.log(cats)
+  }
+
   return (
     <>
       <PageLayout title={"Главная - Управление кафе"} pageNav={"administration"}>
-        <PageLayout pageNav={"administration/service"} nav2>
-          <form className='form w-max printers-form' onSubmit={(e)=>e.preventDefault()}>
-            <fieldset>
-              <legend>Добавить новый принтер</legend>
-              <div className='fields'><span>Название</span><input /></div>
-              <div className='fields'><span>Категории<br />(не занятые)</span>
-                <ul>
-                  {categories.data.map((item: any) => (
-                    <li key={item._id}><input type='checkbox' value={item.title} className='categories-checkboxes'/> - {item.title}</li>
+        <PageLayout pageNav={"administration/service"} nav2 flex>
+          <AddNewPrinter
+            addPrinter={addPrinter}
+            newPrinter={newPrinter}
+            setNewPrinter={setNewPrinter}
+            categories={categories}/>
+            <div className='horizontal'>
+            {
+              printers.data?.map((printer: any)=>(
+                <fieldset key={printer._id} className='form'>
+                  <legend><Image src={billIco} alt="bill" className='ico'/>{printer.name}</legend>
+                  {printer.category.map((el: any)=>(
+                    <span key={el}>{el}<br/></span>
                   ))}
-                </ul>
-              </div>
-              <div className='fields'><span>ip</span><input value={"192.1.1.0"}/></div>
-              <button type='submit'>Добавить</button>
-            </fieldset>
-          </form>
+                </fieldset>
+              ))
+            }
+            </div>
+            {/* <table>
+              <tr>
+                {printers.data?.map((printer: any) => (
+                  <th key={printer._id}>{printer.name}</th>
+                ))}
+              </tr>
+
+              {printers.data?.map((printer: any)=>(
+
+                <tr key={printer._id}>
+                  {
+                  printer.category.map((category: any) => (
+                    <td key={category}>{category}</td>
+                  )).reverse()
+                  }
+                </tr>
+
+              ))}
+            </table> */}
         </PageLayout>
       </PageLayout>
       {printers.isFetching ? <LoadingScreen /> : ""}

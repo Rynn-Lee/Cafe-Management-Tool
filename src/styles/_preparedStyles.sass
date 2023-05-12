@@ -33,6 +33,14 @@
   border-bottom: 1px solid $Accent2
   padding: 10px
 
+.flex
+  display: flex
+  &>div
+    width: max-content
+    &>fieldset
+      width: max-content
+      min-width: 120px !important
+
 button, input, select, option, textarea
   background: none
   box-sizing: border-box
