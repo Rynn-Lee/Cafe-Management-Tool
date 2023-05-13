@@ -27,6 +27,7 @@ export default function Service({dirs}: Props) {
 
   const deleteAllUsers = async() => await services.account.deleteUsers()
   const deleteMenu = async() => await services.menu.deleteAll()
+  const deletePrinters = async() => await services.printers.delete()
 
   const deleteLeftovers = async () => {
     const used = menu.data.map((item: any) => item.filename)
@@ -47,6 +48,7 @@ export default function Service({dirs}: Props) {
               <legend>Очистка</legend>
               <button onClick={deleteAllUsers}>Удалить всех пользователей</button><br/>
               <button onClick={deleteMenu}>Удалить всё меню</button><br/>
+              <button onClick={deletePrinters}>Удалить все принтеры</button><br/>
             </fieldset>
             <fieldset>
               <legend>Изображения</legend>

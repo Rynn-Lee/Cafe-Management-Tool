@@ -14,9 +14,26 @@ export default async function printerApi(req: NextApiRequest, res: NextApiRespon
     }
     if(req.method == "POST"){
       const {name, category, ip} = req.body 
-      console.log(`Добавление нового принтера:`)
-      console.log(`"${name}" для категрии "${category}" c адресом "${ip}"`)
+      if(!name || !category || !ip){
+        console.log(`Недостаточно аргументов для добавления принтера - отмена | name: ${name} - categories: ${category} - ip: ${ip}`)
+        res.send({response: "Недостаточно аргументов для добавления принтера - отмена"} as unknown as Data)
+        return
+      }
+      console.log(`Добавление нового принтера: "${name}" для категории "${category}" c адресом "${ip}"`)
       const result = await printers.create(req.body)
+      res.json(result as unknown as Data)
+    }
+    if(req.method == "DELETE"){
+      const {_id} = req.body 
+      let result
+      if(!_id){
+        console.log(`Удаление ВСЕХ принтеров`)
+        result = await printers.deleteMany()
+      }
+      else{
+        console.log(`Удаление принтера: "${_id}"`)
+        result = await printers.deleteOne({_id})
+      }
       res.json(result as unknown as Data)
     }
   } catch (error) {

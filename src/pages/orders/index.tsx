@@ -10,7 +10,6 @@ import LoadingScreen from '@/components/LoadingScreen'
 export default function Orders() {
   const [total, setTotal] = useState()
   const [menu, setMenu] = useState<any>([])
-  // const [cart, setCart] = useState<any>([])
   const [order, setOrder] = useState<any>({
     cart: [],
     waiter: {},

@@ -28,15 +28,22 @@ a
   color: $textColor
   font-size: 10pt
 
-.ico, .ico2, .ico3, .ico4, .ico5
+.ico, .ico2, .ico3, .ico35, .ico4, .ico5
   cursor: pointer
   display: inline-block
-  position: relative 
+  position: relative
+  top: -2px
   width: 18px
   height: 18px
   margin: 0px 5px 0px 5px
 
 .ico3
+  width: 25px
+  height: 25px
+  filter: invert(1)
+
+.ico35
+  top: 0px !important
   width: 25px
   height: 25px
   filter: invert(1)
@@ -74,11 +81,11 @@ a
 
 /* Handle */
 ::-webkit-scrollbar-thumb
-  background: $Accent1
+  background: $Accent2
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover
-  background: $Accent1
+  background: $Accent2tr
 
 .active-page
   background: $lineRight !important
@@ -150,12 +157,44 @@ fieldset
   to
     transform: rotate(360deg)
 
+
 .categories-checkboxes
-  width: 15px !important
-  height: 15px !important
+  display: inline-block
+  align-items: center
+  justify-content: center
+  width: 25px !important
+  height: 25px !important
 .printers-form
   &>fieldset
-    padding: 5px 20px
-  .fields>span
-    display: flex
-    align-items: flex-start
+    padding: 5px 0px
+    background: $navbar
+    &>button
+      border-radius: 0px
+      bottom: 0px
+    & .fields
+      padding: 5px 0px
+      border: none
+      &>*
+        background: none
+      &>ul
+        max-height: 400px 
+        overflow-y: auto
+        width: 100%
+        &>li
+          display: flex
+          padding: 10px
+          &:nth-child(odd)
+            background: $Accent2tr
+          &>span
+            padding-left: 8px 
+    &>legend
+      padding: 3px 15px 3px 10px
+      border-radius: 10px
+      margin: 0px 10px
+      background: $navbar
+  .fields
+    &>span
+      display: flex
+      align-items: flex-start
+    &>input:focus, &>input:hover
+      border-top: none
