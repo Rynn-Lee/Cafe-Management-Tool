@@ -4,9 +4,7 @@ import tagIco from "@icons/tag.svg"
 import listIco from "@icons/list.svg"
 import webLinkIco from "@icons/web-link.svg"
 
-
-
-export function AddNewPrinter({addPrinter, categories, setNewPrinter, newPrinter}: any){
+export function AddNewPrinter({addPrinter, categories, setNewPrinter, newPrinter, vacantCategories}: any){
   return(
     <form className='form w-max printers-form' onSubmit={addPrinter}>
       <fieldset>
@@ -20,7 +18,7 @@ export function AddNewPrinter({addPrinter, categories, setNewPrinter, newPrinter
           </ul>
         </div>
         <div className='fields'><span><Image src={webLinkIco} className="ico35" alt="ico"/>ip</span><input value={newPrinter.ip} onChange={(e)=>setNewPrinter({...newPrinter, ip: e.target.value})}/></div>
-        <button type='submit'>Добавить</button>
+        <button type='submit' disabled={!vacantCategories.length}>{vacantCategories.length ? <><Image src={plusIco} className="ico" alt="ico"/>Добавить</> : <>Нет свободных категорий!</>}</button>
       </fieldset>
     </form>
   )

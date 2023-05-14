@@ -12,11 +12,14 @@ $themeDark15: #377a7e2a
 $themeDark2: #5dcab223 
 $themeDark3: #5dbdca71 
 $lineRight: #2bb19454
+$lineRightnontr: #125f4f
 $lineRight2: #2bb19454
 $lineBottom: #2bb19454
 $action: #00ffd50a
 $inputPlaceholder: #5dc5c0 
 $transparent: #30304020 
+$warn: #ffa600
+$error: #ff6868
 $loading: #252525be
 
 body
@@ -364,6 +367,8 @@ table
     background: $Accent2
     left: 0px
     right: 0px
+    &>*>img
+      min-width: 220px !important
     &>div>*::selection
       background: none
     &>div>div
@@ -517,6 +522,69 @@ table
         transition: 200ms
         &:hover
           color: $textColor    
+
+.printer-info-window
+  width: 500px !important
+  background: $navbar
+  padding: 10px 5px
+  margin: 0px 5px
+  .form
+    .fields>input, .fields>span
+      background: $navbar
+      &:hover, &:focus
+        border-top: none !important
+  &>fieldset
+    border-color: #fff
+    border: none
+    border-top: 1px solid
+    padding: 5px
+    margin: 0px
+    &>div
+      &>button
+        background: none !important
+      &>select
+        margin: 0px 5px
+        &>option
+          background: $navbar
+    &>legend
+      width: max-content
+      margin-left: 15px
+  legend
+    border-radius: 10px
+    padding: 0px
+    margin: 0px
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+    &>span
+      background: $navbar
+      min-height: 45px
+      padding: 10px 5px
+      border-radius: 10px
+      width: 400px !important
+      text-align: center
+      word-break: break-word
+      &::selection
+        background: none
+    .save
+      background: #2b3b2b
+    .reset
+      background: #3b3b2b
+    .remove
+      background: #3b2b2b
+    &>button
+      display: flex
+      justify-content: center
+      align-items: center
+      background: $lineRightnontr
+      min-width: 40px
+      width: 40px
+      margin: 0px 2px
+      min-height: 45px
+      border-radius: 10px
+      &::selection
+        background: none
 
 @import 'mess.sass'
 @import 'preparedStyles.sass'

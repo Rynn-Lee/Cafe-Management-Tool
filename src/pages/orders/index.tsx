@@ -84,7 +84,7 @@ export default function Orders() {
 
   return (
     <>
-      <PageLayout title={<><span className="steps">Шаг {step+1} из 3</span>Заказы - Управление кафе</>} pageNav={"orders"}>
+      <PageLayout title={<><span className="steps">Шаг {step+1} из 2</span>Заказы - Управление кафе</>} pageNav={"orders"}>
         <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} order={order.cart?.length} table={order.table}>
           <SelectOrder selectedItem={selectedItem} menu={menu} clearOrder={clearOrder} order={order.cart.length} removeOne={removeOne}/>
           <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} setTotal={setTotal} total={total} setStep={setStep} setOrder={setOrder} order={order}/>

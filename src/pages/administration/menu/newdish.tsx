@@ -91,7 +91,7 @@ export default function Add() {
           <DialogWindow />
         </PageLayout>
       </PageLayout>
-      {menu.isFetching && <LoadingScreen />}
+      {menu.isFetching || menu.isLoading && <LoadingScreen />}
     </>
   )
 }

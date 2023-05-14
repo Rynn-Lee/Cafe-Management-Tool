@@ -12,7 +12,7 @@ export default function Administration() {
 
   const [newPrinter, setNewPrinter] = useState<any>({
     name: "",
-    ip: "192.1.1.0"
+    ip: "192.168.0.1"
   })
 
   const printers = useQuery({
@@ -41,6 +41,8 @@ export default function Administration() {
     !categories.isFetched && categories.refetch()
   }, [categories, printers])
 
+  const removePrinter = async(id: string) => {await services.printers.delete(id); printers.refetch()}
+
   const addPrinter = async(e: any) => {
     e.preventDefault()
     const checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
@@ -48,6 +50,24 @@ export default function Administration() {
     checkboxes.forEach((item: any)=> printerCategories.push(item.value))
     const result = await services.printers.add(newPrinter, printerCategories)
     result && printers.refetch()
+  }
+
+  const removeCategory = async(printerToEdit: any, categoryToRemove: any, ) => {
+    const result = printerToEdit.category.filter((item: any)=> item != categoryToRemove)
+    await services.printers.patch(printerToEdit._id, {category: result})
+    printers.refetch()
+  }
+
+  const addCategory = async(printerToEdit: any, categoryToAdd: any) => {
+    const result = [printerToEdit.category, [categoryToAdd]].flat()
+    await services.printers.patch(printerToEdit._id, {category: result})
+    setNewPrinter({...newPrinter, name: ""})
+    printers.refetch()
+  }
+
+  const editPrinterInfo = async(printerToEdit: any, data: any) => {
+    await services.printers.patch(printerToEdit._id, data)
+    printers.refetch()
   }
 
   return (
@@ -59,11 +79,21 @@ export default function Administration() {
             addPrinter={addPrinter}
             newPrinter={newPrinter}
             setNewPrinter={setNewPrinter}
+            vacantCategories={vacantCategories}
             categories={vacantCategories}/>
+
+          {printers.data?.length ?
           <PrintersList 
             printers={printers}
-            setPage={setPage}/>
-
+            page={page}
+            setPage={setPage}
+            removePrinter={removePrinter}
+            removeCategory={removeCategory}
+            addCategory={addCategory}
+            vacantCategories={vacantCategories}
+            editPrinterInfo={editPrinterInfo}/>
+            :""}
+          
         </PageLayout>
       </PageLayout>
       {printers.isFetching ? <LoadingScreen /> : ""}

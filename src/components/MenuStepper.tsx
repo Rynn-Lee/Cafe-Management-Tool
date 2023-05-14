@@ -1,5 +1,5 @@
-import arrowR from '@icons/arrow-R.svg'
-import arrowL from '@icons/arrow-L.svg'
+import arrowR from '@icons/arrow-r.svg'
+import arrowL from '@icons/arrow-l.svg'
 import check from '@icons/check.svg'
 import Image from 'next/image'
 import useDialog from '@/hooks/useDialog'

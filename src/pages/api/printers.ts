@@ -7,14 +7,16 @@ type Data = {
 
 export default async function printerApi(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
+
     if(req.method == "GET"){
       const result = await printers.find({})
       console.log(`Получение всех принтеров`)
       res.json(result as unknown as Data)
     }
+
     if(req.method == "POST"){
       const {name, category, ip} = req.body 
-      if(!name || !category || !ip){
+      if(!name || !ip){
         console.log(`Недостаточно аргументов для добавления принтера - отмена | name: ${name} - categories: ${category} - ip: ${ip}`)
         res.send({response: "Недостаточно аргументов для добавления принтера - отмена"} as unknown as Data)
         return
@@ -23,31 +25,30 @@ export default async function printerApi(req: NextApiRequest, res: NextApiRespon
       const result = await printers.create(req.body)
       res.json(result as unknown as Data)
     }
+
     if(req.method == "DELETE"){
-      const {_id} = req.body 
+      const query = req.query;
+      const id = query
       let result
-      if(!_id){
+      if(!id){
         console.log(`Удаление ВСЕХ принтеров`)
         result = await printers.deleteMany()
       }
       else{
-        console.log(`Удаление принтера: "${_id}"`)
-        result = await printers.deleteOne({_id})
+        console.log(`Удаление принтера: "${id.id}"`)
+        result = await printers.deleteOne({_id: id.id})
       }
       res.json(result as unknown as Data)
     }
+    if(req.method == "PATCH"){
+      const {printer, data} = req.body
+      console.log(`Обновление принтера ${printer} - `, data)
+      const result = await printers.updateOne({_id: printer}, data)
+      res.json(result as unknown as Data)
+    }
+    
   } catch (error) {
       console.log(error)
       res.json(error as Data)
   }
-
-  // try{
-  //   const { full_name, password, hire_date, email, job} = req.body
-  //   const userResult= await printers.create(req.body)
-  //   res.json(userResult)
-  // }
-  // catch(error){
-  //   console.log(error)
-  //   res.json(error as Data)
-  // }
 }

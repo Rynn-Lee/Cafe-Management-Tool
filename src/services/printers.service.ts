@@ -11,8 +11,13 @@ export const printersService = {
     const response = await axios.post(api, {name: newPrinter.name, category: printerCategories, ip: newPrinter.ip})
     return response.data
   },
-  async delete(_id: any = null){
-    const response = await axios.delete(api, _id)
+  async delete(id: any = null){
+    const response = await axios.delete(`${api}/?id=${id}`, )
+    return response.data
+  },
+  async patch(printer: string, data: any){
+    console.log(data)
+    const response = await axios.patch(api, {printer, data})
     return response.data
   }
 }

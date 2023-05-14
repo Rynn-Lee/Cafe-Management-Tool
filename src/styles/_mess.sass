@@ -57,6 +57,10 @@ a
   height: 45px
   filter: invert(1)
 
+  
+.revert
+  filter: invert(0) !important
+
 .content-title
   position: fixed
   left: 200px
@@ -100,9 +104,8 @@ a
 .loading
   z-index: 100000
   display: flex
-  background: $loading
-  justify-content: center
-  align-items: center
+  justify-content: flex-start
+  align-items: flex-start
   position: fixed
   left: 0px
   right: 0px
@@ -144,6 +147,7 @@ fieldset
     background: #fc5858
     content: "Отключено!"
 
+
 .employees-form
   width: auto !important
 
@@ -166,13 +170,16 @@ fieldset
   height: 25px !important
 .printers-form
   &>fieldset
+    margin: 0px 5px
     padding: 5px 0px
     background: $navbar
     &>button
       border-radius: 0px
       bottom: 0px
+      &:disabled
+        color: $error
     & .fields
-      padding: 5px 0px
+      padding: 0px 0px
       border: none
       &>*
         background: none
@@ -188,10 +195,12 @@ fieldset
           &>span
             padding-left: 8px 
     &>legend
-      padding: 3px 15px 3px 10px
-      border-radius: 10px
-      margin: 0px 10px
       background: $navbar
+      min-height: 45px
+      padding: 10px 10px
+      border-radius: 10px
+      width: auto !important
+      text-align: left
   .fields
     &>span
       display: flex
