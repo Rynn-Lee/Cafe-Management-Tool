@@ -47,9 +47,7 @@ export default function Add() {
       fileName
     }
     await services.menu.add(data)
-    const formData = new FormData()
-    formData.append("image", selectedFile)
-    await axios.post("/api/images/upload", formData)
+    await services.images.add(selectedFile)
     menu.refetch()
     setInfo({...info, name: "", description: "", cost: 0})
     setSelectedImage("")

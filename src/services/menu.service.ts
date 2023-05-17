@@ -1,21 +1,16 @@
 import axios from "axios"
 
-const api = {
-  "menu": {
-    "add": "../../api/menu/add",
-    "find": "../../api/menu/find",
-    "remove": "../../api/menu/remove",
-    "visibility": "../../api/menu/visibility",
-  }
-}
+const api = "../../api/menu"
+
 const params = {
   "id": "?_id=",
   "name": "?name=",
   "filter": "?filter="
 }
+
 export const menuService = {
   async add(data: any){
-    const response = await axios.post(api.menu.add,{
+    const response = await axios.post(api,{
         name: data.name,
         cost: data.cost,
         category: data.category,
@@ -27,23 +22,22 @@ export const menuService = {
     return result
   },
   async deleteAll(){
-    const response = await axios.delete(api.menu.remove)
+    const response = await axios.delete(api)
     return response.data
   },
   async deleteDish(id: any){
-    const response = await axios.delete(api.menu.remove + params.id + id)
+    const response = await axios.delete(api + params.id + id)
     return response.data
   },
   async findMenu(filter?: any){
     let response
     filter
-    ? response = await axios.post(api.menu.find, {filter})
-    : response = await axios.get(api.menu.find)
+    ? response = await axios.post(api, {filter})
+    : response = await axios.get(api)
     return await response.data
   },
   async changeVisibility(id: string, visibility: boolean){
-    console.log("VIS: ", visibility)
-    const response = await axios.post(api.menu.visibility, {id, visibility})
+    const response = await axios.put(api, {id, visibility})
     return response.data
   }
 }

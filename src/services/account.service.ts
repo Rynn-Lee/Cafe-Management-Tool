@@ -2,13 +2,7 @@ import { getDateNow } from '@/utils/getDate'
 import axios from 'axios'
 const md5 = require('md5')
 
-const api = {
-  "users": {
-    "add": "../../api/users/add",
-    "find": "../../api/users/find",
-    "remove": "../../api/users/remove"
-  }
-}
+const api = "../../api/users"
 
 const params = {
   "id": "?_id=",
@@ -22,7 +16,7 @@ interface data{
 
 export const accountService = {
   async addUser(data: data){
-    const response = await axios.post(api.users.add,{
+    const response = await axios.post(api,{
         full_name: data.full_name,
         password: md5(`123`),
         hire_date: getDateNow(),
@@ -35,9 +29,9 @@ export const accountService = {
   async findUsers(fio: any = null, id: any = null, inputPassword: any = null, auth: boolean = false){
     let query: any
 
-    fio && (query = api.users.find + params.full_name + fio)
-    id && (query = api.users.find + params.id + id)
-    !fio && !id && (query = api.users.find)
+    fio && (query = api + params.full_name + fio)
+    id && (query = api + params.id + id)
+    !fio && !id && (query = api)
 
     const response: any = await axios.get(query)
     const result = await response.data
@@ -59,8 +53,8 @@ export const accountService = {
   },
   async deleteUsers(id: any = null){
     let query: any
-    id && (query = api.users.remove + params.id + id)
-    !id && (query = api.users.remove)
+    id && (query = api + params.id + id)
+    !id && (query = api)
 
     const response = await axios.delete(query)
     return response.data

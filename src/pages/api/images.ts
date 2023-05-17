@@ -9,8 +9,6 @@ export const config = {
   }
 }
 
-const allowedTypes = ["png", "jpg", "jpeg", "webp", "gif", "svg"]
-
 const readFile = (req: NextApiRequest, saveLocally?: boolean):Promise<{fields: formidable.Fields, files: formidable.Files}> => {
   const options: formidable.Options = {};
   
@@ -31,14 +29,32 @@ const readFile = (req: NextApiRequest, saveLocally?: boolean):Promise<{fields: f
 }
 
 const handler: NextApiHandler = async (req, res) => {
-  console.log("Incoming request: Upload a File")
-  try{
-    await fs.readdir(path.join(process.cwd() + "/public", "/images"))
-  } catch (err) {
-    await fs.mkdir(path.join(process.cwd() + "/public", "/images"))
+  if(req.method == "POST"){
+    console.log("Incoming request: Upload a File")
+    try{
+      await fs.readdir(path.join(process.cwd() + "/public", "/images"))
+    } catch (err) {
+      await fs.mkdir(path.join(process.cwd() + "/public", "/images"))
+    }
+    await readFile(req, true)
+    res.json({done: "ok"})
   }
-  await readFile(req, true)
-  res.json({done: "ok"})
+
+  if(req.method == "DELETE"){
+    const query = req.query;
+    const images: any = query
+    const toDelete: any = Object.values(images)
+    const filtered: string[] = toDelete[0].split(',')
+
+    console.log("Images waiting to be obliterated: ", filtered)
+    
+    filtered.forEach((image: string) => {
+      console.log("Image deleted: " + image)
+      fs.unlink(process.cwd() + '/public/images/' + image)
+    });
+  
+    res.send({done: "Unlinked succesfully!"})
+  }
 }
 
 export default handler
