@@ -5,7 +5,7 @@ import { Categories } from './parts/Categories'
 import { MainInfo } from './parts/MainInfo'
 
 export function PrintersList({printers, page, setPage, removePrinter, removeCategory, addCategory, vacantCategories, editPrinterInfo}: any){
-  const [printer, setPrinter] = useState<any>({})
+  const [printer, setPrinter] = useState<any>({ip: "",name: ""})
   const [edited, setEdited] = useState<any>(false)
   const [printerCopy, setPrinterCopy] = useState<any>({})
   const [newCategory, setNewCategory] = useState("")

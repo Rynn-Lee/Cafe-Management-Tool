@@ -34,11 +34,17 @@ export default function MenuList({menu, query, deleteDish, changeVisibility}: an
                 <Image src={removeIco} width={18} height={18} className="icon remove" alt="ico" onClick={()=>ask(`Удалить блюдо: ${item.name}`, ()=>deleteDish(item._id))}/>
               </span>
             </div><hr/>
-            <div className="description">{item.description}</div>
+            <div className="description">
+              {
+                item.ingredients?.map((ingredient: any, index: number) => (
+                  <span key={ingredient}>{ingredient}{index+1 < item.ingredients.length ? ", " : ""}</span>
+                ))
+              }
+            </div>
             <div className="cost"><span>{item.category} • </span>{item.cost} тг.</div>
           </div>
         </div>
-      ))}
+      )).reverse()}
       <DialogWindow />
     </div>
   )

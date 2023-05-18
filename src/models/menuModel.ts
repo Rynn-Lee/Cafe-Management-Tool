@@ -4,7 +4,7 @@ const menuSchema: any = new Schema({
   name: String,
   cost: Number,
   category: String,
-  description: String,
+  ingredients: [String],
   available: Boolean,
   filename: String,
 })

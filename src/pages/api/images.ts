@@ -1,4 +1,4 @@
-import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler, NextApiRequest } from "next";
 import formidable from "formidable";
 import path from "path";
 import fs from 'fs/promises'
@@ -28,28 +28,23 @@ const readFile = (req: NextApiRequest, saveLocally?: boolean):Promise<{fields: f
   })
 }
 
-const handler: NextApiHandler = async (req, res) => {
+const imagesApi: NextApiHandler = async (req, res) => {
   if(req.method == "POST"){
-    console.log("Incoming request: Upload a File")
     try{
-      await fs.readdir(path.join(process.cwd() + "/public", "/images"))
-    } catch (err) {
-      await fs.mkdir(path.join(process.cwd() + "/public", "/images"))
-    }
+      await fs.readdir(path.join(process.cwd() + "/public", "/images"))} 
+    catch(err){
+      await fs.mkdir(path.join(process.cwd() + "/public", "/images"))}
     await readFile(req, true)
     res.json({done: "ok"})
   }
 
   if(req.method == "DELETE"){
-    const query = req.query;
-    const images: any = query
+    const images = req.query;
     const toDelete: any = Object.values(images)
     const filtered: string[] = toDelete[0].split(',')
 
-    console.log("Images waiting to be obliterated: ", filtered)
-    
-    filtered.forEach((image: string) => {
-      console.log("Image deleted: " + image)
+    filtered.forEach((image: string, index: number) => {
+      console.log(`#${index} - Image deleted:  + ${image}`)
       fs.unlink(process.cwd() + '/public/images/' + image)
     });
   
@@ -57,4 +52,4 @@ const handler: NextApiHandler = async (req, res) => {
   }
 }
 
-export default handler
+export default imagesApi

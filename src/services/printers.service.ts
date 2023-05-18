@@ -16,7 +16,6 @@ export const printersService = {
     return response.data
   },
   async patch(printer: string, data: any){
-    console.log(data)
     const response = await axios.patch(api, {printer, data})
     return response.data
   }

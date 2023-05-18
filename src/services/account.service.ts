@@ -61,7 +61,6 @@ export const accountService = {
   },
   unauth(){
     sessionStorage.removeItem("username")
-    console.log("Logged out!")
   },
   checkLogin(){
     const response: any = sessionStorage.getItem("username");

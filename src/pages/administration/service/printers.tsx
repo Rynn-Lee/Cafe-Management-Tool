@@ -18,14 +18,12 @@ export default function Administration() {
   const printers = useQuery({
     queryKey: ["printers"],
     queryFn: () => services.printers.find(),
-    onSuccess: (data) => console.log("printers",data),
     enabled: false
   })
 
   const categories = useQuery({
     queryKey: ["categories"],
     queryFn: () => services.category.list(),
-    onSuccess: (data) => console.log("categories", data),
     enabled: false
   })
 

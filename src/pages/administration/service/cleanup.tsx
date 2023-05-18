@@ -32,7 +32,7 @@ export default function Service({dirs}: Props) {
   const deleteLeftovers = async () => {
     const used = menu.data.map((item: any) => item.filename)
     const result = images.filter((x: any) => !used.includes(x))
-    console.log(await services.images.delete(result))
+    await services.images.delete(result)
   }
 
   useEffect(()=>{

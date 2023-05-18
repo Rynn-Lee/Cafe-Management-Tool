@@ -50,7 +50,7 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
               <span className="remove2" onClick={()=>removeOne(item._id)}><Image src={closeIco} alt="remove" className="ico3"/>Убрать</span>
             </div> : ""}
           </div>
-        ))}
+        )).reverse()}
         <DialogWindow/>
       </div>
     </>

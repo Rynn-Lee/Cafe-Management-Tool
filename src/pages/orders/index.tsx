@@ -33,10 +33,6 @@ export default function Orders() {
     enabled: true
   })
 
-  useEffect(()=>{
-    console.log("order", order)
-  }, [order])
-
   //!---------------------- SKILL ISSUE - CRINGE ZONE - REFACTOR LATER! ----------------------!//
   const selectedItem = (dish: any) => {
     //! console.log("Passed order: ",dish)

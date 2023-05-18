@@ -55,7 +55,6 @@ export default function TabsLayout({page, id, nav2}: any) {
         <div className={styleClass}>
           <Link href={`/administration/menu/viewdishes`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Меню</Link>
           <Link href={`/administration/menu/newdish`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Блюдо</Link>
-          <Link href={`/administration/menu/categories`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Категории</Link>
         </div>
       )
     case "administration/employees":
@@ -70,9 +69,9 @@ export default function TabsLayout({page, id, nav2}: any) {
         <div className={styleClass}>
           <Link href={`/administration/service/cleanup`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Очистка</Link>
           <Link href={`/administration/service/printers`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Принтеры</Link>
+          <Link href={`/administration/service/categories`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Категории</Link>
         </div>
       )
   }
-{/* <Image src={listIco} alt="plus" className='ico'/> */}
   return(<></>)
 }

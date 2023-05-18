@@ -4,15 +4,14 @@ import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
-import lightbulbIco from '@icons/lightbulb.svg'
-import messageIco from '@icons/message.svg'
 import plusIco from '@icons/plus.svg'
 import Image from 'next/image'
-import axios from 'axios'
 import useDialog from '@/hooks/useDialog'
+import MainInfo from '@/components/menu/MainInfo'
+import Ingredients from '@/components/menu/Ingredients'
 
 export default function Add() {
-  const [info, setInfo] = useState<any>({available: false, cost: 0, name: "", description: ""})
+  const [info, setInfo] = useState<any>({available: false, cost: 0, name: "", ingredients: ""})
   const [selectedImage, setSelectedImage] = useState("")
   const [fileName, setFileName] = useState("")
   const [selectedFile, setSelectedFile] = useState<File>()
@@ -21,7 +20,6 @@ export default function Add() {
   const menu = useQuery({
     queryKey: ["menu"],
     queryFn: () => services.menu.findMenu(),
-    onSuccess: (data) => console.log(data),
     enabled: false
   })
   
@@ -37,19 +35,18 @@ export default function Add() {
 
   const handleUpload = async() => {
     if(!selectedFile) return;
-    console.log(info)
     const data = {
       name: info.name,
       cost: info.cost,
       category: info.category,
-      description: info.description,
+      ingredients: info.ingredients,
       available: info.available,
       fileName
     }
     await services.menu.add(data)
     await services.images.add(selectedFile)
     menu.refetch()
-    setInfo({...info, name: "", description: "", cost: 0})
+    setInfo({...info, name: "", ingredients: "", cost: 0})
     setSelectedImage("")
   }
 
@@ -64,32 +61,21 @@ export default function Add() {
                 setSelectedImage={setSelectedImage}
                 setSelectedFile={setSelectedFile}
                 selectedImage={selectedImage}
-                setFileName={setFileName}
-              />
-              <fieldset className='px-6 py-2'>
-              <legend><Image src={lightbulbIco} alt="Image" className="ico"/>Основная информация</legend>
-                <div className='fields'><span>Название</span><input value={info.name} className='right-input' onChange={(e) => setInfo({...info, name: e.target.value})} required/></div>
-                <div className='fields'><span>Цена</span><input value={info.cost} type='number' className='right-input' onChange={(e) => setInfo({...info, cost: e.target.value})} required/></div>
-                <div className='fields'><span>Категория</span>
-                  <select className='right-input' onChange={(e) => setInfo({...info, category: e.target.value})} required>
-                    {categories?.data?.map((category: any) => (
-                      <option key={category?.title}>{category?.title}</option>
-                    )).reverse()}
-                  </select>
-                </div>
-                <div className='fields'><span>Доступно после добавления? | <input type='checkbox' onChange={(e) => setInfo({...info, available: e.target.checked})}/></span></div>
-              </fieldset>
+                setFileName={setFileName}/>
+              <MainInfo 
+                info={info}
+                setInfo={setInfo}
+                categories={categories}/>
             </div>
-            <fieldset>
-              <legend><Image src={messageIco} alt="Image" className="ico"/>Краткое описание</legend>
-              <textarea value={info.description} onChange={(e) => setInfo({...info, description: e.target.value})} required/>
-            </fieldset>
+            <Ingredients 
+              setInfo={setInfo}
+              info={info}/>
             <button><Image src={plusIco} alt="Image" className="ico"/>Добавить товар</button>
           </form>
           <DialogWindow />
         </PageLayout>
       </PageLayout>
-      {menu.isFetching || menu.isLoading && <LoadingScreen />}
+      {menu.isFetching && <LoadingScreen />}
     </>
   )
 }

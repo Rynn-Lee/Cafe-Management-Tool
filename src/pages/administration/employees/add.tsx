@@ -12,7 +12,6 @@ export default function Add() {
   const employees = useQuery({
     queryKey: ["employees"],
     queryFn: () => services.account.findUsers(),
-    onSuccess: (data) => console.log(data),
     enabled: false
   })
 

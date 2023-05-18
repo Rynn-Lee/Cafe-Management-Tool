@@ -1,7 +1,5 @@
 import axios from "axios"
-
 const api = "../../api/menu"
-
 const params = {
   "id": "?_id=",
   "name": "?name=",
@@ -10,11 +8,13 @@ const params = {
 
 export const menuService = {
   async add(data: any){
+    const ingredients = data.ingredients.replace(/\s*,\s*/g, ",").split(',')
+    console.log("INgredients", ingredients)
     const response = await axios.post(api,{
         name: data.name,
         cost: data.cost,
         category: data.category,
-        description: data.description,
+        ingredients,
         available: data.available,
         filename: data.fileName
     })

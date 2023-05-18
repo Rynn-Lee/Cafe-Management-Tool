@@ -5,43 +5,32 @@ type Data = {
   name: String,
 }
 
-export default async function addUSer(req: NextApiRequest, res: NextApiResponse<Data>){
+export default async function usersApi(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
     if(req.method == "POST"){
-      const { full_name } = req.body
-      console.log(`Incoming request: Add new user - ${full_name}`)
-      const userResult= await users.create(req.body)
-      res.json(userResult)
+      res.json(await users.create(req.body))
     }
+
     if(req.method == "GET"){
-      const query = req.query;
-      const user = query
+      const user = req.query;
       let result
       
-      if(user.full_name || user.id){
-        console.log(`Incoming request: Find one user - ${user.full_name}`)
-        if(user.full_name) result = await users.findOne({'full_name': user.full_name})
-        else result = await users.findById(user.id)
-      }
-      else{
-        console.log(`Incoming request: Find ALL users`)
-        result = await users.find({})
-      }
-      res.json(result as unknown as Data)
+      user.full_name || user.id
+        ? user.full_name //if 1
+            ? result = await users.findOne({'full_name': user.full_name}) // if 2
+            : result = await users.findById(user.id) // else 2
+        : result = await users.find({}) //else 1
+
+      res.json(result as any)
     }
+    
     if(req.method == "DELETE"){
-      const query = req.query;
-      const id = query
+      const id = req.query;
       let result
 
-      if(id._id){
-        console.log(`Incoming request: Remove one user - ${id._id}`)
-        result = await users.deleteOne(id)
-      }
-      else{
-        console.log(`Incoming request: Remove ALL users`)
-        result = await users.deleteMany({})
-      }
+      id._id
+        ? result = await users.deleteOne(id)
+        : result = await users.deleteMany({})
       res.json(result as unknown as Data)
     }
   }

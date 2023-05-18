@@ -14,7 +14,6 @@ export default function Menu() {
   const categories = useQuery({
     queryKey: ["categories"],
     queryFn: () => services.category.list(),
-    onSuccess: (data) => console.log(data),
     enabled: false
   })
   const addMutatuion = useMutation({
@@ -33,8 +32,8 @@ export default function Menu() {
   
   return (
     <>
-      <PageLayout title={"Меню > Категории - Управление кафе"} pageNav={"administration"}>
-        <PageLayout pageNav={"administration/menu"} nav2>
+      <PageLayout title={"Категории - Управление кафе"} pageNav={"administration"}>
+        <PageLayout pageNav={"administration/service"} nav2>
           <form onSubmit={(e)=>{e.preventDefault()}} className='!w-max items-center form'>
               <div className='fields'><span>Название</span><input value={newCategory} onChange={(e)=>setNewCategory(e.target.value)} className='w-full'/></div>
               <button onClick={() => ask(`Добавить категорию: ${newCategory}`, ()=>addMutatuion.mutate())}>Добавить категорию</button>

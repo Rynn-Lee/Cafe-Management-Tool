@@ -12,7 +12,6 @@ export const categoryService = {
     return await response.data
   },
   async remove(id: string){
-    // console.log(id)
     const response = await axios.delete(api + params.id + id)
     return await response.data
   },
