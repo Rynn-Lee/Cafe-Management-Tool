@@ -35,9 +35,6 @@ export default function Orders() {
 
   //!---------------------- SKILL ISSUE - CRINGE ZONE - REFACTOR LATER! ----------------------!//
   const selectedItem = (dish: any) => {
-    //! console.log("Passed order: ",dish)
-    //! console.log("CART: ",cart)
-
     const filtered = order.cart.filter((item: any) => item._id == dish._id)
 
     if(!filtered.length){
@@ -51,18 +48,11 @@ export default function Orders() {
       return
     }
 
-    const changed = order.cart.map((item: any)=>{
-      return item._id == dish._id ? {...item, amount: item.amount + 1} : item
-    })
-
-    const newMenu = menu.map((item: any) => {
-      return filtered[0]._id == item._id ? {...item, amount: filtered[0].amount + 1} : item
-    })
+    const changed = order.cart.map((item: any)=> item._id == dish._id ? {...item, amount: item.amount + 1} : item)
+    const newMenu = menu.map((item: any) => filtered[0]._id == item._id ? {...item, amount: filtered[0].amount + 1} : item)
 
     setMenu(newMenu)
     setOrder({...order, cart: changed})
-    //! console.log("filtered: ", filtered)
-    //! console.log("changed: ", changed)
   }
   //!---------------------- SKILL ISSUE - CRINGE ZONE - REFACTOR LATER! ----------------------!//
 
