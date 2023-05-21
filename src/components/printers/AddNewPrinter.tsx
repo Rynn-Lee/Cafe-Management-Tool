@@ -15,10 +15,11 @@ export function AddNewPrinter({addPrinter, categories, setNewPrinter, newPrinter
             {categories?.map((item: any) => (
               <li key={item._id}><input type='checkbox' value={item.title} className='categories-checkboxes'/><span> - {item.title}</span></li>
             ))}
+            {!vacantCategories.length ? <li>Нет свободных принтеров</li> : ""}
           </ul>
         </div>
         <div className='fields'><span><Image src={webLinkIco} className="ico35" alt="ico"/>ip</span><input value={newPrinter.ip} onChange={(e)=>setNewPrinter({...newPrinter, ip: e.target.value})}/></div>
-        <button type='submit' disabled={!vacantCategories.length}>{vacantCategories.length ? <><Image src={plusIco} className="ico" alt="ico"/>Добавить</> : <>Нет свободных категорий!</>}</button>
+        <button type='submit'><Image src={plusIco} className="ico" alt="ico"/>Добавить</button>
       </fieldset>
     </form>
   )

@@ -50,6 +50,11 @@ export default function Administration() {
     result && printers.refetch()
   }
 
+  const editPrinterInfo = async(printerToEdit: any, data: any) => {
+    await services.printers.patch(printerToEdit._id, data)
+    printers.refetch()
+  }
+
   const removeCategory = async(printerToEdit: any, categoryToRemove: any, ) => {
     const result = printerToEdit.category.filter((item: any)=> item != categoryToRemove)
     await services.printers.patch(printerToEdit._id, {category: result})
@@ -60,11 +65,6 @@ export default function Administration() {
     const result = [printerToEdit.category, [categoryToAdd]].flat()
     await services.printers.patch(printerToEdit._id, {category: result})
     setNewPrinter({...newPrinter, name: ""})
-    printers.refetch()
-  }
-
-  const editPrinterInfo = async(printerToEdit: any, data: any) => {
-    await services.printers.patch(printerToEdit._id, data)
     printers.refetch()
   }
 
@@ -89,7 +89,8 @@ export default function Administration() {
             removeCategory={removeCategory}
             addCategory={addCategory}
             vacantCategories={vacantCategories}
-            editPrinterInfo={editPrinterInfo}/>
+            editPrinterInfo={editPrinterInfo}
+            />
             :""}
           
         </PageLayout>

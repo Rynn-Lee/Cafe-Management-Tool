@@ -33,6 +33,12 @@ export default function Orders() {
     enabled: true
   })
 
+  const printers = useQuery({
+    queryKey: ["printers"],
+    queryFn: () => services.printers.find(),
+    enabled: true
+  })
+
   //!---------------------- SKILL ISSUE - CRINGE ZONE - REFACTOR LATER! ----------------------!//
   const selectedItem = (dish: any) => {
     const filtered = order.cart.filter((item: any) => item._id == dish._id)
@@ -68,10 +74,12 @@ export default function Orders() {
     setOrder({...order, cart: newCart})
   }
 
+  const completeOrder = async() => await services.orders.create(order, printers.data)
+
   return (
     <>
       <PageLayout title={<><span className="steps">Шаг {step+1} из 2</span>Заказы - Управление кафе</>} pageNav={"orders"}>
-        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} order={order.cart?.length} table={order.table}>
+        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} order={order.cart?.length} table={order.table} completeOrder={completeOrder}>
           <SelectOrder selectedItem={selectedItem} menu={menu} clearOrder={clearOrder} order={order.cart.length} removeOne={removeOne}/>
           <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} setTotal={setTotal} total={total} setStep={setStep} setOrder={setOrder} order={order}/>
         </MenuStepper>

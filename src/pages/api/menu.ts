@@ -6,8 +6,7 @@ type Data = { name: String }
 export default async function menuApi(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
     if(req.method == "POST"){
-      const {filter, ingredients} = req.body
-      console.log(ingredients)
+      const {filter} = req.body
       filter
         ? res.json(await menu.find().where(filter) as any) 
         : res.json(await menu.create(req.body))

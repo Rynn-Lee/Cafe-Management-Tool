@@ -4,6 +4,7 @@ import { dbService } from "./db.service"
 import { imagesService } from "./images.service"
 import { categoryService } from "./category.service"
 import { printersService } from "./printers.service"
+import { ordersService } from "./orders.service"
 
 
 export const services = {
@@ -12,5 +13,6 @@ export const services = {
   images: imagesService,
   menu: menuService,
   category: categoryService,
-  printers: printersService
+  printers: printersService,
+  orders: ordersService
 }
