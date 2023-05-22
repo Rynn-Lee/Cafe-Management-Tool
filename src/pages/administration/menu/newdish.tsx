@@ -13,6 +13,7 @@ import Ingredients from '@/components/menu/Ingredients'
 export default function Add() {
   const [info, setInfo] = useState<any>({available: false, cost: 0, name: "", ingredients: ""})
   const [selectedImage, setSelectedImage] = useState("")
+  const [defaultValue, setDefaultValue] = useState("")
   const [fileName, setFileName] = useState("")
   const [selectedFile, setSelectedFile] = useState<File>()
   const { DialogWindow, ask } = useDialog()
@@ -48,7 +49,12 @@ export default function Add() {
     menu.refetch()
     setInfo({...info, name: "", ingredients: "", cost: 0})
     setSelectedImage("")
+    setDefaultValue("none")
   }
+
+  useEffect(()=>{
+    console.log(defaultValue)
+  }, [defaultValue])
 
   return (
     <>
@@ -65,7 +71,9 @@ export default function Add() {
               <MainInfo 
                 info={info}
                 setInfo={setInfo}
-                categories={categories}/>
+                categories={categories}
+                defaultValue={defaultValue}
+                setDefaultValue={setDefaultValue}/>
             </div>
             <Ingredients 
               setInfo={setInfo}

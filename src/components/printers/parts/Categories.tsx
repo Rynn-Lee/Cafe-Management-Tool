@@ -5,10 +5,10 @@ import { useState } from 'react'
 
 export function Categories({setNewCategory, newCategory, vacantCategories, ask, printer, removeCategory, addCategory}: any){
 
-  const [fknValue, setFknValue] = useState("")
+  const [defaulValue, setdefaulValue] = useState("")
   const handleCategory = (printer: any, newCategory: any) => {
     addCategory(printer, newCategory)
-    setFknValue("")
+    setdefaulValue("")
   }
 
   return(
@@ -16,7 +16,7 @@ export function Categories({setNewCategory, newCategory, vacantCategories, ask, 
       <legend> - Категории - </legend>
       {vacantCategories.length ? <>
       <div>
-        <select onChange={(e)=>{setNewCategory(e.target.value); setFknValue(e.target.value)}} value={fknValue}>
+        <select onChange={(e)=>{setNewCategory(e.target.value); setdefaulValue(e.target.value)}} value={defaulValue}>
           <option value="" disabled>Выберите категорию</option>
           {vacantCategories.map((category: any, index: number)=>(
             <option key={category._id} value={category.title}>{category.title}</option>
