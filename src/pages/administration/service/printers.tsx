@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react'
 export default function Administration() {
   const [vacantCategories, setVacantCategories] = useState([])
   const [page, setPage] = useState(0)
-
   const [newPrinter, setNewPrinter] = useState<any>({
     name: "",
     ip: "192.168.0.1"
@@ -39,7 +38,7 @@ export default function Administration() {
     !categories.isFetched && categories.refetch()
   }, [categories, printers])
 
-  const removePrinter = async(id: string) => {await services.printers.delete(id); printers.refetch()}
+  const removePrinter = async(id: string) => {await services.printers.delete(id); await printers.refetch()}
 
   const addPrinter = async(e: any) => {
     e.preventDefault()
@@ -47,7 +46,9 @@ export default function Administration() {
     let printerCategories: String[] = []
     checkboxes.forEach((item: any)=> printerCategories.push(item.value))
     const result = await services.printers.add(newPrinter, printerCategories)
-    result && printers.refetch()
+    setNewPrinter({...newPrinter, name: ""})
+    result && await printers.refetch()
+    setPage(printers?.data?.length)
   }
 
   const editPrinterInfo = async(printerToEdit: any, data: any) => {
@@ -64,7 +65,6 @@ export default function Administration() {
   const addCategory = async(printerToEdit: any, categoryToAdd: any) => {
     const result = [printerToEdit.category, [categoryToAdd]].flat()
     await services.printers.patch(printerToEdit._id, {category: result})
-    setNewPrinter({...newPrinter, name: ""})
     printers.refetch()
   }
 
