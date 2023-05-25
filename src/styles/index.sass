@@ -359,55 +359,68 @@ table
   font-size: 15px
   width: 100%
   .menu-waiter-dish
-    cursor: pointer
     border-radius: 10px
     position: relative
     width: 220px
-    max-height: 250px
-    background: $Accent2
+    height: auto
+    max-height: 300px
+    background: $Accent2tr
     left: 0px
     right: 0px
-    &>*>img
-      min-width: 220px !important
-    &>div>*::selection
-      background: none
-    &>div>div
-      border-radius: 0px 0px 9px 9px
-      flex-direction: column
-      display: flex
-      align-items: center
-      justify-content: center
-      vertical-align: middle
-      background: #000000c0
-      z-index: 999
-      left: 0px
-      bottom: 0px
+    .images
       width: 100%
-      position: absolute
-      font-size: 16px
-      font-weight: 600
-      &>*::selection
-        background: none
-      .cost
-        color: lightgreen
-    .cost-full
-      display: flex
-      background: #000000d0
-      border-radius: 9px !important
-      top: 0px !important
-      // border: 1px solid $themeDark3
-      justify-content: space-between
-      font-weight: 300
-      .cost
-        display: none
-    &>div>img
-      border-radius: 10px
-      max-width: 220px !important
-      height: 200px !important
-      object-fit: cover
-      &::selection
-        background: none
-      
+      &>span
+        position: absolute
+        display: block
+        width: 100%
+        bottom: 103px
+        background: #00000090
+      &>img:first-child
+        display: flex
+        position: absolute
+        right: -5px
+        top: 0px
+        display: block
+        border-radius: 15px 10px 0px 15px
+        padding: 0px
+        background: #00000050
+        filter: invert(0)
+      &>img:last-child
+        border-radius: 10px 10px 0px 0px
+        object-fit: cover
+        height: 150px
+        max-height: 150px
+    .infoblock
+      margin: 5px 0px 0px 0px
+      font-size: 12pt
+      max-height: 200px
+      .title
+        padding: 0px 10px
+        word-break: break-word
+        display: block
+        max-width: 98%
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+      &>div
+        margin: 10px 0px 0px 0px
+        flex-direction: column
+        width: 100%
+        position: relative
+        bottom: 5px
+        justify-content: space-evenly
+        display: flex
+        &>div
+          justify-content: space-evenly
+          display: flex
+          &>button
+            padding: 8px 13px
+            width: 110px
+            &:disabled
+              color: #666
+              &:hover
+                background: #313131
+
 .amount
   pointer-events: none
   z-index: 9999

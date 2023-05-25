@@ -7,6 +7,10 @@ const menuSchema: any = new Schema({
   ingredients: [String],
   available: Boolean,
   filename: String,
+  weight: {
+    number: String,
+    value: String
+  }
 })
 
 const menu = models.menu || model('menu', menuSchema)

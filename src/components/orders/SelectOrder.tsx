@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import searchIco from '@icons/search.svg'
 import closeIco from '@icons/close.svg'
 import trashIco from '@icons/trash.svg'
+import infoIco from '@icons/list2.svg'
 import useDialog from "@/hooks/useDialog"
 
 
@@ -35,20 +36,24 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
       </div>
       <div className="menu-waiter">
         {search?.map((item: any, index: number)=>(
-          <div className={`horizontal menu-waiter-dish${!item.available ? "unavailable" : ""}`} key={index}>
-            <div onClick={()=>selectedItem(item)}>
-              <div className={`${item.amount ? "cost-full" : ""}`}>
-                <span className="title">{item.name}</span>
-                <span className="cost">{item.cost} тг.</span>
-                
-              </div>
-              <Image src={"/images/" + item.filename} alt="image" width={400} height={400} className="img-fill2"/>
+          <div className={`vertical menu-waiter-dish${!item.available ? "unavailable" : ""}`} key={index}>
+            <div className="images">
+              <Image src={infoIco} className="ico4" alt="info"/>
+              {item.amount ? <span>Выбрано: {item.amount * item.weight.amount}{item.weight?.value} ({item.amount} шт)</span> : ""}
+              <Image src={`/images/${item.filename}`} width={400} height={400} alt="dish"/>
             </div>
-            {item.amount ?
-            <div>
-              <span className="amount">{item.amount}<span>шт.</span></span>
-              <span className="remove2" onClick={()=>removeOne(item._id)}><Image src={closeIco} alt="remove" className="ico3"/>Убрать</span>
-            </div> : ""}
+            <div className="infoblock">
+              <span className="title">{item.name}</span>
+              <div>
+                <div>
+                  <button disabled={!item.amount} onClick={()=>removeOne(item._id)}>Убрать</button>
+                  <button onClick={()=>selectedItem(item)}>Добавить</button>
+                </div>
+                <div>
+                  <span className="cost">{item.cost} ₸ / {item.weight?.amount} {item.weight?.value}</span>
+                </div>
+              </div>
+            </div>
           </div>
         )).reverse()}
         <DialogWindow/>
@@ -56,3 +61,6 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
     </>
   )
 }
+
+//()=>removeOne(item._id)
+//()=>selectedItem(item)

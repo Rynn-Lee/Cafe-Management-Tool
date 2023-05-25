@@ -11,7 +11,7 @@ import MainInfo from '@/components/menu/MainInfo'
 import Ingredients from '@/components/menu/Ingredients'
 
 export default function Add() {
-  const [info, setInfo] = useState<any>({available: false, cost: 0, name: "", ingredients: ""})
+  const [info, setInfo] = useState<any>({available: false, cost: 0, name: "", ingredients: "", weight: {number: 0, value: "грамм"}})
   const [selectedImage, setSelectedImage] = useState("")
   const [defaultValue, setDefaultValue] = useState("")
   const [fileName, setFileName] = useState("")
@@ -42,19 +42,20 @@ export default function Add() {
       category: info.category,
       ingredients: info.ingredients,
       available: info.available,
-      fileName
+      fileName,
+      weight: info.weight
     }
     await services.menu.add(data)
     await services.images.add(selectedFile)
     menu.refetch()
-    setInfo({...info, name: "", ingredients: "", cost: 0})
+    setInfo({...info, name: "", ingredients: "", cost: 0, weight: {number: 0, value: "шт."}})
     setSelectedImage("")
     setDefaultValue("none")
   }
 
   useEffect(()=>{
-    console.log(defaultValue)
-  }, [defaultValue])
+    console.log(info)
+  }, [info])
 
   return (
     <>

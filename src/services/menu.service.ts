@@ -18,7 +18,8 @@ export const menuService = {
         category: data.category,
         ingredients: filtered,
         available: data.available,
-        filename: data.fileName
+        filename: data.fileName,
+        weight: data.weight
     })
     const result = await response.data
     return result
