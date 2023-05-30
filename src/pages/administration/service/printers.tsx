@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 export default function Administration() {
   const [vacantCategories, setVacantCategories] = useState([])
   const [page, setPage] = useState(0)
+  const [printMessage, setPrintMessage] = useState("")
   const [newPrinter, setNewPrinter] = useState<any>({
     name: "",
     ip: "192.168.0.1"
@@ -92,7 +93,8 @@ export default function Administration() {
             editPrinterInfo={editPrinterInfo}
             />
             :""}
-          
+          <input onChange={(e)=>setPrintMessage(e.target.value)}/>
+          <button onClick={()=>services.printers.printCheck(printMessage)}>ПЕЧАТЬ</button>
         </PageLayout>
       </PageLayout>
       {printers.isFetching ? <LoadingScreen /> : ""}

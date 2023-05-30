@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const api = "/api/printers"
+const printing = "/api/printingApi"
 
 export const printersService = {
   async find(){
@@ -17,6 +18,10 @@ export const printersService = {
   },
   async patch(printer: string, data: any){
     const response = await axios.patch(api, {printer, data})
+    return response.data
+  },
+  async printCheck(text: string){
+    const response = await axios.post(printing, {text})
     return response.data
   }
 }
