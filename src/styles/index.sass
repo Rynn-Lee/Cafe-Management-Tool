@@ -13,6 +13,7 @@ $themeDark2: #5dcab223
 $themeDark3: #5dbdca71 
 $lineRight: #2bb19454
 $lineRightnontr: #125f4f
+$green: #87ff8db7
 $lineRight2: #2bb19454
 $lineBottom: #2bb19454
 $action: #00ffd50a
@@ -601,6 +602,56 @@ table
 
 .unistepper
   width: 100% !important
+  .unistepper-containter
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    height: 100%
+    .service-buttons, .service-buttons2
+      width: max-content
+      margin-left: 5px
+      padding: 7px 20px
+      background: $navbar
+      border-radius: 0px
+      border-bottom: 1px solid $Accent2
+    .service-buttons2
+      position: relative
+      padding: 8px 20px
+      width: max-content
+      border-radius: 10px
+      box-sizing: border-box
+    .title
+      font-size: 16pt
+      padding: 0px 10px 5px 10px
+    .hint
+      width: max-content
+      min-width: 680px
+      color: #aaa !important
+      padding-bottom: 0px
+      text-align: left
+    .status
+      width: max-content !important
+      min-width: 450px !important
+      & img
+        padding: 0px
+        margin: 0px
+        width: 20px
+        height: 20px
+    & button
+      margin-top: 15px
+      font-size: 15px
+      padding: 5px 0px
+      background: $navbar
+      width: 300px
+      text-align: center
+      border-radius: 15px
+    & input
+      margin-top: 5px
+      padding: 5px
+      width: 300px
+      border-bottom: 1px solid #fff
+      text-align: left
   .unistepper-steps
     position: relative
     display: flex
@@ -625,11 +676,20 @@ table
       width: 0
 
 
+.printer-select
+  border-radius: 10px
+  padding: 0px 10px
+  width: 200px
+  background: $Accent2tr
+  &>option
+    padding: 10px
+    background: $Accent2
+
 .active-step
   animation: fading 0.7s infinite alternate 0.3s
   transition: 500ms
 .passed-step
-  background: $themeDark !important
+  background: $green !important
   transition: 500ms
 
 @keyframes fading 

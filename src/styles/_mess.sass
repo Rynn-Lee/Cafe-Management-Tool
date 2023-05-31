@@ -28,6 +28,9 @@ a
   color: $textColor
   font-size: 10pt
 
+.iconotop
+  top: 0px !important
+
 .ico, .ico2, .ico3, .ico35, .ico4, .ico5
   cursor: pointer
   display: inline-block
@@ -168,7 +171,7 @@ fieldset
 .addNewPrinter
   background: $navbar
   width: 100%
-  padding: 5px
+  padding: 5px 15px
   border-radius: 10px
   margin-bottom: 10px
   transition: 100ms
@@ -176,47 +179,65 @@ fieldset
     background: $Accent2
 
 .categories-checkboxes
-  display: inline-block
-  align-items: center
-  justify-content: center
-  width: 25px !important
-  height: 25px !important
-.printers-form
-  &>fieldset
-    margin: 0px 5px
-    padding: 5px 0px
-    background: $navbar
-    &>button
-      border-radius: 0px
-      bottom: 0px
-      &:disabled
-        color: $error
-    & .fields
-      padding: 0px 0px
-      border: none
-      &>*
-        background: none
-      &>ul
-        max-height: 400px 
-        overflow-y: auto
-        width: 100%
-        &>li
-          display: flex
-          padding: 10px
-          &:nth-child(odd)
-            background: $Accent2tr
-          &>span
-            padding-left: 8px 
-    &>legend
-      background: $navbar
-      min-height: 45px
-      padding: 10px 10px
-      border-radius: 10px
-      width: auto !important
-      text-align: left
-  .fields
+  width: 20px !important
+  height: 20px !important
+
+.categories-list
+  display: flex
+  flex-direction: column
+  &>li
+    display: flex
+    flex-direction: row
+    padding: 5px
+    align-items: center
     &>span
-      display: flex
-      align-items: flex-start
-    &>input:focus, &>input:hover
-      border-top: none
+      position: relative
+      top: 2px
+      margin-left: 8px
+
+.summary
+  width: 600px
+  text-align: left
+  display: flex
+  flex-direction: column
+
+
+
+  // &>fieldset
+  //   margin: 0px 5px
+  //   padding: 5px 0px
+  //   background: $navbar
+  //   &>button
+  //     border-radius: 0px
+  //     bottom: 0px
+  //     &:disabled
+  //       color: $error
+  //   & .fields
+  //     padding: 0px 0px
+  //     border: none
+  //     &>*
+  //       background: none
+  //     &>ul
+  //       max-height: 400px 
+  //       overflow-y: auto
+  //       width: 100%
+  //       &>li
+  //         display: flex
+  //         padding: 10px
+  //         &:nth-child(odd)
+  //           background: $Accent2tr
+  //         &>span
+  //           padding-left: 8px 
+  //   &>legend
+  //     background: $navbar
+  //     min-height: 45px
+  //     padding: 10px 10px
+  //     border-radius: 10px
+  //     width: auto !important
+  //     text-align: left
+  // .fields
+  //   &>span
+  //     display: flex
+  //     align-items: flex-start
+  //   &>input:focus, &>input:hover
+  //     border-top: none

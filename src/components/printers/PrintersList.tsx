@@ -32,9 +32,7 @@ export function PrintersList({printers, page, setPage, removePrinter, removeCate
   const resetEdit = () => setPrinter(printerCopy)
 
   return(
-    <>
     <div>
-      <button className='addNewPrinter' onClick={()=>setIsSetup(1)}>Добавить новый принтер</button>
       <fieldset className='printer-info-window'>
         <ActionButtons 
           prevPage={prevPage}
@@ -64,6 +62,5 @@ export function PrintersList({printers, page, setPage, removePrinter, removeCate
       </fieldset>
       <DialogWindow />
     </div>
-    </>
     )
 }

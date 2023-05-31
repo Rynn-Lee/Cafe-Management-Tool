@@ -8,8 +8,8 @@ export const printersService = {
     const response = await axios.get(api)
     return response.data
   },
-  async add(newPrinter: any, printerCategories: any){
-    const response = await axios.post(api, {name: newPrinter.name, category: printerCategories, ip: newPrinter.ip})
+  async add(printer: any){
+    const response = await axios.post(api, {printer})
     return response.data
   },
   async delete(id: any = null){
@@ -20,8 +20,13 @@ export const printersService = {
     const response = await axios.patch(api, {printer, data})
     return response.data
   },
-  async printCheck(info: string){
+  async printCheck(info: any){
     const response = await axios.post(printing, {info})
+    console.log(info)
+    return response.data
+  },
+  async isExisting(ip: string){
+    const response = await axios.get(printing + "?ip=" + ip)
     return response.data
   }
 }

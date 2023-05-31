@@ -18,7 +18,11 @@ export default function Administration() {
   const [isSetup, setIsSetup] = useState(0)
   const [newPrinter, setNewPrinter] = useState<any>({
     name: "",
-    ip: "192.168.0.1"
+    ip: "192.168.0.1",
+    method: "EPSON",
+    info:{
+      alive: true
+    }
   })
 
   const printers = useQuery({
@@ -34,6 +38,10 @@ export default function Administration() {
   })
 
   useEffect(()=>{
+    console.log(newPrinter)
+  }, [newPrinter])
+
+  useEffect(()=>{
     if(!printers.data || !categories.data){return}
     const usedCategories = printers.data?.map((item: any) => item.category).flat()
     const freeCategories = categories.data?.filter((item: any) => !usedCategories.includes(item.title))
@@ -47,15 +55,22 @@ export default function Administration() {
 
   const removePrinter = async(id: string) => {await services.printers.delete(id); await printers.refetch()}
 
-  const addPrinter = async(e: any) => {
-    e.preventDefault()
+  const addPrinter = async() => {
+    const result = await services.printers.add(newPrinter)
+    setNewPrinter({...newPrinter, name: "", ip: "192.168.0.1", method: "EPSON", info:{message: "", alive: true}})
+    result && await printers.refetch()
+    setPage(printers?.data?.length)
+    setSetupStep(0)
+    setIsSetup(0)
+  }
+
+  const checkCategories = () => {
     const checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
     let printerCategories: String[] = []
     checkboxes.forEach((item: any)=> printerCategories.push(item.value))
-    const result = await services.printers.add(newPrinter, printerCategories)
-    setNewPrinter({...newPrinter, name: ""})
-    result && await printers.refetch()
-    setPage(printers?.data?.length)
+    let converted = Array.from(printerCategories)
+
+    setNewPrinter({...newPrinter, category: converted})
   }
 
   const editPrinterInfo = async(printerToEdit: any, data: any) => {
@@ -77,17 +92,38 @@ export default function Administration() {
 
   return (
     <>
-      <PageLayout title={"Главная - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Принтеры - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/service"} nav2 flex>
-
+        
+        
           {isSetup ? 
-          <UniStepper setSetupStep={setSetupStep} setupStep={setupStep}>
-            <PrinterName/>
-            <PrinterSysInfo/>
-            <PrinterCategories/>
-            <PrinterFinale/>
+          <UniStepper setSetupStep={setSetupStep} setupStep={setupStep} setIsSetup={setIsSetup}>
+            <PrinterName
+            newPrinter={newPrinter}
+            setNewPrinter={setNewPrinter}
+            setSetupStep={setSetupStep}
+            setupStep={setupStep}/>
+
+            <PrinterSysInfo
+            newPrinter={newPrinter}
+            setNewPrinter={setNewPrinter}
+            setSetupStep={setSetupStep}
+            setupStep={setupStep}/>
+
+            <PrinterCategories
+            newPrinter={newPrinter}
+            setNewPrinter={setNewPrinter}
+            setSetupStep={setSetupStep}
+            setupStep={setupStep}
+            vacantCategories={vacantCategories}
+            categories={vacantCategories}
+            checkCategories={checkCategories}/>
+
+            <PrinterFinale
+            newPrinter={newPrinter}
+            addPrinter={addPrinter}/>
           </UniStepper>
-          :""}
+          : ""}
 
           {/* <AddNewPrinter
             addPrinter={addPrinter}
@@ -96,7 +132,8 @@ export default function Administration() {
             vacantCategories={vacantCategories}
             categories={vacantCategories}
             setIsSetup={setIsSetup}/> */}
-
+          <div>
+          {!isSetup ? <button className='addNewPrinter' onClick={()=>setIsSetup(1)}>Добавить новый принтер</button> : ""}
           {printers.data?.length && !isSetup ?
           <PrintersList 
             printers={printers}
@@ -110,6 +147,7 @@ export default function Administration() {
             setIsSetup={setIsSetup}
             />
             :""}
+          </div>
         </PageLayout>
       </PageLayout>
       {printers.isFetching ? <LoadingScreen /> : ""}
