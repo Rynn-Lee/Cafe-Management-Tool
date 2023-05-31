@@ -20,8 +20,8 @@ export const printersService = {
     const response = await axios.patch(api, {printer, data})
     return response.data
   },
-  async printCheck(text: string){
-    const response = await axios.post(printing, {text})
+  async printCheck(info: string){
+    const response = await axios.post(printing, {info})
     return response.data
   }
 }

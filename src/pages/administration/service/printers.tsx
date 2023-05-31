@@ -1,6 +1,11 @@
 import LoadingScreen from '@/components/LoadingScreen'
+import UniStepper from '@/components/UniStepper'
 import { AddNewPrinter } from '@/components/printers/AddNewPrinter'
 import { PrintersList } from '@/components/printers/PrintersList'
+import PrinterCategories from '@/components/printers/stepsToAdd/PrinterCategories'
+import PrinterFinale from '@/components/printers/stepsToAdd/PrinterFinale'
+import PrinterName from '@/components/printers/stepsToAdd/PrinterName'
+import PrinterSysInfo from '@/components/printers/stepsToAdd/PrinterSysInfo'
 import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
 import { useQuery } from '@tanstack/react-query'
@@ -9,7 +14,8 @@ import { useEffect, useState } from 'react'
 export default function Administration() {
   const [vacantCategories, setVacantCategories] = useState([])
   const [page, setPage] = useState(0)
-  const [printMessage, setPrintMessage] = useState("")
+  const [setupStep, setSetupStep] = useState(0)
+  const [isSetup, setIsSetup] = useState(0)
   const [newPrinter, setNewPrinter] = useState<any>({
     name: "",
     ip: "192.168.0.1"
@@ -74,14 +80,24 @@ export default function Administration() {
       <PageLayout title={"Главная - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/service"} nav2 flex>
 
-          <AddNewPrinter
+          {isSetup ? 
+          <UniStepper setSetupStep={setSetupStep} setupStep={setupStep}>
+            <PrinterName/>
+            <PrinterSysInfo/>
+            <PrinterCategories/>
+            <PrinterFinale/>
+          </UniStepper>
+          :""}
+
+          {/* <AddNewPrinter
             addPrinter={addPrinter}
             newPrinter={newPrinter}
             setNewPrinter={setNewPrinter}
             vacantCategories={vacantCategories}
-            categories={vacantCategories}/>
+            categories={vacantCategories}
+            setIsSetup={setIsSetup}/> */}
 
-          {printers.data?.length ?
+          {printers.data?.length && !isSetup ?
           <PrintersList 
             printers={printers}
             page={page}
@@ -91,10 +107,9 @@ export default function Administration() {
             addCategory={addCategory}
             vacantCategories={vacantCategories}
             editPrinterInfo={editPrinterInfo}
+            setIsSetup={setIsSetup}
             />
             :""}
-          <input onChange={(e)=>setPrintMessage(e.target.value)}/>
-          <button onClick={()=>services.printers.printCheck(printMessage)}>ПЕЧАТЬ</button>
         </PageLayout>
       </PageLayout>
       {printers.isFetching ? <LoadingScreen /> : ""}

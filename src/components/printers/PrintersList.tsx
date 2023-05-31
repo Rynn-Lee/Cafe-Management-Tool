@@ -4,7 +4,7 @@ import { ActionButtons } from './parts/ActionButtons'
 import { Categories } from './parts/Categories'
 import { MainInfo } from './parts/MainInfo'
 
-export function PrintersList({printers, page, setPage, removePrinter, removeCategory, addCategory, vacantCategories, editPrinterInfo}: any){
+export function PrintersList({printers, page, setPage, removePrinter, removeCategory, addCategory, vacantCategories, editPrinterInfo, setIsSetup}: any){
   const [printer, setPrinter] = useState<any>({ip: "",name: ""})
   const [edited, setEdited] = useState<any>(false)
   const [printerCopy, setPrinterCopy] = useState<any>({})
@@ -34,8 +34,8 @@ export function PrintersList({printers, page, setPage, removePrinter, removeCate
   return(
     <>
     <div>
+      <button className='addNewPrinter' onClick={()=>setIsSetup(1)}>Добавить новый принтер</button>
       <fieldset className='printer-info-window'>
-
         <ActionButtons 
           prevPage={prevPage}
           nextPage={nextPage}

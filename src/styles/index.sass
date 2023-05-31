@@ -599,6 +599,46 @@ table
       &::selection
         background: none
 
+.unistepper
+  width: 100% !important
+  .unistepper-steps
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100% !important
+    margin-bottom: 10px
+    &>button
+      font-size: 15px
+      padding: 5px 0px
+      background: $navbar
+      width: 100px
+      text-align: center
+      border-radius: 15px
+    &>span
+      background: $Accent2
+      transition: 200ms
+      height: 6px
+      margin: 0px 5px
+      border-radius: 15px
+      flex: 1
+      width: 0
+
+
+.active-step
+  animation: fading 0.7s infinite alternate 0.3s
+  transition: 500ms
+.passed-step
+  background: $themeDark !important
+  transition: 500ms
+
+@keyframes fading 
+  from
+    background: $Accent2
+  to
+    background: $themeDark
+
+
 @import 'mess.sass'
 @import 'preparedStyles.sass'
 @import 'media.sass'
