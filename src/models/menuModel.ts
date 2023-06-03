@@ -8,7 +8,7 @@ const menuSchema: any = new Schema({
   available: Boolean,
   filename: String,
   weight: {
-    number: String,
+    amount: String,
     value: String
   }
 })

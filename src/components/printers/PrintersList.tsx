@@ -4,7 +4,7 @@ import { ActionButtons } from './parts/ActionButtons'
 import { Categories } from './parts/Categories'
 import { MainInfo } from './parts/MainInfo'
 
-export function PrintersList({printers, page, setPage, removePrinter, removeCategory, addCategory, vacantCategories, editPrinterInfo, setIsSetup}: any){
+export function PrintersList({printers, page, setPage, removePrinter, removeCategory, addCategory, vacantCategories, editPrinterInfo}: any){
   const [printer, setPrinter] = useState<any>({ip: "",name: ""})
   const [edited, setEdited] = useState<any>(false)
   const [printerCopy, setPrinterCopy] = useState<any>({})
@@ -48,7 +48,8 @@ export function PrintersList({printers, page, setPage, removePrinter, removeCate
 
         <MainInfo
           setPrinter={setPrinter}
-          printer={printer}/>
+          printer={printer}
+          printerCopy={printerCopy}/>
 
         <Categories
           setNewCategory={setNewCategory}

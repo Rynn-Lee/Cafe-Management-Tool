@@ -1,18 +1,20 @@
 import LoadingScreen from '@/components/LoadingScreen'
-import AddPhoto from '@/components/menu/AddPhoto'
 import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
-import plusIco from '@icons/plus.svg'
-import Image from 'next/image'
 import useDialog from '@/hooks/useDialog'
-import MainInfo from '@/components/menu/MainInfo'
-import Ingredients from '@/components/menu/Ingredients'
+import UniStepper from '@/components/UniStepper'
+import DishName from '@/components/menu/stepsToAdd/DishName'
+import DishCost from '@/components/menu/stepsToAdd/DishCost';
+import DishCategory from '@/components/menu/stepsToAdd/DishCategory';
+import DishPhoto from '@/components/menu/stepsToAdd/DishPhoto';
+import DishFinish from '@/components/menu/stepsToAdd/DishFinish';
 
 export default function Add() {
-  const [info, setInfo] = useState<any>({available: false, cost: 0, name: "", ingredients: "", weight: {number: 0, value: "грамм"}})
+  const [info, setInfo] = useState<any>({available: false, cost: 0, name: "", ingredients: "", weight: {number: 0, value: "шт"}})
   const [selectedImage, setSelectedImage] = useState("")
+  const [setupStep, setSetupStep] = useState(0)
   const [defaultValue, setDefaultValue] = useState("")
   const [fileName, setFileName] = useState("")
   const [selectedFile, setSelectedFile] = useState<File>()
@@ -51,6 +53,7 @@ export default function Add() {
     setInfo({...info, name: "", ingredients: "", cost: 0, weight: {number: 0, value: "шт."}})
     setSelectedImage("")
     setDefaultValue("none")
+    setSetupStep(0)
   }
 
   useEffect(()=>{
@@ -61,7 +64,44 @@ export default function Add() {
     <>
       <PageLayout title={"Меню > Просмотр - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/menu"} nav2>
-          <form onSubmit={(e)=>{e.preventDefault(); ask(`Добавить блюдо: ${info.name}`, handleUpload)}} className='bg-2 form photo-form'>
+          <UniStepper setupStep={setupStep} setSetupStep={setSetupStep} dish>
+            <DishName
+              setSetupStep={setSetupStep}
+              setupStep={setupStep}
+              info={info}
+              setInfo={setInfo}/>
+            <DishCost
+              setSetupStep={setSetupStep}
+              setupStep={setupStep}
+              info={info}
+              setInfo={setInfo}
+              setDefaultValue={setDefaultValue}
+              defaultValue={defaultValue}/>
+            <DishCategory
+              setSetupStep={setSetupStep}
+              setupStep={setupStep}
+              info={info}
+              setInfo={setInfo}
+              setDefaultValue={setDefaultValue}
+              defaultValue={defaultValue}
+              categories={categories}/>
+            <DishPhoto
+              setSetupStep={setSetupStep}
+              setupStep={setupStep}
+              info={info}
+              setSelectedImage={setSelectedImage}
+              setSelectedFile={setSelectedFile}
+              setFileName={setFileName}
+              selectedImage={selectedImage}/>
+            <DishFinish
+              info={info}
+              setInfo={setInfo}
+              handleUpload={handleUpload}/>
+          </UniStepper>
+
+
+
+          {/* <form onSubmit={(e)=>{e.preventDefault(); ask(`Добавить блюдо: ${info.name}`, handleUpload)}} className='bg-2 form photo-form'>
             <div className='horizontal'>
               <AddPhoto
                 handleUpload={handleUpload}
@@ -81,7 +121,7 @@ export default function Add() {
               info={info}/>
             <button><Image src={plusIco} alt="Image" className="ico"/>Добавить товар</button>
           </form>
-          <DialogWindow />
+          <DialogWindow /> */}
         </PageLayout>
       </PageLayout>
       {menu.isFetching && <LoadingScreen />}

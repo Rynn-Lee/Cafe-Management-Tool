@@ -538,18 +538,28 @@ table
           color: $textColor    
 
 .printer-info-window
-  width: 500px !important
+  max-width: 600px !important
+  width: 600px !important
   background: $navbar
   padding: 10px 5px
   margin: 0px 5px
   .form
     .fields>input, .fields>span
       background: $navbar
+      border-bottom: 1px $Accent2 solid !important
       &:hover, &:focus
         border-top: none !important
+    .fields>span
+      min-width: 100px !important
+      border-right: 1px $Accent2tr solid
+    .fields>select
+      background: $navbar !important
+      border-bottom: 1px $Accent2 solid !important
+      width: auto !important
   &>fieldset
-    border-color: #fff
+    border-color: #888 !important
     border: none
+    border-radius: 0px !important
     border-top: 1px solid
     padding: 5px
     margin: 0px
@@ -557,7 +567,7 @@ table
       &>button
         background: none !important
       &>select
-        margin: 0px 5px
+        margin: 0px 0px
         &>option
           background: $navbar
     &>legend
@@ -576,7 +586,7 @@ table
       min-height: 45px
       padding: 10px 5px
       border-radius: 10px
-      width: 400px !important
+      max-width: 100% !important
       text-align: center
       word-break: break-word
       &::selection
@@ -587,7 +597,7 @@ table
       background: #3b3b2b
     .remove
       background: #3b2b2b
-    &>button
+    &>button, &>div>button
       display: flex
       justify-content: center
       align-items: center
@@ -599,6 +609,10 @@ table
       border-radius: 10px
       &::selection
         background: none
+    &>div
+      display: flex
+      flex-direction: row
+      width: max-content
 
 .unistepper
   width: 100% !important
@@ -690,13 +704,16 @@ table
   transition: 500ms
 .passed-step
   background: $green !important
+  box-shadow: 0px 0px 20px 1px #5cff7220
   transition: 500ms
 
 @keyframes fading 
   from
     background: $Accent2
+    box-shadow: 0px 0px 0px 0px $Accent2
   to
     background: $themeDark
+    box-shadow: 0px 0px 20px 1px #5cf4ff20
 
 
 @import 'mess.sass'

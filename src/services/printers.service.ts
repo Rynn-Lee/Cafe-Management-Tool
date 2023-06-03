@@ -20,9 +20,8 @@ export const printersService = {
     const response = await axios.patch(api, {printer, data})
     return response.data
   },
-  async printCheck(info: any){
-    const response = await axios.post(printing, {info})
-    console.log(info)
+  async printCheck(data: any){
+    const response = await axios.post(printing, {data})
     return response.data
   },
   async isExisting(ip: string){

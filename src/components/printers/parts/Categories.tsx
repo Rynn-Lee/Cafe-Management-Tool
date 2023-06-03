@@ -13,7 +13,7 @@ export function Categories({setNewCategory, newCategory, vacantCategories, ask, 
 
   return(
     <fieldset>
-      <legend> - Категории - </legend>
+      <legend>Категории</legend>
       {vacantCategories.length ? <>
       <div>
         <select onChange={(e)=>{setNewCategory(e.target.value); setdefaulValue(e.target.value)}} value={defaulValue}>

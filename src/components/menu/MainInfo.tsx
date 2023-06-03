@@ -23,7 +23,7 @@ export default function MainInfo({info, setInfo, categories, setDefaultValue, de
             )).reverse()}
           </select>
         </div>
-        <div className='fields'><span>Доступно после добавления? | <input type='checkbox' onChange={(e) => setInfo({...info, available: e.target.checked})}/></span></div>
+        <div className='fields'><span>Доступно после добавления?| <input type='checkbox' onChange={(e) => setInfo({...info, available: e.target.checked})}/></span></div>
       </fieldset>
   )
 }

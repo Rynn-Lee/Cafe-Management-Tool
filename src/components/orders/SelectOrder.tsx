@@ -39,7 +39,7 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
           <div className={`vertical menu-waiter-dish${!item.available ? "unavailable" : ""}`} key={index}>
             <div className="images">
               <Image src={infoIco} className="ico4" alt="info"/>
-              {item.amount ? <span>Выбрано: {item.amount * item.weight.amount}{item.weight?.value} ({item.amount} шт)</span> : ""}
+              {item.amount ? <span>Выбрано: {item.amount * item.weight.amount} {item.weight?.value} ({item.amount} шт)</span> : ""}
               <Image src={`/images/${item.filename}`} width={400} height={400} alt="dish"/>
             </div>
             <div className="infoblock">

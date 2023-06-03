@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function PrinterCategories({newPrinter, setNewPrinter, setSetupStep, setupStep, vacantCategories, categories, checkCategories}:any){
   return(
     <>

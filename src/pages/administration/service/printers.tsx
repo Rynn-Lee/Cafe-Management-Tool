@@ -57,8 +57,13 @@ export default function Administration() {
 
   const addPrinter = async() => {
     const result = await services.printers.add(newPrinter)
-    setNewPrinter({...newPrinter, name: "", ip: "192.168.0.1", method: "EPSON", info:{message: "", alive: true}})
     result && await printers.refetch()
+    setPage(printers?.data?.length+1)
+    clearSetup()
+  }
+
+  const clearSetup = () => {
+    setNewPrinter({...newPrinter, name: "", ip: "192.168.0.1", method: "EPSON", info:{message: "", alive: true}, category: []})
     setPage(printers?.data?.length)
     setSetupStep(0)
     setIsSetup(0)
@@ -97,7 +102,7 @@ export default function Administration() {
         
         
           {isSetup ? 
-          <UniStepper setSetupStep={setSetupStep} setupStep={setupStep} setIsSetup={setIsSetup}>
+          <UniStepper setSetupStep={setSetupStep} setupStep={setupStep} setIsSetup={setIsSetup} clearSetup={clearSetup}>
             <PrinterName
             newPrinter={newPrinter}
             setNewPrinter={setNewPrinter}

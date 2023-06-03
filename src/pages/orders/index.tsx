@@ -20,6 +20,10 @@ export default function Orders() {
   const nextStep = () => step < 1 && setStep(step + 1)
   const prevStep = () => step > 0 && setStep(step - 1)
 
+  useEffect(()=>{
+    console.log(order)
+  },[order])
+
   const auth = useQuery({
     queryKey: ["auth"],
     queryFn: () => services.account.checkLogin(),
