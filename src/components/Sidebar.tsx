@@ -18,7 +18,7 @@ export default function Sidebar(){
       <div className="sidebar-buttons">
         <Link href="/" className="sidebar-button"><Image src={mainIco} className="ico" alt={"Главная"} /><span>Главная</span></Link>
         <Link href="/orders" className="sidebar-button"><Image src={listIco} className="ico" alt={"Управление"} /><span>Заказы</span></Link>
-        <Link href="/administration" className="sidebar-button"><Image src={manageIco} className="ico" alt={"Управление"} /><span>Управление</span></Link>
+        <Link href="/administration/menu/viewdishes" className="sidebar-button"><Image src={manageIco} className="ico" alt={"Управление"} /><span>Управление</span></Link>
         <Link href={`/account/my`} className="sidebar-button"><Image src={userIco} className="ico" alt={"Аккаунт"} /><span>Аккаунт</span></Link>
       </div>
       <div>

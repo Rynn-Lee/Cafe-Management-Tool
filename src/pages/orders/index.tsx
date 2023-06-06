@@ -78,7 +78,13 @@ export default function Orders() {
     setOrder({...order, cart: newCart})
   }
 
-  const completeOrder = async() => await services.orders.create(order, printers.data)
+  const completeOrder = async() => {
+    const response = await services.printers.createOrder(order, printers.data)
+    //!
+    //! if(response.status != "Printed"){return}
+    //! TURN ON LATER!
+    console.log("ORDERS RESPONSE: ", await services.orders.createOrder(order))
+  }
 
   return (
     <>

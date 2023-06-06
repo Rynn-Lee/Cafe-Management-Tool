@@ -10,7 +10,7 @@ export function OrderList ({selectedItem, removeOne, order}: any){
           {removeOne ? <th>Убрать</th> : <th></th>}
           <th>Блюдо</th>
           <th>Количество</th>
-          <th>Цена в общем</th>
+          <th>Цена</th>
           {selectedItem ? <th>Добавить</th> : <th></th>}
         </tr>
       </thead>

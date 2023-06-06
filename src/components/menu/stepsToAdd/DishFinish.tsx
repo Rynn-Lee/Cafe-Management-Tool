@@ -24,7 +24,7 @@ export default function DishFinish({info, setInfo, handleUpload}:any){
     <div className="horizontal">
       <button className="dishfinish-buttons" onClick={()=>{
         setInfo({...info, available: true})
-        ask("Уверены что хотите завершить и опубликовать блюдо??", handleUpload)
+        ask("Уверены что хотите завершить и опубликовать блюдо?", handleUpload)
       }}>Опубликовать</button>
       <button className="dishfinish-buttons" onClick={()=>ask("Уверены что хотите завершить блюдо без публикации?", handleUpload)}>Завершить</button>
     </div>

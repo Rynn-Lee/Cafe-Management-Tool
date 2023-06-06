@@ -25,7 +25,10 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
       });
       let isConnected = await printer.isPrinterConnected();
       console.log("Printer connection: ",isConnected)
-      if(!isConnected){return}
+      if(!isConnected){
+        res.json({status: "Printer is not connected!"} as any)
+        return
+      }
 
       try{
         printer.alignLeft()
@@ -47,7 +50,7 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
 
         let execute = printer.execute()
         console.log("EXEC:",await execute)
-        res.json({status: "Printed!"} as any)
+        res.json({status: "Printed"} as any)
       } catch (error) {
         console.log("THERE'S AN ERROR!", error)
         res.json({status: error} as any)

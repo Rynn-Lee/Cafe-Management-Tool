@@ -6,16 +6,15 @@ const sidebar = {
 }
 
 const tabs = {
-  undefined: 0, "": 0, "my": 0, null: 0,
-  "menu": 1, "statistics": 1, "myorders": 1,
-  "employees": 2, "allorders": 2,
-  "service": 3
+  undefined: 0, "": 0, "my": 0, null: 0, "menu": 0,
+  "statistics": 1, "myorders": 1, "employees": 1, 
+  "allorders": 2, "service": 2
 }
 
 const funcTabs = {
-  "overview": 0, "viewdishes": 0, "cleanup": 0,
-  "add": 1, "newdish": 1, "printers": 1,
-  "categories": 2
+  "overview": 0, "viewdishes": 0, "printers": 0,
+  "add": 1, "newdish": 1, "categories": 1,
+  "cleanup": 2
 }
 
 

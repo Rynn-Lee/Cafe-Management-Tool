@@ -21,7 +21,6 @@ export default function TabsLayout({page, id, nav2}: any) {
     case "administration":
       return (
         <div className={styleClass}>
-          <Link href={"/administration"} className='nav-page'><Image src={homeIco} alt="plus" className='ico'/>Главная</Link>
           <Link href={"/administration/menu/viewdishes"} className='nav-page'><Image src={listIco} alt="plus" className='ico'/>Меню</Link>
           <Link href={"/administration/employees/overview"} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Сотрудники</Link>
           <Link href={"/administration/service/cleanup"} className='nav-page'><Image src={wrenchIco} alt="plus" className='ico'/>Сервисное Меню</Link>
@@ -39,7 +38,7 @@ export default function TabsLayout({page, id, nav2}: any) {
         <div className={styleClass}>
           <Link href={`/orders`} className='nav-page'><Image src={plusIco} alt="plus" className='ico'/>Создать</Link>
           <Link href={`/orders/myorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Мои Заказы</Link>
-          <Link href={`/orders/allorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Все Заказы</Link>
+          <Link href={`/orders/allorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Прочие Заказы</Link>
         </div>
       )
 
@@ -67,9 +66,9 @@ export default function TabsLayout({page, id, nav2}: any) {
     case "administration/service":
       return (
         <div className={styleClass}>
-          <Link href={`/administration/service/cleanup`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Очистка</Link>
           <Link href={`/administration/service/printers`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Принтеры</Link>
           <Link href={`/administration/service/categories`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Категории</Link>
+          <Link href={`/administration/service/cleanup`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Очистка</Link>
         </div>
       )
   }
