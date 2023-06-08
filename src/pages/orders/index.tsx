@@ -5,6 +5,7 @@ import { PageLayout } from '@/layouts/PageLayout'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { services } from '@/services'
+import { createID } from '@utils/createID'
 import LoadingScreen from '@/components/LoadingScreen'
 
 export default function Orders() {
@@ -19,10 +20,6 @@ export default function Orders() {
   const [step, setStep] = useState(0)
   const nextStep = () => step < 1 && setStep(step + 1)
   const prevStep = () => step > 0 && setStep(step - 1)
-
-  useEffect(()=>{
-    console.log(order)
-  },[order])
 
   const auth = useQuery({
     queryKey: ["auth"],
@@ -79,11 +76,12 @@ export default function Orders() {
   }
 
   const completeOrder = async() => {
-    const response = await services.printers.createOrder(order, printers.data)
+    const orderID = createID()
+    const response =  await services.printers.createOrder(order, printers.data, orderID)
     //!
     //! if(response.status != "Printed"){return}
     //! TURN ON LATER!
-    console.log("ORDERS RESPONSE: ", await services.orders.createOrder(order))
+    await services.orders.createOrder(order, orderID)
   }
 
   return (

@@ -23,7 +23,7 @@ export default function TabsLayout({page, id, nav2}: any) {
         <div className={styleClass}>
           <Link href={"/administration/menu/viewdishes"} className='nav-page'><Image src={listIco} alt="plus" className='ico'/>Меню</Link>
           <Link href={"/administration/employees/overview"} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Сотрудники</Link>
-          <Link href={"/administration/service/cleanup"} className='nav-page'><Image src={wrenchIco} alt="plus" className='ico'/>Сервисное Меню</Link>
+          <Link href={"/administration/service/printers"} className='nav-page'><Image src={wrenchIco} alt="plus" className='ico'/>Сервисное Меню</Link>
         </div>
       )
     case "account":

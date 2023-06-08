@@ -28,7 +28,7 @@ export const printersService = {
     const response = await axios.get(printing + "?ip=" + ip)
     return response.data
   },
-  async createOrder(order: any, printers: any){
+  async createOrder(order: any, printers: any, orderID: string){
     let newArr: any = {}
     printers.map((printer: any)=>(
       printer.category.filter((printerCateg: any) => (
@@ -41,8 +41,8 @@ export const printersService = {
         })
       ))
     ))
+    newArr.orderID = orderID
     const result = await this.printCheck(newArr)
-    console.log("COMPLETE: ", newArr)
     return result
   }
 }

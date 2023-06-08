@@ -8,8 +8,10 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
     const ThermalPrinter = require("node-thermal-printer").printer;
     const PrinterTypes = require("node-thermal-printer").types;
     const {data} = req.body
+    const orderID = data.orderID
 
     for(const key in data){
+      if (key == "orderID"){return}
       console.log(data[key].info?.ip)
       let current = data[key]
 
@@ -32,14 +34,13 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
 
       try{
         printer.alignLeft()
+        printer.println(`Номер заказа: ${orderID}`)
         printer.println(`Дата заказа: ${getDateNow(true)}`)
         printer.leftRight(`Принтер: ${current.info.name}`, `Стол: ${current.table}`)
         printer.drawLine()
         for(const dishes in current.order){
           let dish = current.order[dishes]
-          // printer.println(`${dish.amount * dish.weight.amount}${dish.weight.value} ${dish.weight.value == "шт." ? "" : ` (${dish.amount}шт)`} | ${dish.name}`)
-
-          printer.tableCustom([                                       // Prints table with custom settings (text, align, width, cols, bold)
+          printer.tableCustom([
             { text:`${dish.amount * dish.weight.amount}${dish.weight.value} ${dish.weight.value == "шт." ? "" : ` (${dish.amount}шт)`}`, align:"LEFT" , cols:15},
             { text:`| ${dish.name}`, align:"LEFT", cols:32}
           ]);
