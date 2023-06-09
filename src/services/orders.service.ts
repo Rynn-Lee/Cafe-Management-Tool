@@ -9,6 +9,8 @@ export const ordersService = {
     return response.data
   },
   async getOrders(filter: any){
+    console.log("Called!")
+    console.log(filter)
     const response = filter
     ? await axios.get(api + "?filter=" + JSON.stringify(filter))
     : await axios.get(api)

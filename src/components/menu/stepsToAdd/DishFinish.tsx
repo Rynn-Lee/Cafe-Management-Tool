@@ -10,16 +10,18 @@ export default function DishFinish({info, setInfo, handleUpload}:any){
     <center><span className="hint">* Неопубликованное блюдо можно будет опубликовать позже</span></center>
     
     <table className="dish-table">
-      <td>
-        <tr>Название:</tr>
-        <tr>Категория:</tr>
-        <tr>Стоимость:</tr>
-      </td>
-      <td>
-        <tr>{info.name}</tr>
-        <tr>{info.category}</tr>
-        <tr>{info.cost}тг. за {info.weight.amount} {info.weight.value}</tr>
-      </td>
+      <tr>
+        <td>Название:</td>
+        <td>{info.name}</td>
+      </tr>
+      <tr>
+        <td>Категория:</td>
+        <td>{info.category}</td>
+      </tr>
+      <tr>
+        <td>Стоимость:</td>
+        <td>{info.cost}тг. за {info.weight.amount} {info.weight.value}</td>
+      </tr>
     </table>
     <div className="horizontal">
       <button className="dishfinish-buttons" onClick={()=>{

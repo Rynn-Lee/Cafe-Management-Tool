@@ -3,7 +3,7 @@ import AdditionalInfo from '@/components/orders/AdditionalInfo'
 import SelectOrder from '@/components/orders/SelectOrder'
 import { PageLayout } from '@/layouts/PageLayout'
 import { useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { services } from '@/services'
 import { createID } from '@utils/createID'
 import LoadingScreen from '@/components/LoadingScreen'
@@ -25,6 +25,12 @@ export default function Orders() {
     queryKey: ["auth"],
     queryFn: () => services.account.checkLogin(),
     onSuccess: (data) => setOrder({...order, waiter: {full_name: data.full_name, _id: data._id}})
+  })
+
+  const myorders = useQuery({
+    queryKey: ["myorders"],
+    queryFn: () => services.orders.getOrders({waiter: auth.data?.full_name}),
+    enabled: false
   })
 
   const employeemenu = useQuery({
@@ -77,12 +83,24 @@ export default function Orders() {
 
   const completeOrder = async() => {
     const orderID = createID()
+    setStep(0)
     const response =  await services.printers.createOrder(order, printers.data, orderID)
     //!
     //! if(response.status != "Printed"){return}
     //! TURN ON LATER!
-    await services.orders.createOrder(order, orderID)
+    mutateOrders.mutate(orderID)
+    setOrder({cart: [],
+      waiter: {},
+      table: '',
+      totalCost: 0,})
   }
+
+  const mutateOrders = useMutation({
+    mutationFn: async (orderID: string) => {
+      return await services.orders.createOrder(order, orderID)
+    },
+    onSuccess: () => myorders.refetch()
+  })
 
   return (
     <>
@@ -92,7 +110,7 @@ export default function Orders() {
           <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} setTotal={setTotal} total={total} setStep={setStep} setOrder={setOrder} order={order}/>
         </MenuStepper>
       </PageLayout>
-      {employeemenu.isFetching && <LoadingScreen />}
+      {employeemenu.isFetching && mutateOrders.isLoading && <LoadingScreen />}
     </>
   )
 }

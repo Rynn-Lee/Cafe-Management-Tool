@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import plusIco from "@icons/plus-square.svg"
-import homeIco from "@icons/home.svg"
 import listIco from "@icons/list.svg"
 import userIco from "@icons/user.svg"
 import wrenchIco from "@icons/wrench.svg"

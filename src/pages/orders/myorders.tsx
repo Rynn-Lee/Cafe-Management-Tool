@@ -1,3 +1,5 @@
+import LoadingScreen from '@/components/LoadingScreen'
+import OrderCard from '@/components/orders/OrderCard'
 import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
 import { useQuery } from '@tanstack/react-query'
@@ -19,19 +21,29 @@ export default function MyOrders() {
   })
 
   useEffect(()=>{
+    !myorders.isFetched || !myorders.data.length && myorders.refetch()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myorders.data])
+
+  useEffect(()=>{
     myorders.refetch()
+    console.log(orders)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[auth.data?.full_name])
 
   return (
     <>
       <PageLayout title={"Заказы - Управление кафе"} pageNav={"orders"}>
-        {orders.map((order: any) => (
-          <div key={order._id}>
-            {order.orderID}
-          </div>
-        ))}
+        <div className='menu-waiter'>
+          {orders.map((order: any) => (
+            <OrderCard
+            key={order._id}
+            order={order}/>
+          )).reverse()
+          }
+        </div>
       </PageLayout>
+      {myorders.isFetching && myorders.isLoading && <LoadingScreen />}
     </>
   )
 }

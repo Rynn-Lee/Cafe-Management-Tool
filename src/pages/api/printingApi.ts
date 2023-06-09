@@ -32,6 +32,18 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
         return
       }
 
+      if(data.test){
+        console.log("TESTING PRINTER! Test Mode: ", data.test)
+        printer.drawLine();
+        printer.alignCenter()
+        printer.println(`Rynn Lee's`)
+        printer.println(`Controling panel`)
+        printer.drawLine();
+        printer.partialCut();
+        let execute = printer.execute()
+        return
+      }
+
       try{
         printer.alignLeft()
         printer.println(`Номер заказа: ${orderID}`)
@@ -57,41 +69,7 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
         res.json({status: error} as any)
       }
     }
-
-
-    // if(data.test){
-    //   printer.drawLine();
-    //   printer.println("Тестовый чек");
-    //   printer.println("Если чек распечатан");
-    //   printer.println("И принтер отрезал его");
-    //   printer.println("Нажмите продолжить");
-    //   printer.println("Для продолжения настройки");
-    //   printer.drawLine();
-    //   printer.partialCut();
-    //   let execute = printer.execute()
-    //   return
-    // }
-    // else{
-    //   for()
-    //   
-    }
-    
-    // printer.alignCenter();
-    // printer.println("Заказ №1"); //Aligning text to center and printing a line
-
-    // printer.drawLine(); 
-    // printer.leftRight("Рыба по деревенский", "5000 тг."); // Drawing a line, printing title and const (left, right). Break line
-    // printer.newLine();
-    
-    // printer.partialCut(); // Cutting paper leaving a little bridge
-    
-    // try {
-    //   let execute = printer.execute()
-    //   console.error("Print done!");
-    // } catch (error) {
-    //   console.log("Print failed:", error);
-    // }
-  // }
+  }
 
   if(req.method == "GET"){
     const ip = req.query.ip;
