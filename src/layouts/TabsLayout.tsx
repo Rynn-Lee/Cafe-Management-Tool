@@ -35,12 +35,18 @@ export default function TabsLayout({page, id, nav2}: any) {
     case "orders":
       return (
         <div className={styleClass}>
-          <Link href={`/orders`} className='nav-page'><Image src={plusIco} alt="plus" className='ico'/>Создать</Link>
-          <Link href={`/orders/myorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Мои Заказы</Link>
-          <Link href={`/orders/allorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Прочие Заказы</Link>
+          <Link href={`/orders`} className='nav-page'><Image src={plusIco} alt="plus" className='ico'/>Добавить заказ</Link>
+          <Link href={`/orders/overview/myorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Заказы</Link>
         </div>
       )
 
+    case "orders/overview":
+      return (
+        <div className={styleClass}>
+          <Link href={`/orders/overview/myorders`} className='nav-page2'><Image src={userIco} alt="plus" className='ico'/>Мои заказы</Link>
+          <Link href={`/orders/overview/allorders`} className='nav-page2'><Image src={chartIco} alt="plus" className='ico'/>Прочие заказы</Link>
+        </div>
+      )
     case "account/statistics":
       return (
         <div className={styleClass}>

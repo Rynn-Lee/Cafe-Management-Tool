@@ -7,6 +7,7 @@ const menuSchema: any = new Schema({
   ingredients: [String],
   available: Boolean,
   filename: String,
+  date: String,
   weight: {
     amount: String,
     value: String

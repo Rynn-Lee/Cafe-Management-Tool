@@ -3,30 +3,33 @@ import OrderCard from '@/components/orders/OrderCard'
 import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
 import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-export default function MyOrders() {
-  const [orders, setOrders] = useState([])
 
+export default function AllOrders({}) {
+  const [orders, setOrders] = useState([])
+  
   const auth = useQuery({
     queryKey: ["auth"],
     queryFn: () => services.account.checkLogin()
   })
 
-  const myorders = useQuery({
-    queryKey: ["myorders"],
-    queryFn: () => services.orders.getOrders({waiter: auth.data?.full_name}),
+  const allorders = useQuery({
+    queryKey: ["allorders"],
+    queryFn: () => services.orders.getOrders({'waiter.full_name': {$ne: auth.data?.full_name}}),
     onSuccess: (data) => setOrders(data),
     enabled: false
   })
 
+  
   useEffect(()=>{
-    !myorders.isFetched || !myorders.data.length && myorders.refetch()
+    !allorders.isFetched || !allorders.data.length && allorders.refetch()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myorders.data])
+  }, [allorders.data])
 
   useEffect(()=>{
-    myorders.refetch()
+    allorders.refetch()
     console.log(orders)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[auth.data?.full_name])
@@ -34,16 +37,19 @@ export default function MyOrders() {
   return (
     <>
       <PageLayout title={"Заказы - Управление кафе"} pageNav={"orders"}>
+        <PageLayout pageNav={"orders/overview"} nav2>
         <div className='menu-waiter'>
-          {orders.map((order: any) => (
-            <OrderCard
-            key={order._id}
-            order={order}/>
+          {orders.length && orders?.map((order: any) => (
+            <Link key={order._id} href={`${order.orderID}`}>
+              <OrderCard
+              order={order}/>
+            </Link>
           )).reverse()
           }
         </div>
+        </PageLayout>
       </PageLayout>
-      {myorders.isFetching && myorders.isLoading && <LoadingScreen />}
+      {allorders.isFetching && allorders.isLoading && <LoadingScreen />}
     </>
   )
 }

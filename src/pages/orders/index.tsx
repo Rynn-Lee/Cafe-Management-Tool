@@ -7,6 +7,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { services } from '@/services'
 import { createID } from '@utils/createID'
 import LoadingScreen from '@/components/LoadingScreen'
+import { getDateNow } from '@/utils/getDate'
 
 export default function Orders() {
   const [total, setTotal] = useState()
@@ -82,22 +83,23 @@ export default function Orders() {
   }
 
   const completeOrder = async() => {
-    const orderID = createID()
-    setStep(0)
-    const response =  await services.printers.createOrder(order, printers.data, orderID)
+    const additionalInfo = {
+      orderID: createID(),
+      date: getDateNow()
+    }
+    console.log("Complete: ", order)
+    const response =  await services.printers.createOrder(order, printers.data, additionalInfo)
     //!
     //! if(response.status != "Printed"){return}
     //! TURN ON LATER!
-    mutateOrders.mutate(orderID)
-    setOrder({cart: [],
-      waiter: {},
-      table: '',
-      totalCost: 0,})
+    mutateOrders.mutate(additionalInfo)
+    setStep(0)
+    clearOrder()
   }
 
   const mutateOrders = useMutation({
-    mutationFn: async (orderID: string) => {
-      return await services.orders.createOrder(order, orderID)
+    mutationFn: async (additionalInfo: any) => {
+      return await services.orders.createOrder(order, additionalInfo)
     },
     onSuccess: () => myorders.refetch()
   })
@@ -110,7 +112,7 @@ export default function Orders() {
           <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} setTotal={setTotal} total={total} setStep={setStep} setOrder={setOrder} order={order}/>
         </MenuStepper>
       </PageLayout>
-      {employeemenu.isFetching && mutateOrders.isLoading && <LoadingScreen />}
+      {employeemenu.isLoading && mutateOrders.isLoading && <LoadingScreen />}
     </>
   )
 }
