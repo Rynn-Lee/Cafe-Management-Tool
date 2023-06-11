@@ -4,9 +4,7 @@ const api = "../../api/orders"
 
 export const ordersService = {
   async createOrder(order: any, additionalInfo: any){
-    console.log("order: ", order)
-    order.orderID = additionalInfo.orderID
-    order.date = additionalInfo.date
+    order = {...order, ...additionalInfo}
     const response = await axios.post(api, {order})
     return response.data
   },

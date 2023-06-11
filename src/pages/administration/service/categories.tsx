@@ -25,7 +25,6 @@ export default function Menu() {
     onSuccess: () => categories.refetch()
   })
   
-  
   useEffect(()=>{
     !categories.isFetched && categories.refetch()
   }, [categories])

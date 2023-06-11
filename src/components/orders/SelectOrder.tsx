@@ -36,7 +36,7 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
       </div>
       <div className="menu-waiter">
         {search?.map((item: any, index: number)=>(
-          <div className={`vertical menu-waiter-dish${!item.available ? "unavailable" : ""}`} key={index}>
+          <div className={`vertical menu-waiter-dish ${!item.available ? "unavailable" : ""} ${item.amount ? "selected" : ""}`} key={index}>
             <div className="images">
               <Image src={infoIco} className="ico4" alt="info"/>
               {item.amount ? <span>Выбрано: {item.amount * item.weight.amount} {item.weight?.value} ({item.amount} шт)</span> : ""}
@@ -61,6 +61,3 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
     </>
   )
 }
-
-//()=>removeOne(item._id)
-//()=>selectedItem(item)

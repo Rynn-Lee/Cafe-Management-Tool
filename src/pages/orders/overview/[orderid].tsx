@@ -1,6 +1,6 @@
 import { PageLayout } from '@/layouts/PageLayout'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import { services } from '@/services';
 import Link from 'next/link';

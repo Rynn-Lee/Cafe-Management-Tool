@@ -1,4 +1,3 @@
-import { getDateNow } from '@/utils/getDate';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { CharacterSet } from 'node-thermal-printer';
 type Data = { name: String }
@@ -8,12 +7,12 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
     const ThermalPrinter = require("node-thermal-printer").printer;
     const PrinterTypes = require("node-thermal-printer").types;
     const {data} = req.body
-    const orderID = data.orderID
+    const additionalInfo = data.additionalInfo
 
     for(const key in data){
-      if (key == "orderID"){return}
-      console.log(data[key].info?.ip)
+      if (key == "additionalInfo"){return}
       let current = data[key]
+      console.log("Incoming connection: ", current.info.ip)
 
       let printer = new ThermalPrinter({
         type: PrinterTypes[current.info.method],                    // Printer interface
@@ -26,14 +25,13 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
         }
       });
       let isConnected = await printer.isPrinterConnected();
-      console.log("Printer connection: ",isConnected)
       if(!isConnected){
+        console.log("Printer is not responding: ", current.info.ip)
         res.json({status: "Printer is not connected!"} as any)
         return
       }
 
       if(data.test){
-        console.log("TESTING PRINTER! Test Mode: ", data.test)
         printer.drawLine();
         printer.alignCenter()
         printer.println(`Rynn Lee's`)
@@ -46,8 +44,8 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
 
       try{
         printer.alignLeft()
-        printer.println(`Номер заказа: ${orderID}`)
-        printer.println(`Дата заказа: ${getDateNow(true)}`)
+        printer.println(`Номер заказа: ${additionalInfo.orderID}`)
+        printer.println(`Дата заказа: ${additionalInfo.date}`)
         printer.leftRight(`Принтер: ${current.info.name}`, `Стол: ${current.table}`)
         printer.drawLine()
         for(const dishes in current.order){
@@ -78,9 +76,7 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
 
     let result = await ping.promise.probe(ip, {
       timeout: 1,
-    });
-
-    console.log(result.alive)
+    });    
     
     result.alive
     ? res.json({message: "Обнаружено устройство!", alive: true} as any)

@@ -41,7 +41,7 @@ export default function Service({dirs}: Props) {
 
   return (
     <>
-      <PageLayout title={"Сервисное меню - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Очистка - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/service"} nav2>
           <div className='horizontal form'>
             <fieldset>

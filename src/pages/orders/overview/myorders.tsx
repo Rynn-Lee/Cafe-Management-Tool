@@ -28,7 +28,6 @@ export default function MyOrders() {
 
   useEffect(()=>{
     myorders.refetch()
-    console.log(orders)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[auth.data?.full_name])
 

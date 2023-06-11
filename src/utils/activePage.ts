@@ -1,17 +1,17 @@
-const sidebar = {
+const sidebar: any = {
   undefined: 0, "": 0, "login": 0, null: 0,
   "orders": 1,
   "administration": 2,
   "account": 3,
 }
 
-const tabs = {
+const tabs: any = {
   undefined: 0, "": 0, "my": 0, null: 0, "menu": 0,
   "statistics": 1, "employees": 1, "overview": 1,
   "allorders": 2, "service": 2
 }
 
-const funcTabs = {
+const funcTabs: any = {
   "overview": 0, "viewdishes": 0, "printers": 0, "myorders": 0,
   "add": 1, "newdish": 1, "categories": 1, "allorders": 1,
   "cleanup": 2

@@ -36,15 +36,18 @@ export const printersService = {
           if(printerCateg == dish.category){
             newArr[printer.name] 
               ? newArr[printer.name] = {...newArr[printer.name], order:[...newArr[printer.name].order, dish]}
-              : newArr[printer.name] = {info: [printer][0], order:[dish], totalCost: order.totalCost, table: order.table}
+              : newArr[printer.name] = {
+                info: [printer][0],
+                order:[dish],
+                totalCost:order.totalCost,
+                table: order.table
+                }
           }
         })
       ))
     ))
-    newArr.orderID = additionalInfo.orderID
-    newArr.date = additionalInfo.date
-    console.log("newarr: ", newArr)
-    // const result = await this.printCheck(newArr)
-    // return result
+    newArr = {...newArr, additionalInfo}
+    const result = await this.printCheck(newArr)
+    return result
   }
 }

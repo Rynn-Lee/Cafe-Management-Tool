@@ -19,6 +19,7 @@ const orderSchema: any = new Schema({
   table: String,
   totalCost: Number,
   orderID: String,
+  date: String,
   waiter:{
     full_name: String,
     _id: String

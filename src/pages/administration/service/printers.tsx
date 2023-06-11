@@ -1,6 +1,5 @@
 import LoadingScreen from '@/components/LoadingScreen'
 import UniStepper from '@/components/UniStepper'
-import { AddNewPrinter } from '@/components/printers/AddNewPrinter'
 import { PrintersList } from '@/components/printers/PrintersList'
 import PrinterCategories from '@/components/printers/stepsToAdd/PrinterCategories'
 import PrinterFinale from '@/components/printers/stepsToAdd/PrinterFinale'
@@ -36,10 +35,6 @@ export default function Administration() {
     queryFn: () => services.category.list(),
     enabled: false
   })
-
-  useEffect(()=>{
-    console.log(newPrinter)
-  }, [newPrinter])
 
   useEffect(()=>{
     if(!printers.data || !categories.data){return}
@@ -98,9 +93,7 @@ export default function Administration() {
   return (
     <>
       <PageLayout title={"Принтеры - Управление кафе"} pageNav={"administration"}>
-        <PageLayout pageNav={"administration/service"} nav2 flex>
-        
-        
+        <PageLayout pageNav={"administration/service"} nav2 flex>        
           {isSetup ? 
           <UniStepper setSetupStep={setSetupStep} setupStep={setupStep} setIsSetup={setIsSetup} clearSetup={clearSetup}>
             <PrinterName
@@ -130,13 +123,6 @@ export default function Administration() {
           </UniStepper>
           : ""}
 
-          {/* <AddNewPrinter
-            addPrinter={addPrinter}
-            newPrinter={newPrinter}
-            setNewPrinter={setNewPrinter}
-            vacantCategories={vacantCategories}
-            categories={vacantCategories}
-            setIsSetup={setIsSetup}/> */}
           <div>
           {!isSetup ? <button className='addNewPrinter' onClick={()=>setIsSetup(1)}>Добавить новый принтер</button> : ""}
           {printers.data?.length && !isSetup ?

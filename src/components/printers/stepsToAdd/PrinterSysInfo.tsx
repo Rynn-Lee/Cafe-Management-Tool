@@ -12,10 +12,7 @@ export default function PrinterSysInfo({newPrinter, setNewPrinter, setSetupStep,
     setNewPrinter({...newPrinter, info: await services.printers.isExisting(ip)})
   }
 
-  const testPrinting: any = async() => {
-    const result = await services.printers.printCheck({ip: newPrinter.ip, test: true, method: newPrinter.method})
-    console.log(result)
-  }
+  const testPrinting: any = async() => await services.printers.printCheck({ip: newPrinter.ip, test: true, method: newPrinter.method})
 
   return(
     <>

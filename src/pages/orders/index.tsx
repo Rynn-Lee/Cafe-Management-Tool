@@ -30,7 +30,7 @@ export default function Orders() {
 
   const myorders = useQuery({
     queryKey: ["myorders"],
-    queryFn: () => services.orders.getOrders({waiter: auth.data?.full_name}),
+    queryFn: () => services.orders.getOrders({"waiter.full_name": auth.data?.full_name}),
     enabled: false
   })
 
@@ -85,21 +85,17 @@ export default function Orders() {
   const completeOrder = async() => {
     const additionalInfo = {
       orderID: createID(),
-      date: getDateNow()
+      date: getDateNow("short")
     }
-    console.log("Complete: ", order)
-    const response =  await services.printers.createOrder(order, printers.data, additionalInfo)
-    //!
-    //! if(response.status != "Printed"){return}
-    //! TURN ON LATER!
+    await services.printers.createOrder(order, printers.data, additionalInfo)
     mutateOrders.mutate(additionalInfo)
     setStep(0)
-    clearOrder()
   }
 
   const mutateOrders = useMutation({
     mutationFn: async (additionalInfo: any) => {
-      return await services.orders.createOrder(order, additionalInfo)
+        await services.orders.createOrder(order, additionalInfo)
+        clearOrder()
     },
     onSuccess: () => myorders.refetch()
   })

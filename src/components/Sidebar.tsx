@@ -3,7 +3,7 @@ import mainIco from "@icons/home.svg"
 import manageIco from "@icons/manage.svg"
 import userIco from "@icons/user.svg"
 import listIco from "@icons/list.svg"
-import codeIco from "@icons/code.svg"
+import codeIco from "@icons/code2-orange.svg"
 import { useEffect } from "react";
 import { activePage } from '@/utils/activePage'
 import Image from "next/image";
@@ -14,7 +14,7 @@ export default function Sidebar(){
 
   return(
     <div className="sidebar">
-      <span className="logo"><span>Ry<Image src={codeIco} alt="code" className="ico"/>Panel</span></span>
+      <span className="logo"><span>Ry<Image src={codeIco} alt="code" className="ico3 revert"/>Panel</span></span>
       <div className="sidebar-buttons">
         <Link href="/" className="sidebar-button"><Image src={mainIco} className="ico" alt={"Главная"} /><span>Главная</span></Link>
         <Link href="/orders" className="sidebar-button"><Image src={listIco} className="ico" alt={"Управление"} /><span>Заказы</span></Link>

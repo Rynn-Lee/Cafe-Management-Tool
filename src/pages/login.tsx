@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { PageLayout } from '@/layouts/PageLayout';
 import { useQuery } from '@tanstack/react-query';
 import LoadingScreen from '@/components/LoadingScreen';
-let md5 = require('md5');
 
 export default function Login() {
   const [authFields, setAuthFields] = useState<any>({})

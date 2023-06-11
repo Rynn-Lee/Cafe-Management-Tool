@@ -3,7 +3,6 @@ import { PageLayout } from '@/layouts/PageLayout'
 import { services } from '@/services'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
-import useDialog from '@/hooks/useDialog'
 import UniStepper from '@/components/UniStepper'
 import DishName from '@/components/menu/stepsToAdd/DishName'
 import DishCost from '@/components/menu/stepsToAdd/DishCost';
@@ -18,7 +17,6 @@ export default function Add() {
   const [defaultValue, setDefaultValue] = useState("")
   const [fileName, setFileName] = useState("")
   const [selectedFile, setSelectedFile] = useState<File>()
-  const { DialogWindow, ask } = useDialog()
 
   const menu = useQuery({
     queryKey: ["menu"],
@@ -55,10 +53,6 @@ export default function Add() {
     setDefaultValue("none")
     setSetupStep(0)
   }
-
-  useEffect(()=>{
-    console.log(info)
-  }, [info])
 
   return (
     <>
@@ -98,30 +92,6 @@ export default function Add() {
               setInfo={setInfo}
               handleUpload={handleUpload}/>
           </UniStepper>
-
-
-
-          {/* <form onSubmit={(e)=>{e.preventDefault(); ask(`Добавить блюдо: ${info.name}`, handleUpload)}} className='bg-2 form photo-form'>
-            <div className='horizontal'>
-              <AddPhoto
-                handleUpload={handleUpload}
-                setSelectedImage={setSelectedImage}
-                setSelectedFile={setSelectedFile}
-                selectedImage={selectedImage}
-                setFileName={setFileName}/>
-              <MainInfo 
-                info={info}
-                setInfo={setInfo}
-                categories={categories}
-                defaultValue={defaultValue}
-                setDefaultValue={setDefaultValue}/>
-            </div>
-            <Ingredients 
-              setInfo={setInfo}
-              info={info}/>
-            <button><Image src={plusIco} alt="Image" className="ico"/>Добавить товар</button>
-          </form>
-          <DialogWindow /> */}
         </PageLayout>
       </PageLayout>
       {menu.isFetching && <LoadingScreen />}

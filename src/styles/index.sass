@@ -360,6 +360,7 @@ table
   font-size: 15px
   width: 100%
   .menu-waiter-dish
+    border: 1px solid #00000000
     border-radius: 10px
     position: relative
     width: 220px
@@ -422,6 +423,12 @@ table
               &:hover
                 background: #313131
 
+
+.selected
+  border: 1px solid #575e50ba !important
+  background: #2e312bba !important
+  &>div>div>div>button
+    background: #3b3d38ba !important
 .amount
   pointer-events: none
   z-index: 9999
@@ -727,9 +734,11 @@ table
   .order-card-body
     font-size: 12pt
   .images
+    max-height: 100px
+    overflow: hidden
     &>img
-      border-radius: 10px 10px 5px 5px
       max-height: 100px
+      border-radius: 10px 10px 5px 5px
       object-fit: cover
 
 @import 'mess.sass'

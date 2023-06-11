@@ -32,7 +32,7 @@ export default function Menu() {
 
   return (
     <>
-      <PageLayout title={"Меню > Добавить - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Меню - Управление кафе"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/menu"} nav2>
           <div className='form'>
             <Image src={searchIco} alt="search" className="ico" /><input placeholder='Поиск по названию' onChange={(e) => setQuery(e.target.value)} className='right-input'/>

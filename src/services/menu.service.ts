@@ -10,8 +10,6 @@ export const menuService = {
   async add(data: any){
     const ingredients = data.ingredients.replace(/\s*,\s*/g, ",").split(',')
     const filtered = ingredients.map((item: any)=>item.charAt(0).toUpperCase() + item.slice(1))
-    console.log(ingredients)
-    console.log(filtered)
     const response = await axios.post(api,{
         name: data.name,
         cost: data.cost,

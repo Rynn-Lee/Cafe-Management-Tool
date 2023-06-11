@@ -8,7 +8,6 @@ export default async function printerApi(req: NextApiRequest, res: NextApiRespon
     if(req.method == "GET"){
       const filter: any = req.query.filter;
       const query = JSON.parse(filter)
-      console.log(query)
       const result = await orders.find(query)
       res.json(result as any)
     }
