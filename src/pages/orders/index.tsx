@@ -35,10 +35,10 @@ export default function Orders() {
   })
 
   const employeemenu = useQuery({
-    queryKey: ["employeemenu"],
-    queryFn: () => services.menu.findMenu({available: true}),
-    onSuccess: (data) => setMenu(data.map((item:any)=>{return{...item, amount:0}})),
-    enabled: true
+    queryKey: ["employeemenu"], //Название хранилища
+    queryFn: () => services.menu.findMenu({available: true}), // Функция которая достает данные при загрузке страницы
+    onSuccess: (data) => setMenu(data.map((item:any)=>{return{...item, amount:0}})), // Что делать при удаче. Я закидываю данные в useState
+    enabled: true // Автозапуск при загрузке страницы (Можно не писать, по умолчанию true)
   })
 
   const printers = useQuery({

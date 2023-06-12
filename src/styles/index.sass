@@ -22,6 +22,8 @@ $transparent: #30304020
 $warn: #ffa600
 $error: #ff6868
 $loading: #252525be
+$selectedDish: #4a928e42
+$selectedDishHover: #4a77778e
 
 body
   padding: 0px
@@ -360,6 +362,7 @@ table
   font-size: 15px
   width: 100%
   .menu-waiter-dish
+    transition: 200ms
     border: 1px solid #00000000
     border-radius: 10px
     position: relative
@@ -393,6 +396,7 @@ table
         height: 150px
         max-height: 150px
     .infoblock
+      transition: 120ms
       margin: 5px 0px 0px 0px
       font-size: 12pt
       max-height: 200px
@@ -416,6 +420,7 @@ table
           justify-content: space-evenly
           display: flex
           &>button
+            transition: 120ms
             padding: 8px 13px
             width: 110px
             &:disabled
@@ -425,10 +430,13 @@ table
 
 
 .selected
-  border: 1px solid #575e50ba !important
-  background: #2e312bba !important
+  transition: 120ms
+  // border: 1px solid $selectedDish !important
+  background: $selectedDish !important
   &>div>div>div>button
-    background: #3b3d38ba !important
+    background: $selectedDish !important
+    &:hover
+      background: $selectedDishHover !important
 .amount
   pointer-events: none
   z-index: 9999
@@ -478,8 +486,6 @@ table
     right: 30px
     position: absolute
     width: max-content !important
-    // border-bottom: 1px solid $Accent2tr
-    // border-radius: 0px !important
     padding: 0px 15px 0px 10px !important
     background: none !important
   
@@ -724,22 +730,37 @@ table
     box-shadow: 0px 0px 20px 1px #5cf4ff20
 
 .order-card
+  transition: 200ms
+  counter-reset: imgamount
   display: block
   padding: 0px 0px 10px 0px
   background: $Accent2tr
   margin: 5px
-  border-radius: 10px
+  border-radius: 10px !important
+  overflow: hidden
   width: 200px
   height: max-content
+  &:hover
+    &>.images>img
+      filter: brightness(1)
   .order-card-body
     font-size: 12pt
   .images
+    width: 200px
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr))
     max-height: 100px
-    overflow: hidden
+    // overflow: hidden
     &>img
+      transition: 200ms
+      filter: brightness(0.7)
       max-height: 100px
-      border-radius: 10px 10px 5px 5px
+      height: 100px
       object-fit: cover
+      &:nth-last-child(1)
+        border-radius: 0px 0px 5px 0px
+      &:first-child
+        border-radius: 0px 0px 0px 5px
 
 @import 'mess.sass'
 @import 'preparedStyles.sass'
