@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { PageLayout } from '@/layouts/PageLayout';
 import { useQuery } from '@tanstack/react-query';
 import LoadingScreen from '@/components/LoadingScreen';
+import codeIco from "@icons/code2-orange.svg"
+import Image from 'next/image';
 
 export default function Login() {
   const [authFields, setAuthFields] = useState<any>({})
@@ -27,7 +29,8 @@ export default function Login() {
       <PageLayout noContent>
         <div className='login-content'>
           <form className='form' onSubmit={handleLoginForm}>
-            <div className='status'>{`${auth.isError ? auth.error : "Cafe management tool"}`}</div>
+            <div className='title'><span>Ry<Image src={codeIco} alt="code" className="ico4 revert"/>Panel</span></div>
+            <div className='status'>{`${auth.isError ? auth.error : ""}`}</div>
             <div className='fields'><span>Имя</span><input name={'FIO'} placeholder='Введите ФИО' onChange={(e) => setAuthFields({...authFields, name: e.target.value})}/></div>
             <div className='fields'><span>Пароль</span><input name={'Password'} type="password" placeholder='Введите пароль'  onChange={(e) => setAuthFields({...authFields, password: e.target.value})}/></div>
             <button>Вход</button>

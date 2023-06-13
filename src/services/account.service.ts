@@ -28,7 +28,7 @@ export const accountService = {
   },
   async findUsers(fio: any = null, id: any = null, inputPassword: any = null, auth: boolean = false){
     let query: any
-
+    console.log("Find users")
     fio && (query = api + params.full_name + fio)
     id && (query = api + params.id + id)
     !fio && !id && (query = api)
@@ -36,12 +36,14 @@ export const accountService = {
     const response: any = await axios.get(query)
     const result = await response.data
 
+    if(!result && auth){throw new Error("Пользователь не найден")}
+
     if(auth){
       const authResult = this.auth(result, inputPassword)
       if(authResult) return result
       throw new Error("Пароль не верный")
     }
-    if(!result && auth){return[{}]}
+    
     return result
   },
   auth(result: any, inputPassword: string){

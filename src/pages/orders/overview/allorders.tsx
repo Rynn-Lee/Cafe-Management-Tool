@@ -38,12 +38,12 @@ export default function AllOrders({}) {
       <PageLayout title={"Заказы - Управление кафе"} pageNav={"orders"}>
         <PageLayout pageNav={"orders/overview"} nav2>
         <div className='menu-waiter'>
-          {orders.length && orders?.map((order: any) => (
+          {orders.length ? orders?.map((order: any) => (
             <Link key={order._id} href={`${order.orderID}`}>
               <OrderCard
               order={order}/>
             </Link>
-          )).reverse()
+          )).reverse() : ""
           }
         </div>
         </PageLayout>
