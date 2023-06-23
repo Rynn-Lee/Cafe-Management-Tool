@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useEffect } from "react";
-import Sidebar from "./Sidebar";
+import Sidebar from "../components/Sidebar";
 import { useRouter } from "next/router";
 import { services } from "@/services";
 import { useQuery } from '@tanstack/react-query';
@@ -11,8 +11,7 @@ export default function Layout({ children }: PropsWithChildren){
   const auth = useQuery({
     queryKey: ["auth"],
     queryFn: () => services.account.checkLogin(),
-    onError: () => router.push("/login"),
-    enabled: true
+    onError: () => router.push("/login")
   })
 
   useEffect(()=>{
@@ -25,9 +24,9 @@ export default function Layout({ children }: PropsWithChildren){
 
   return (
     <>
-      {!auth && <Login />}
-      {auth && <Sidebar/>}
-      {auth && children}
+      {!auth.data && <Login />}
+      {auth.data && <Sidebar/>}
+      {auth.data && children}
     </>
   );
 };

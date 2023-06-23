@@ -42,13 +42,16 @@ const imagesApi: NextApiHandler = async (req, res) => {
     const images = req.query;
     const toDelete: any = Object.values(images)
     const filtered: string[] = toDelete[0].split(',')
+    if(!filtered.length || filtered[0] == ''){
+      res.json({error: "Нет изображений для удаления"})
+      return
+    }
 
     filtered.forEach((image: string, index: number) => {
       console.log(`#${index} - Image deleted:  + ${image}`)
       fs.unlink(process.cwd() + '/public/images/' + image)
     });
-  
-    res.send({done: "Unlinked succesfully!"})
+    res.send({info: "Лишние изображения удалены!"})
   }
 }
 

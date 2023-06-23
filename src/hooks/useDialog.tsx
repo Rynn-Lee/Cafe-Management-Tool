@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Dialog from "@/components/modal/Dialog"
 
 export default function useDialog(){
   const [isShown, setIsShown] = useState(false)
   const [funcToCall, setFuncToCall] = useState<any>()
+  const [window, setWindow] = useState<any>()
   const [message, setMessage] = useState<any>()
 
   const confirmDialog = (choice: boolean) =>{
@@ -16,17 +17,19 @@ export default function useDialog(){
     return choice
   }
   
-  function ask(text: string, onSucces: any, options?: any){
+  function ask(text: string, onSucces: any = false, options?: any, windowMethod: any = ""){
+    setWindow(windowMethod)
     !isShown && setIsShown(true)
-    setFuncToCall(() => onSucces)
+    onSucces && setFuncToCall(() => onSucces)
     setMessage(text)
+    console.log(text)
   }
 
 
   function DialogWindow(){
     return(
       <>
-        {isShown && <Dialog message={message} confirmDialog={confirmDialog}/>}
+        {isShown && <Dialog message={message} confirmDialog={confirmDialog} window={window}/>}
       </>
     )
   }

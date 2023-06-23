@@ -10,7 +10,7 @@
   width: 100% !important
   height: 100% !important
   background: $modal !important
-  backdrop-filter: blur(3px) !important
+  backdrop-filter: blur(5px) !important
   .modal-title
     color: #ff5555 !important
     background: none !important
@@ -29,3 +29,31 @@
     background: #ff55553d !important
     &:hover
       background: #ff555590 !important
+  .dialogTable
+    margin: 20px
+    max-width: 800px
+    width: max-content
+    &>tbody>tr
+      &:first-child
+        td:first-child
+          border-radius: 10px 0px 0px 0px
+        td:last-child
+          border-radius: 0px 10px 0px 0px
+      &:last-child
+        td:first-child
+          border-radius: 0px 0px 0px 10px
+        td:last-child
+          border-radius: 0px 0px 10px 0px
+      &>td
+        padding: 5px 10px
+        text-align: center
+        border: none
+        // border-bottom: 1px solid #ffffff50
+        max-width: none
+        &:first-child
+          background: #ffffff40
+          width: max-content
+        &:last-child
+          background: #ffffff20
+          width: max-content
+          text-align: left

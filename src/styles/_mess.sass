@@ -32,7 +32,6 @@ a
   top: 0px !important
 
 .ico, .ico2, .ico3, .ico35, .ico4, .ico5
-  cursor: pointer
   display: inline-block
   position: relative
   top: -2px
@@ -107,13 +106,26 @@ a
 .loading
   z-index: 100000
   display: flex
-  justify-content: flex-start
-  align-items: flex-start
+  justify-content: center
+  align-items: center
   position: fixed
+  background: #00000050
+  backdrop-filter: blur(2px)
   left: 0px
   right: 0px
   top: 0px
   bottom: 0px
+  opacity: 1
+  animation: 0.15s ease-in 0.1s 1 both running loadingappear
+  &>img
+    width: 80px
+    height: 80px
+  
+@keyframes loadingappear 
+  from
+    opacity: 0
+  to
+    opacity: 1
 
 ul
   margin-left: 10px
@@ -153,17 +165,6 @@ fieldset
 
 .employees-form
   width: auto !important
-
-.spin
-  padding: 10px
-  width: 55px
-  height: 55px
-
-@keyframes spin-anim 
-  from
-    transform: rotate(0deg)
-  to
-    transform: rotate(360deg)
 
 .weight-choice
   width: 10px !important

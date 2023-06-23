@@ -39,6 +39,9 @@ export const accountService = {
     if(!result && auth){throw new Error("Пользователь не найден")}
 
     if(auth){
+      if(!fio || !inputPassword)
+        throw new Error("Заполните все поля!")
+
       const authResult = this.auth(result, inputPassword)
       if(authResult) return result
       throw new Error("Пароль не верный")

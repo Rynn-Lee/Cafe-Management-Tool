@@ -27,7 +27,7 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
       let isConnected = await printer.isPrinterConnected();
       if(!isConnected){
         console.log("Printer is not responding: ", current.info.ip)
-        res.json({status: "Printer is not connected!"} as any)
+        res.json({error: `Принтер "${current.info.name}" не подключен! Заказ отменён! Обратитесь к системному администратору!`} as any)
         return
       }
 
@@ -38,7 +38,7 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
         printer.println(`Controling panel`)
         printer.drawLine();
         printer.partialCut();
-        let execute = printer.execute()
+        printer.execute()
         return
       }
 
@@ -62,9 +62,9 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
         let execute = printer.execute()
         console.log("EXEC:",await execute)
         res.json({status: "Printed"} as any)
-      } catch (error) {
-        console.log("THERE'S AN ERROR!", error)
-        res.json({status: error} as any)
+      } catch (err: any) {
+        console.log("THERE'S AN ERROR!", err)
+        res.json({error: `При распечатке произошла ошибка!`, err} as any)
       }
     }
   }

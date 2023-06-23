@@ -1,6 +1,6 @@
 import '@/styles/index.sass'
 import type { AppProps } from 'next/app'
-import Layout from '@/components/layout'
+import Layout from '@/layouts/layout'
 import { useEffect } from 'react'
 import { services } from '@/services'
 import { QueryClient,  QueryClientProvider } from '@tanstack/react-query'

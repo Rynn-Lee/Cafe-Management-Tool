@@ -5,12 +5,14 @@ import fs from 'fs/promises'
 import path from 'path'
 import { useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
+import useDialog from '@/hooks/useDialog'
 
 interface Props {
   dirs: string[]
 }
 
 export default function Service({dirs}: Props) {
+  const {DialogWindow, ask} = useDialog()
   const [images, setImages] = useState<any>()
 
   const menu = useQuery({
@@ -32,7 +34,9 @@ export default function Service({dirs}: Props) {
   const deleteLeftovers = async () => {
     const used = menu.data.map((item: any) => item.filename)
     const result = images.filter((x: any) => !used.includes(x))
-    await services.images.delete(result)
+    const cleanup = await services.images.delete(result)
+    if(cleanup.error) ask(cleanup.error, false, false, "error")
+    else ask(cleanup.info, false, false, "info")
   }
 
   useEffect(()=>{
@@ -63,6 +67,7 @@ export default function Service({dirs}: Props) {
               ))}
             </ul>
           </fieldset>
+          <DialogWindow />
         </PageLayout>
       </PageLayout>
     </>

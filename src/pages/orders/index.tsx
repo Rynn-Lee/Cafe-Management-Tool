@@ -2,15 +2,17 @@ import MenuStepper from '@/components/MenuStepper'
 import AdditionalInfo from '@/components/orders/AdditionalInfo'
 import SelectOrder from '@/components/orders/SelectOrder'
 import { PageLayout } from '@/layouts/PageLayout'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { services } from '@/services'
 import { createID } from '@utils/createID'
 import LoadingScreen from '@/components/LoadingScreen'
 import { getDateNow } from '@/utils/getDate'
+import useDialog from '@/hooks/useDialog'
 
 export default function Orders() {
   const [total, setTotal] = useState()
+  const {DialogWindow, ask} = useDialog()
   const [menu, setMenu] = useState<any>([])
   const [order, setOrder] = useState<any>({
     cart: [],
@@ -87,28 +89,36 @@ export default function Orders() {
       orderID: createID(),
       date: getDateNow("short")
     }
-    await services.printers.createOrder(order, printers.data, additionalInfo)
-    mutateOrders.mutate(additionalInfo)
+
+    const printerreturn = await services.printers.createOrder(order, printers.data, additionalInfo)
+    if(!printerreturn) throw new Error("Сервис распечатки не вернул ответ!")
+    
+    const orderreturn= await services.orders.createOrder(order, additionalInfo)
+    if(!orderreturn) throw new Error("Сервис заказов не вернул ответ!")
+
+    clearOrder()
     setStep(0)
+    return true
   }
 
   const mutateOrders = useMutation({
     mutationFn: async (additionalInfo: any) => {
-        await services.orders.createOrder(order, additionalInfo)
-        clearOrder()
+      await completeOrder()
     },
-    onSuccess: () => myorders.refetch()
+    onSuccess: () => myorders.refetch(),
+    onError: (error: any)=>ask(`${error}`, false, false, "error")
   })
 
   return (
     <>
       <PageLayout title={<><span className="steps">Шаг {step+1} из 2</span>Заказы - Управление кафе</>} pageNav={"orders"}>
-        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} order={order.cart?.length} table={order.table} completeOrder={completeOrder}>
+        <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} order={order.cart?.length} table={order.table} mutateOrders={mutateOrders}>
           <SelectOrder selectedItem={selectedItem} menu={menu} clearOrder={clearOrder} order={order.cart.length} removeOne={removeOne}/>
           <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} setTotal={setTotal} total={total} setStep={setStep} setOrder={setOrder} order={order}/>
         </MenuStepper>
+        <DialogWindow/>
       </PageLayout>
-      {employeemenu.isLoading && mutateOrders.isLoading && <LoadingScreen />}
+      {(employeemenu.isFetching || mutateOrders.isLoading) && <LoadingScreen />}
     </>
   )
 }

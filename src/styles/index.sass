@@ -34,14 +34,12 @@ body
     family: monospace
     size: 13pt
 
-
 hr
   margin: 3px
   color: $textColor
   background: #ffffff0a
   border: none
   border-top: 2px outset #ffffff48
-
 
 .sidebar
   z-index: 10000
@@ -61,7 +59,7 @@ hr
       border-right: 2px solid #00000000
       border-bottom: 1px #00000000 solid
       transition: 200ms
-      padding: 20px 10px 20px 10px
+      padding: 15px 10px 15px 10px
 
 .content
   top: 83px
@@ -81,11 +79,29 @@ hr
   display: flex
   justify-content: center
   align-items: center
+  flex-direction: column
   background: $Accent1
   position: fixed
   width: 100%
   text-align: center
   height: 100vh
+  .title, .title>*
+    font-size: 20pt !important
+    cursor: default
+  .status
+    color: #ee8585
+    padding: 5px 0px 10px 0px
+  &>input, &>button
+    width: 300px
+    padding: 8px 12px
+    margin-bottom: 5px
+    background: $navbar
+    transition: 200ms
+    border-radius: 10px
+    &:hover
+      background: $Accent2
+  
+
 
 .photo-form
   width: auto !important
@@ -383,13 +399,18 @@ table
     right: 0px
     .images
       width: 100%
+      &>::selection
+        background: none
       &>span
         position: absolute
         display: block
         width: 100%
         bottom: 103px
         background: #00000090
+        &>::selection
+          background: none
       &>img:first-child
+        cursor: pointer
         display: flex
         position: absolute
         right: -5px
@@ -417,6 +438,8 @@ table
         white-space: nowrap
         overflow: hidden
         text-overflow: ellipsis
+      &>::selection
+        background: none !important
       &>div
         margin: 10px 0px 0px 0px
         flex-direction: column
@@ -428,10 +451,14 @@ table
         &>div
           justify-content: space-evenly
           display: flex
+          &>::selection
+            background: none
           &>button
             transition: 120ms
             padding: 8px 13px
             width: 110px
+            &>::selection
+              background: none
             &:disabled
               color: #666
               &:hover
@@ -497,6 +524,28 @@ table
     width: max-content !important
     padding: 0px 15px 0px 10px !important
     background: none !important
+  &>div
+    background: $navbar
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 10px
+    box-sizing: border-box
+    &>input
+      transition: 200ms
+      padding: 5px 5px
+      width: 100px
+      background: $navbar
+      text-align: left
+      &:focus
+        width: 400px
+    &>img
+      position: relative
+      top: 0px
+      padding: 0px
+      margin: 0px 8px
+      &:last-child
+        cursor: pointer
   
 .stepper-buttons
   z-index: 100000
@@ -533,9 +582,10 @@ table
 .additional-info-table
   table-layout: auto
   width: 100%
-  text-align: center
+  text-align: left
   border-spacing: 0px
   th
+    text-align: center
     padding: 5px 15px 5px 15px
     &:first-child
       border-radius: 10px 0px 0px 0px
@@ -544,16 +594,14 @@ table
       border-radius: 0px 10px 0px 0px
       width: 110px
   tr
-    padding: 5px 2px
     &:nth-child(odd)
-      background: $navbar
+      &>td
+        background: $navbar
+        border-radius: 10px
     td
-      border-right: 1px solid $Accent1
+      text-align: center
       &:nth-child(2)
         text-align: left
-      &:first-child
-        display: flex
-        justify-content: space-evenly
       &>a
         font-weight: 600
         transition: 200ms
@@ -770,6 +818,15 @@ table
         border-radius: 0px 0px 5px 0px
       &:first-child
         border-radius: 0px 0px 0px 5px
+
+.choose-table
+  display: flex
+  flex-direction: column
+  margin: 10px 0px 20px 0px
+  &>input
+    background: $navbar
+    padding: 10px 15px !important
+    border-radius: 10px
 
 @import 'mess.sass'
 @import 'preparedStyles.sass'

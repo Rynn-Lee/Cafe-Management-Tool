@@ -11,7 +11,6 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
   const [query, setQuery] = useState<any>()
   const [search, setSearch] = useState<any>()
   const {DialogWindow, ask} = useDialog()
-
   
   useEffect(()=>{
       if(query){
@@ -28,7 +27,7 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
         <div className="menu-actions">
           <div>
             <Image src={searchIco} alt="search" className="ico" />
-            <input placeholder='Поиск по названию' value={query} onChange={(e) => setQuery(e.target.value)} className='right-input'/>
+            <input placeholder='Поиск' value={query} onChange={(e) => setQuery(e.target.value)}/>
             <Image src={closeIco} alt="search" className="ico3" onClick={()=>setQuery("")}/>
           </div>
           {order ? <button onClick={()=>ask("Очистить выбор?", clearOrder)}><Image src={trashIco} alt="ico" className="ico3"/>Очистить заказ</button> : ""}
@@ -38,7 +37,7 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
         {search?.map((item: any, index: number)=>(
           <div className={`vertical menu-waiter-dish${!item.available ? " unavailable" : ""}${item.amount ? " selected" : ""}`} key={index}>
             <div className="images">
-              <Image src={infoIco} className="ico4" alt="info"/>
+              <Image src={infoIco} className="ico4" alt="info" onClick={()=>ask(item, false, false, "description")}/>
               {item.amount ? <span>Выбрано: {item.amount * item.weight.amount} {item.weight?.value} ({item.amount} шт)</span> : ""}
               <Image src={`/images/${item.filename}`} width={400} height={400} alt="dish"/>
             </div>
@@ -56,7 +55,7 @@ export default function SelectOrder({selectedItem, menu, clearOrder, order, remo
             </div>
           </div>
         )).reverse()}
-        <DialogWindow/>
+        <DialogWindow />
       </div>
     </>
   )

@@ -15,6 +15,11 @@ export default async function printerApi(req: NextApiRequest, res: NextApiRespon
       const {order} = req.body 
       res.json(await orders.create(order))
     }
+    if(req.method == "DELETE"){
+      const id: any = req.query.id;
+      const result = await orders.deleteOne({"_id": id})
+      res.json(result as any)
+    }
   } catch (error) {
       console.log(error)
       res.json(error as Data)

@@ -14,14 +14,11 @@ export default function AdditionalInfo({selectedItem, removeOne, setStep, setOrd
   return (
     <>
       <span className="total-cost">Общая цена: <span>{order.totalCost}</span> тг.</span>
-      <fieldset>
-        <legend>Дополнительная информация</legend>
-        <div className="form">
-          <div className="fields"><span>Выберите столик</span>
-          <input className="right-input" placeholder="Введите номер столика" value={order.table} onChange={(e)=>setOrder({...order, table: e.target.value})} type="number"/>
-          </div>
+        <div className="choose-table">
+          <span>Дополнительная информация</span>
+          <input placeholder="Введите номер столика" value={order.table} onChange={(e)=>setOrder({...order, table: e.target.value})} type="number"/>
         </div>
-      </fieldset>
+        <span>Выбранные блюда</span>
       <OrderList selectedItem={selectedItem} removeOne={removeOne} order={order}/>
     </>
   )

@@ -18,23 +18,15 @@ export default function Login() {
     enabled: false,
   })
 
-
-  const handleLoginForm = (e: any) => {
-    e.preventDefault()
-    auth.refetch()
-  }
-
   return (
     <>
       <PageLayout noContent>
         <div className='login-content'>
-          <form className='form' onSubmit={handleLoginForm}>
-            <div className='title'><span>Ry<Image src={codeIco} alt="code" className="ico4 revert"/>Panel</span></div>
-            <div className='status'>{`${auth.isError ? auth.error : ""}`}</div>
-            <div className='fields'><span>Имя</span><input name={'FIO'} placeholder='Введите ФИО' onChange={(e) => setAuthFields({...authFields, name: e.target.value})}/></div>
-            <div className='fields'><span>Пароль</span><input name={'Password'} type="password" placeholder='Введите пароль'  onChange={(e) => setAuthFields({...authFields, password: e.target.value})}/></div>
-            <button>Вход</button>
-          </form>
+          <span className='title'>Ry<Image src={codeIco} alt="code" className="ico4 revert"/>Panel</span>
+          <span className='status'>{`${auth.isError ? auth.error : ""}`}</span>
+          <input placeholder='Введите ФИО' onChange={(e) => setAuthFields({...authFields, name: e.target.value})}/>
+          <input type="password" placeholder='Введите пароль'  onChange={(e) => setAuthFields({...authFields, password: e.target.value})}/>
+          <button onClick={()=>auth.refetch()}>Вход</button>
         </div>
       </PageLayout>
       {auth.isFetching && <LoadingScreen/>}
