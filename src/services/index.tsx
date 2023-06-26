@@ -5,6 +5,7 @@ import { imagesService } from "./images.service"
 import { categoryService } from "./category.service"
 import { printersService } from "./printers.service"
 import { ordersService } from "./orders.service"
+import { statisticsService } from "./statistics.service"
 
 
 export const services = {
@@ -14,5 +15,6 @@ export const services = {
   menu: menuService,
   category: categoryService,
   printers: printersService,
-  orders: ordersService
+  orders: ordersService,
+  statistics: statisticsService,
 }

@@ -48,9 +48,9 @@ export const printersService = {
     ))
     newArr = {...newArr, additionalInfo}
     const result = await this.printCheck(newArr)
-    if(result.error){
-      throw new Error(`${result.error}`)
-    }
+    // if(result.error){
+    //   throw new Error(`${result.error}`)
+    // }
     return result
   }
 }

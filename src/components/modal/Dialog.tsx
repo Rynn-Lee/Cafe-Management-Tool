@@ -10,14 +10,17 @@ export default function Dialog({message, confirmDialog, window}:any) {
 
   return (
     <div className="modal-window">
-      <span className="modal-title">
-        <Image src={exclamIco} alt="!" className='ico2'/>
-        {window == "error" ? "Произошла ошибка!" : ""}
-        {window == "info" ? "Информация!" : ""}
-        {window == "description" ? "Описание блюда" : ""}
+      <span className={`modal-title ${(window && window != "error") ? "green" : "red"}`}>
+        {window == "error" || !window ? <Image src={exclamIco} alt="!" className='ico2'/> : ""}
+        {window == "error" ? " - Произошла ошибка - " : ""}
+        {window == "info" ? " - Информация - " : ""}
+        {window == "description" ? " - Описание блюда - " : ""}
         {!window ? "Подтвердите ваше действие" : ""} 
-        <Image src={exclamIco} alt="!" className='ico2'/>
+        {window == "error" || !window ? <Image src={exclamIco} alt="!" className='ico2'/> : ""}
       </span>
+
+
+
       {window != "description" ? 
       <><hr/>- {message} -<hr/></>
       :

@@ -798,8 +798,7 @@ table
   width: 200px
   height: max-content
   &:hover
-    &>.images>img
-      filter: brightness(1)
+    background: #414141
   .order-card-body
     font-size: 12pt
   .images
@@ -810,7 +809,6 @@ table
     // overflow: hidden
     &>img
       transition: 200ms
-      filter: brightness(0.7)
       max-height: 100px
       height: 100px
       object-fit: cover
@@ -827,6 +825,80 @@ table
     background: $navbar
     padding: 10px 15px !important
     border-radius: 10px
+
+.order-overview
+  position: fixed
+  top: 0px
+  left: 100px
+  width: 100vw
+  height: 100vh
+  display: flex
+  justify-content: center
+  align-items: center
+  &>div
+    width: 600px
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    .buttons
+      width: 100%
+      display: flex
+      flex-direction: row
+      justify-content: space-evenly
+      &>a, &>button
+        font-size: 12pt
+        text-align: center
+        background: $navbar
+        margin-top: 5px
+        border-radius: 10px
+        width: 100%
+        transition: 200ms
+        padding: 10px 20px
+        background: #b155559a
+        &:hover
+          background: #b15555d5
+        &:last-child
+          margin-left: 5px
+          background: #6bb1559a
+          &:hover
+            background: #6ab155d5
+        &:first-child
+          margin-right: 5px
+          background: $navbar
+          &:hover
+            background: $Accent2
+    &>table
+      width: 600px
+      &>tbody
+        &>tr
+          background: $navbar
+          &>td
+            border-right: 0px
+          &>td:nth-child(1)
+            background: $Accent2tr
+            width: 240px
+          &>td:first-child
+            border-radius: 10px 0px 0px 10px
+          &>td:last-child
+            border-radius: 0px 10px 10px 0px
+  &>a
+    padding: 10px 20px
+    background: $Accent2
+    border-radius: 10px
+  .images
+    justify-items: center
+    width: 600px
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr))
+    max-height: 100px
+    // overflow: hidden
+    &>img
+      transition: 200ms
+      max-height: 100px
+      height: 100px
+      object-fit: cover
+      border-radius: 10px
 
 @import 'mess.sass'
 @import 'preparedStyles.sass'

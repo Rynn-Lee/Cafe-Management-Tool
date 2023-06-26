@@ -46,7 +46,7 @@ export default function MyOrders() {
         </div>
         </PageLayout>
       </PageLayout>
-      {myorders.isFetching && myorders.isLoading && <LoadingScreen />}
+      {myorders.isFetching && <LoadingScreen />}
     </>
   )
 }

@@ -91,10 +91,10 @@ export default function Orders() {
     }
 
     const printerreturn = await services.printers.createOrder(order, printers.data, additionalInfo)
-    if(!printerreturn) throw new Error("Сервис распечатки не вернул ответ!")
+    // if(!printerreturn) throw new Error("Сервис распечатки не вернул ответ!")
     
     const orderreturn= await services.orders.createOrder(order, additionalInfo)
-    if(!orderreturn) throw new Error("Сервис заказов не вернул ответ!")
+    // if(!orderreturn) throw new Error("Сервис заказов не вернул ответ!")
 
     clearOrder()
     setStep(0)

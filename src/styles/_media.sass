@@ -46,7 +46,8 @@
     left: 70px !important
   .top
     left: 0px !important
-
+  .order-overview
+    left: 35px
 
 @media screen and (max-width: 985px)
   .menu-waiter
@@ -67,6 +68,18 @@
   .stepper-buttons
     top: auto
     bottom: 20px
+  .order-overview
+    .images
+      width: 100%
+    &>div
+      width: max-content
+      &>table
+        width: 100%
+        &>tbody
+          &>tr
+            &>td:nth-child(1)
+              background: $Accent2tr
+              width: 160px
 
 
 @media screen and (max-width: 500px)
