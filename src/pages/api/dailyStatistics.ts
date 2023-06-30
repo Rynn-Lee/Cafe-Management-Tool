@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import orders from '@/models/ordersModel'
+import orders from '@/models/dailyStatisticsModel'
 
 type Data = { name: String }
 
-export default async function ordersApi(req: NextApiRequest, res: NextApiResponse<Data>){
+export default async function statisticsApi(req: NextApiRequest, res: NextApiResponse<Data>){
   try{
     if(req.method == "GET"){
       const filter: any = req.query.filter;
@@ -12,8 +12,8 @@ export default async function ordersApi(req: NextApiRequest, res: NextApiRespons
       res.json(result as any)
     }
     if(req.method == "POST"){
-      const {order} = req.body 
-      res.json(await orders.create(order))
+      const {statistics} = req.body 
+      res.json(await orders.create(statistics))
     }
     if(req.method == "DELETE"){
       const id: any = req.query.id;

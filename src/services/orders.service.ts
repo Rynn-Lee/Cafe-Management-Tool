@@ -1,4 +1,5 @@
 import axios from "axios"
+import { services } from "."
 
 const api = "../../api/orders"
 
@@ -10,6 +11,7 @@ export const ordersService = {
     return response.data
   },
   async getOrders(filter: any){
+    console.log("THIS BITCH FILTERS: ", filter)
     const response = filter
     ? await axios.get(api + "?filter=" + JSON.stringify(filter))
     : await axios.get(api)
@@ -23,7 +25,8 @@ export const ordersService = {
     return response.data
   },
   async finishOrder(order: any){
-    console.log("Finishorder", order)
+    // await this.deleteOrder(order._id)
+    await services.statistics.finishOrder(order)
     return true
   }
 }

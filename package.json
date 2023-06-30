@@ -20,7 +20,6 @@
     "eslint-config-next": "13.2.4",
     "formidable": "^2.1.1",
     "md5": "^2.3.0",
-    "moment": "^2.29.4",
     "mongodb": "^5.1.0",
     "mongoose": "^7.0.3",
     "next": "13.2.4",

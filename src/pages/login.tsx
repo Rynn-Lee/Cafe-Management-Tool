@@ -1,6 +1,7 @@
 import { services } from '@/services';
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { PageLayout } from '@/layouts/PageLayout';
 import { useQuery } from '@tanstack/react-query';
 import LoadingScreen from '@/components/LoadingScreen';
@@ -10,11 +11,12 @@ import Image from 'next/image';
 export default function Login() {
   const [authFields, setAuthFields] = useState<any>({})
   const router = useRouter();
+  const pathname = usePathname()
 
   const auth = useQuery({
     queryKey: ["auth"],
     queryFn: () => services.account.findUsers(authFields.name,false,authFields.password,true),
-    onSuccess: (data) => data && router.push("/"),
+    onSuccess: (data) => {(data && pathname == "/login") && router.push("/")},
     enabled: false,
   })
 

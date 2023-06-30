@@ -1,14 +1,14 @@
 import {Schema, model, models} from 'mongoose'
 
 const dailyStatisticsSchema: any = new Schema({
-  date: String,
+  date: Date,
   menuStatistics: [{
     name: String,
     amountOfOrders: Number,
   }],
   waitersStatistics: [{
     name: String,
-    serverd: Number
+    served: Number
   }]
 })
 
