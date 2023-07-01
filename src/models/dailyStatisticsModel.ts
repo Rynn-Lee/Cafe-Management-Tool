@@ -4,11 +4,13 @@ const dailyStatisticsSchema: any = new Schema({
   date: Date,
   menuStatistics: [{
     name: String,
-    amountOfOrders: Number,
+    amount: Number,
+    _id: String
   }],
   waitersStatistics: [{
     name: String,
-    served: Number
+    served: Number,
+    _id: String
   }]
 })
 

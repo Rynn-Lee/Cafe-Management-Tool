@@ -11,7 +11,6 @@ export const ordersService = {
     return response.data
   },
   async getOrders(filter: any){
-    console.log("THIS BITCH FILTERS: ", filter)
     const response = filter
     ? await axios.get(api + "?filter=" + JSON.stringify(filter))
     : await axios.get(api)
