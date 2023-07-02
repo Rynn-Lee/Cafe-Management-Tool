@@ -17,7 +17,6 @@ export default async function statisticsApi(req: NextApiRequest, res: NextApiRes
     }
     if(req.method == "PATCH"){
       const {statistics, id} = req.body 
-      console.log("id to update:", id)
       res.json(await dailyStatistics.updateOne({_id: id}, statistics) as any)
     }
     if(req.method == "DELETE"){

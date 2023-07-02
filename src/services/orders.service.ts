@@ -24,7 +24,7 @@ export const ordersService = {
     return response.data
   },
   async finishOrder(order: any){
-    // await this.deleteOrder(order._id)
+    await this.deleteOrder(order._id)
     await services.statistics.finishOrder(order)
     return true
   }

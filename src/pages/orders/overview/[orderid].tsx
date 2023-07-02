@@ -18,6 +18,7 @@ export default function OrderPage() {
     if(!orderid){return}
     console.log(orderid)
     myorders.refetch()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderid])
 
   const myorders = useQuery({
