@@ -23,9 +23,9 @@ export const ordersService = {
     if(!response.data){throw new Error("No data returned!")}
     return response.data
   },
-  async finishOrder(order: any){
-    await this.deleteOrder(order._id)
-    await services.statistics.finishOrder(order)
+  async finishOrder(order: any, waiterServed: any, del: boolean){
+    // await this.deleteOrder(order._id)
+    !del && await services.statistics.finishOrder(order, {full_name: waiterServed.full_name, _id: waiterServed._id})
     return true
   }
 }

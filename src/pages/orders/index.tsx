@@ -27,7 +27,7 @@ export default function Orders() {
   const auth = useQuery({
     queryKey: ["auth"],
     queryFn: () => services.account.checkLogin(),
-    onSuccess: (data) => setOrder({...order, waiter: {full_name: data.full_name, _id: data._id}})
+    onSuccess: (data) => {data && setOrder({...order, waiter: {full_name: data.full_name, _id: data._id}})},
   })
 
   const myorders = useQuery({
@@ -37,10 +37,10 @@ export default function Orders() {
   })
 
   const employeemenu = useQuery({
-    queryKey: ["employeemenu"], //Название хранилища
-    queryFn: () => services.menu.findMenu({available: true}), // Функция которая достает данные при загрузке страницы
-    onSuccess: (data) => setMenu(data.map((item:any)=>{return{...item, amount:0}})), // Что делать при удаче. Я закидываю данные в useState
-    enabled: true // Автозапуск при загрузке страницы (Можно не писать, по умолчанию true)
+    queryKey: ["employeemenu"],
+    queryFn: () => services.menu.findMenu({available: true}), 
+    onSuccess: (data) => setMenu(data.map((item:any)=>{return{...item, amount:0}})), 
+    enabled: true
   })
 
   const printers = useQuery({
@@ -48,6 +48,8 @@ export default function Orders() {
     queryFn: () => services.printers.find(),
     enabled: true
   })
+
+  console.log("ORDER: ",order)
 
   //!---------------------- SKILL ISSUE - CRINGE ZONE - REFACTOR LATER! ----------------------!//
   const selectedItem = (dish: any) => {
@@ -91,10 +93,10 @@ export default function Orders() {
     }
 
     const printerreturn = await services.printers.createOrder(order, printers.data, additionalInfo)
-    // if(!printerreturn) throw new Error("Сервис распечатки не вернул ответ!")
+    //! if(!printerreturn) throw new Error("Сервис распечатки не вернул ответ!")
     
     const orderreturn= await services.orders.createOrder(order, additionalInfo)
-    // if(!orderreturn) throw new Error("Сервис заказов не вернул ответ!")
+    //! if(!orderreturn) throw new Error("Сервис заказов не вернул ответ!")
 
     clearOrder()
     setStep(0)

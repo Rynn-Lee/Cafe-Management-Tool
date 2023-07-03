@@ -10,6 +10,7 @@ const dailyStatisticsSchema: any = new Schema({
   waitersStatistics: [{
     name: String,
     served: Number,
+    servedOthers: Number,
     _id: String
   }]
 })

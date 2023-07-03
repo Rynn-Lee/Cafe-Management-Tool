@@ -14,12 +14,10 @@ export default function OrderPage() {
   const router = useRouter()
   const { orderid }: any = router.query
   
-  useEffect(()=>{
-    if(!orderid){return}
-    console.log(orderid)
-    myorders.refetch()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [orderid])
+  const auth = useQuery({
+    queryKey: ["auth"],
+    queryFn: () => services.account.checkLogin()
+  })
 
   const myorders = useQuery({
     queryKey: ["myorders"],
@@ -33,14 +31,20 @@ export default function OrderPage() {
   })
 
   const mutateOrders = useMutation({
-    mutationFn: async (del: any = false) => {
-      del
-      ? await services.orders.deleteOrder(myorders.data[0]?._id)
-      : await services.orders.finishOrder(myorders.data[0])
+    mutationFn: async (del: boolean = false) => {
+      await services.orders.finishOrder(myorders.data[0], auth.data, del)
     },
     onSuccess: async() => {await myorders.refetch(), router.push("/orders/overview/myorders")},
     onError: (error: any)=>ask(`${error}`, false, false, "error")
   })
+
+  useEffect(()=>{
+    if(!orderid){return}
+    console.log(orderid)
+    myorders.refetch()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderid])
+
 
   return (
     <>

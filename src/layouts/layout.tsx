@@ -11,16 +11,9 @@ export default function Layout({ children }: PropsWithChildren){
   const auth = useQuery({
     queryKey: ["auth"],
     queryFn: () => services.account.checkLogin(),
+    onSuccess: (data) => {(!data && router.pathname != "/login") && router.push("/login"); console.log("LOGIN DATA!", data)},
     onError: () => router.push("/login")
   })
-
-  useEffect(()=>{
-    const userData = services.account.checkLogin()
-    const path = router.pathname
-    if(path === "/login") return
-    !userData && router.push("/login")
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
 
   return (
     <>
