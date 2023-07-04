@@ -11,7 +11,7 @@ export default function Layout({ children }: PropsWithChildren){
   const auth = useQuery({
     queryKey: ["auth"],
     queryFn: () => services.account.checkLogin(),
-    onSuccess: (data) => {(!data && router.pathname != "/login") && router.push("/login"); console.log("LOGIN DATA!", data)},
+    onSuccess: (data) => {(!data && router.pathname != "/login") && router.push("/login")},
     onError: () => router.push("/login")
   })
 

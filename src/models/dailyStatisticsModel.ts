@@ -11,6 +11,8 @@ const dailyStatisticsSchema: any = new Schema({
     name: String,
     served: Number,
     servedOthers: Number,
+    sum: Number,
+    sumOthers: Number,
     _id: String
   }]
 })

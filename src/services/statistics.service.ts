@@ -15,8 +15,8 @@ export const statisticsService = {
     if(!stats.data.length){
       statistics.menuStatistics = order.cart.map((item: any) => ({name: item.name, amount: item.amount, _id: item._id}))
       order.waiter._id == waiterServed._id
-        ? statistics.waitersStatistics = [{name: waiterServed.full_name, served: 1, servedOthers: 0, _id: waiterServed._id}]
-        : statistics.waitersStatistics = [{name: waiterServed.full_name, served: 0, servedOthers: 1, _id: waiterServed._id}]
+        ? statistics.waitersStatistics = [{name: waiterServed.full_name, served: 1, sum: order.totalCost, sumOthers: 0, servedOthers: 0, _id: waiterServed._id}]
+        : statistics.waitersStatistics = [{name: waiterServed.full_name, served: 0, sum: 0, sumOthers: order.totalCost, servedOthers: 1, _id: waiterServed._id}]
       return await axios.post(api, {statistics})
     }
     else{
@@ -34,12 +34,12 @@ export const statisticsService = {
       statistics.waitersStatistics = filtered 
       ? stats.data[0].waitersStatistics.map((waiter: any) => waiter._id == waiterServed._id
         ? waiter._id == order.waiter._id
-          ? ({...waiter, served: waiter.served + 1})
-          : ({...waiter, servedOthers: waiter.servedOthers + 1})
+          ? ({...waiter, served: waiter.served + 1, sum: waiter.sum + order.totalCost})
+          : ({...waiter, servedOthers: waiter.servedOthers + 1, sumOthers: waiter.sumOthers + order.totalCost})
         : waiter)
       : waiterServed._id == order.waiter._id
-        ? [...stats.data[0].waitersStatistics, {name: waiterServed.full_name, served: 1, servedOthers: 0, _id: waiterServed._id}]
-        : [...stats.data[0].waitersStatistics, {name: waiterServed.full_name, served: 0, servedOthers: 1, _id: waiterServed._id}]
+        ? [...stats.data[0].waitersStatistics, {name: waiterServed.full_name, served: 1, sum: order.totalCost, sumOthers: 0, servedOthers: 0, _id: waiterServed._id}]
+        : [...stats.data[0].waitersStatistics, {name: waiterServed.full_name, served: 0, sum: 0, sumOthers: order.totalCost, servedOthers: 1, _id: waiterServed._id}]
         
       return await axios.patch(api, {statistics, id: stats.data[0]._id})
     }

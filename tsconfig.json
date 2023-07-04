@@ -17,6 +17,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@icons/*": ["./src/assets/icons/*"],
+      "@gifs/*": ["./src/assets/gifs/*"],
       "@modals/*": ["./src/components/modal/*"],
       "@api/*": ["./src/pages/api/*"],
       "@hooks/*": ["./src/hooks/*"],

@@ -789,20 +789,32 @@ table
 .order-card
   transition: 200ms
   counter-reset: imgamount
-  display: block
+  display: flex
+  flex-direction: column
   padding: 0px 0px 10px 0px
+  align-items: center
   background: $Accent2tr
   margin: 5px
   border-radius: 10px !important
   overflow: hidden
-  width: 200px
+  width: 205px
   height: max-content
   &:hover
-    background: #414141
+    background: #56d1da2a
   .order-card-body
+    display: flex
+    justify-content: space-evenly
+    flex-direction: column
     font-size: 12pt
+    table
+      width: 200px
+      font-size: 14px !important
+      tr>td
+          padding: 10px 0px 0px 2px
+          text-align: left
+          border: none !important
   .images
-    width: 200px
+    width: 205px
     display: grid
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr))
     max-height: 100px
@@ -816,6 +828,12 @@ table
         border-radius: 0px 0px 5px 0px
       &:first-child
         border-radius: 0px 0px 0px 5px
+  .onepic
+    display: flex !important
+    justify-content: center !important
+    align-items: center !important
+    &>img
+      border-radius: 10px !important
 
 .choose-table
   display: flex

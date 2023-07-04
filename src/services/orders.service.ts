@@ -24,7 +24,7 @@ export const ordersService = {
     return response.data
   },
   async finishOrder(order: any, waiterServed: any, del: boolean){
-    // await this.deleteOrder(order._id)
+    await this.deleteOrder(order._id)
     !del && await services.statistics.finishOrder(order, {full_name: waiterServed.full_name, _id: waiterServed._id})
     return true
   }
