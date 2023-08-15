@@ -41,7 +41,8 @@ export default function MyOrders() {
               <OrderCard
               order={order}/>
             </Link>
-          )).reverse() : ""
+          )).reverse()
+          : <div>Нет активных заказов</div>
           }
         </div>
         </PageLayout>
