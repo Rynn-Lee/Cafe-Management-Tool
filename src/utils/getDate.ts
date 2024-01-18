@@ -1,8 +1,8 @@
-export const getDateNow = (type: any = false) =>{
+export const getDateNow = (type: string | null = null) =>{
   const date = new Date()
   const monthNames = [ "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" ];
   switch(type){
-    case false:
+    case null:
       return `${date.getDate()}-${monthNames[date.getMonth()]}-${date.getFullYear()}`;
     case "time":
       return `${date.getHours() < 10 ? "0" + date.getHours() : date.getHours()}`+
