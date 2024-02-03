@@ -45,13 +45,13 @@ export default function Employee() {
 
   return (
     <>
-      <PageLayout title={user?.full_name + " - Профиль"} pageNav={"account"} id={index}>
+      <PageLayout title={user?.full_name + " - Profile"} pageNav={"account"} id={index}>
         <div className='vertical account-form'>
-          <div className='fields'><span>Фио</span><span>{user?.full_name}</span></div>
-          <div className='fields'><span>Дата трудоустройства</span><span>{user?.hire_date}</span></div>
+          <div className='fields'><span>Full Name</span><span>{user?.full_name}</span></div>
+          <div className='fields'><span>Hire date</span><span>{user?.hire_date}</span></div>
           <div className='fields'><span>Email</span><span>{user?.email}</span></div>
-          <div className='fields'><span>Должность</span><span>{user?.job}</span></div>
-          {myProfile && <button onClick={()=>unauth()}>Выход</button>}
+          <div className='fields'><span>Position</span><span>{user?.job}</span></div>
+          {myProfile && <button onClick={()=>unauth()}>Log out</button>}
         </div>
       </PageLayout>
     </>

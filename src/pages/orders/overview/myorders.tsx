@@ -33,7 +33,7 @@ export default function MyOrders() {
 
   return (
     <>
-      <PageLayout title={"Заказы - Управление кафе"} pageNav={"orders"}>
+      <PageLayout title={"Orders - Cafe Management"} pageNav={"orders"}>
         <PageLayout pageNav={"orders/overview"} nav2>
         <div className='menu-waiter'>
           {orders.length ? orders.map((order: any) => (
@@ -42,7 +42,7 @@ export default function MyOrders() {
               order={order}/>
             </Link>
           )).reverse()
-          : <div>Нет активных заказов</div>
+          : <div>No active orders</div>
           }
         </div>
         </PageLayout>

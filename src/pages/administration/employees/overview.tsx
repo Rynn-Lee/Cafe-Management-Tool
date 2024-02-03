@@ -31,11 +31,11 @@ export default function Employees() {
 
   return (
     <>
-      <PageLayout title={"Сотрудники  > Просмотр - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Employees  > View - Cafe Management"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
           <div className='form employees-form bg-3'>
             <div>
-              <Image src={searchIco} alt="search" className="ico" /><input placeholder='Поиск по имени' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
+              <Image src={searchIco} alt="search" className="ico" /><input placeholder='Search by Name' onChange={(e) => setQuery(e.target.value)} className='right-input'/>
             </div>
             <EmployeesTable employees={employees.data} query={query} deleteUser={deleteUser} editUser={editUser}/>
           </div>

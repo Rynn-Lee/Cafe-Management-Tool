@@ -5,7 +5,7 @@ import React from 'react'
 export default function LoadingScreen({error}: any){
   return(
     <div className="loading horizontal">
-      {error ? "Произошла ошибка: " + error : ""}
+      {error ? "An error occured: " + error : ""}
       <Image src={spinner} alt="Spinner" className='spin ico'/>
     </div>
   )

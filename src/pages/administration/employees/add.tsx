@@ -27,19 +27,19 @@ export default function Add() {
 
   return (
     <>
-      <PageLayout title={"Сотрудники > Добавить - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Employees > Add - Cafe Management"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/employees"} nav2>
           <form onSubmit={addNewEmployee} className='form'>
-            <div className='fields'><span>Фио</span><input onChange={(e) => setNewEmployee({...newEmployee, full_name: e.target.value})}/></div>
-            <div className='fields'><span>Пароль</span><input placeholder="По умолчанию! 123" readOnly/></div>
-            <div className='fields'><span>Должность</span>
+            <div className='fields'><span>Full Name</span><input onChange={(e) => setNewEmployee({...newEmployee, full_name: e.target.value})}/></div>
+            <div className='fields'><span>Password</span><input placeholder="By default! 123" readOnly/></div>
+            <div className='fields'><span>Position</span>
             <select onChange={(e) => setNewEmployee({...newEmployee, job: e.target.value})}>
-              <option>Официант</option>
-              <option>Повар</option>
-              <option>Кассир</option>
-              <option>Администратор</option>
+              <option>Waiter</option>
+              <option>Cook</option>
+              <option>Cashier</option>
+              <option>Administrator</option>
             </select></div>
-          <button type='submit'><Image src={plusIco} alt="Image" className="ico"/>Добавить сотрудника</button>
+          <button type='submit'><Image src={plusIco} alt="Image" className="ico"/>Add an employee</button>
           </form>
         </PageLayout>
       </PageLayout>

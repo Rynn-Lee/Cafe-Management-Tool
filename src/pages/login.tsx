@@ -26,9 +26,9 @@ export default function Login() {
         <div className='login-content'>
           <span className='title'>Ry<Image src={codeIco} alt="code" className="ico4 revert"/>Panel</span>
           <span className='status'>{`${auth.isError ? auth.error : ""}`}</span>
-          <input placeholder='Введите ФИО' onChange={(e) => setAuthFields({...authFields, name: e.target.value})}/>
-          <input type="password" placeholder='Введите пароль'  onChange={(e) => setAuthFields({...authFields, password: e.target.value})}/>
-          <button onClick={()=>auth.refetch()}>Вход</button>
+          <input placeholder='Enter your login' onChange={(e) => setAuthFields({...authFields, name: e.target.value})}/>
+          <input type="password" placeholder='Enter password'  onChange={(e) => setAuthFields({...authFields, password: e.target.value})}/>
+          <button onClick={()=>auth.refetch()}>Enter</button>
         </div>
       </PageLayout>
       {auth.isFetching && <LoadingScreen/>}

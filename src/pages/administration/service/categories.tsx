@@ -31,18 +31,18 @@ export default function Menu() {
   
   return (
     <>
-      <PageLayout title={"Категории - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Categories - Cafe Management"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/service"} nav2>
           <form onSubmit={(e)=>{e.preventDefault()}} className='!w-max items-center form'>
-              <div className='fields'><span>Название</span><input value={newCategory} onChange={(e)=>setNewCategory(e.target.value)} className='w-full'/></div>
-              <button onClick={() => ask(`Добавить категорию: ${newCategory}`, ()=>addMutatuion.mutate())}>Добавить категорию</button>
+              <div className='fields'><span>Name</span><input value={newCategory} onChange={(e)=>setNewCategory(e.target.value)} className='w-full'/></div>
+              <button onClick={() => ask(`Add a category: ${newCategory}`, ()=>addMutatuion.mutate())}>Add a category</button>
             <fieldset>
-              <legend>Доступные категории</legend>
+              <legend>Available categories</legend>
               <ul className='p-2 pl-7'>
                 {categories?.data?.map((category: any, index: number)=>(
                   <span key={index}>
                     <li>
-                      <Image src={removeIco} className="ico2" alt='remove' onClick={() => ask(`Удалить категорию: ${category.title}`, ()=>removeMutation.mutate(category._id))}/>{category.title}
+                      <Image src={removeIco} className="ico2" alt='remove' onClick={() => ask(`Remove category: ${category.title}`, ()=>removeMutation.mutate(category._id))}/>{category.title}
                     </li>
                   </span>
                 )).reverse()}

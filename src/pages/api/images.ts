@@ -43,7 +43,7 @@ const imagesApi: NextApiHandler = async (req, res) => {
     const toDelete: any = Object.values(images)
     const filtered: string[] = toDelete[0].split(',')
     if(!filtered.length || filtered[0] == ''){
-      res.json({error: "Нет изображений для удаления"})
+      res.json({error: "No images to delete"})
       return
     }
 
@@ -51,7 +51,7 @@ const imagesApi: NextApiHandler = async (req, res) => {
       console.log(`#${index} - Image deleted:  + ${image}`)
       fs.unlink(process.cwd() + '/public/images/' + image)
     });
-    res.send({info: "Лишние изображения удалены!"})
+    res.send({info: "All leftovers were deleted!"})
   }
 }
 

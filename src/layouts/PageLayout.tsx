@@ -5,7 +5,7 @@ export function PageLayout({children, title, pageNav, id, nav2, noContent, flex}
   return(
     <>
       <Head>
-        <title>Управление Кафе</title>
+        <title>Cafe Management</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 

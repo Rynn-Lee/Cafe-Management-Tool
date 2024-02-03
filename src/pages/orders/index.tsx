@@ -93,10 +93,10 @@ export default function Orders() {
     }
 
     const printerreturn = await services.printers.createOrder(order, printers.data, additionalInfo)
-    //! if(!printerreturn) throw new Error("Сервис распечатки не вернул ответ!")
+    if(!printerreturn) throw new Error("Printing service didn't respond!")
     
     const orderreturn= await services.orders.createOrder(order, additionalInfo)
-    //! if(!orderreturn) throw new Error("Сервис заказов не вернул ответ!")
+    if(!orderreturn) throw new Error("Order service didn't respond!")
 
     clearOrder()
     setStep(0)
@@ -113,7 +113,7 @@ export default function Orders() {
 
   return (
     <>
-      <PageLayout title={<><span className="steps">Шаг {step+1} из 2</span>Заказы - Управление кафе</>} pageNav={"orders"}>
+      <PageLayout title={<><span className="steps">Step {step+1} out of 2</span>Orders - Cafe Management</>} pageNav={"orders"}>
         <MenuStepper step={step} nextStep={nextStep} prevStep={prevStep} order={order.cart?.length} table={order.table} mutateOrders={mutateOrders}>
           <SelectOrder selectedItem={selectedItem} menu={menu} clearOrder={clearOrder} order={order.cart.length} removeOne={removeOne}/>
           <AdditionalInfo selectedItem={selectedItem} removeOne={removeOne} setTotal={setTotal} total={total} setStep={setStep} setOrder={setOrder} order={order}/>

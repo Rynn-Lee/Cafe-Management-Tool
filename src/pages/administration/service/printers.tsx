@@ -92,7 +92,7 @@ export default function Administration() {
 
   return (
     <>
-      <PageLayout title={"Принтеры - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Printers - Cafe management"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/service"} nav2 flex>        
           {isSetup ? 
           <UniStepper setSetupStep={setSetupStep} setupStep={setupStep} setIsSetup={setIsSetup} clearSetup={clearSetup}>
@@ -124,7 +124,7 @@ export default function Administration() {
           : ""}
 
           <div>
-          {!isSetup ? <button className='addNewPrinter' onClick={()=>setIsSetup(1)}>Добавить новый принтер</button> : ""}
+          {!isSetup ? <button className='addNewPrinter' onClick={()=>setIsSetup(1)}>Add new thermal printer</button> : ""}
           {printers.data?.length && !isSetup ?
           <PrintersList 
             printers={printers}

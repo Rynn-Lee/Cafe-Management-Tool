@@ -4,8 +4,8 @@ export default function Home() {
 
   return (
     <>
-      <PageLayout title={"Главная - Управление кафе"} pageNav={"main"}>
-        Страница со статистикой
+      <PageLayout title={"Main - Cafe management"} pageNav={"main"}>
+        Page with statistics
       </PageLayout>
     </>
   )

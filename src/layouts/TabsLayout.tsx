@@ -14,66 +14,66 @@ export default function TabsLayout({page, id, nav2}: any) {
     case "main":
       return (
         <div className={styleClass}>
-          <Link href={"/"} className='nav-page'>Главная</Link>
+          <Link href={"/"} className='nav-page'>Main page</Link>
         </div>
       )
     case "administration":
       return (
         <div className={styleClass}>
-          <Link href={"/administration/menu/viewdishes"} className='nav-page'><Image src={listIco} alt="plus" className='ico'/>Меню</Link>
-          <Link href={"/administration/employees/overview"} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Сотрудники</Link>
-          <Link href={"/administration/service/printers"} className='nav-page'><Image src={wrenchIco} alt="plus" className='ico'/>Сервисное Меню</Link>
+          <Link href={"/administration/menu/viewdishes"} className='nav-page'><Image src={listIco} alt="plus" className='ico'/>Menu</Link>
+          <Link href={"/administration/employees/overview"} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Employees</Link>
+          <Link href={"/administration/service/printers"} className='nav-page'><Image src={wrenchIco} alt="plus" className='ico'/>Service menu</Link>
         </div>
       )
     case "account":
       return (
         <div className={styleClass}>
-          <Link href={`/account/${id}`} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Профиль</Link>
-          <Link href={`/account/statistics/${id}`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Статистика</Link>
+          <Link href={`/account/${id}`} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Profile</Link>
+          <Link href={`/account/statistics/${id}`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Statistics</Link>
         </div>
       )
     case "orders":
       return (
         <div className={styleClass}>
-          <Link href={`/orders`} className='nav-page'><Image src={plusIco} alt="plus" className='ico'/>Добавить заказ</Link>
-          <Link href={`/orders/overview/myorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Заказы</Link>
+          <Link href={`/orders`} className='nav-page'><Image src={plusIco} alt="plus" className='ico'/>Add an order</Link>
+          <Link href={`/orders/overview/myorders`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Orders</Link>
         </div>
       )
 
     case "orders/overview":
       return (
         <div className={styleClass}>
-          <Link href={`/orders/overview/myorders`} className='nav-page2'><Image src={userIco} alt="plus" className='ico'/>Мои заказы</Link>
-          <Link href={`/orders/overview/allorders`} className='nav-page2'><Image src={chartIco} alt="plus" className='ico'/>Прочие заказы</Link>
+          <Link href={`/orders/overview/myorders`} className='nav-page2'><Image src={userIco} alt="plus" className='ico'/>My orders</Link>
+          <Link href={`/orders/overview/allorders`} className='nav-page2'><Image src={chartIco} alt="plus" className='ico'/>Other orders</Link>
         </div>
       )
     case "account/statistics":
       return (
         <div className={styleClass}>
-          <Link href={`/account/${id}`} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Посещаемость</Link>
-          <Link href={`/account/statistics/${id}`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Производительность</Link>
+          <Link href={`/account/${id}`} className='nav-page'><Image src={userIco} alt="plus" className='ico'/>Attendance</Link>
+          <Link href={`/account/statistics/${id}`} className='nav-page'><Image src={chartIco} alt="plus" className='ico'/>Performance</Link>
         </div>
       )
     case "administration/menu":
       return (
         <div className={styleClass}>
-          <Link href={`/administration/menu/viewdishes`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Меню</Link>
-          <Link href={`/administration/menu/newdish`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Блюдо</Link>
+          <Link href={`/administration/menu/viewdishes`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Menu</Link>
+          <Link href={`/administration/menu/newdish`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Dish</Link>
         </div>
       )
     case "administration/employees":
       return (
         <div className={styleClass}>
-          <Link href={`/administration/employees/overview`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Сотрудники</Link>
-          <Link href={`/administration/employees/add`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Добавить</Link>
+          <Link href={`/administration/employees/overview`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Employees</Link>
+          <Link href={`/administration/employees/add`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Add</Link>
         </div>
       )
     case "administration/service":
       return (
         <div className={styleClass}>
-          <Link href={`/administration/service/printers`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Принтеры</Link>
-          <Link href={`/administration/service/categories`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Категории</Link>
-          <Link href={`/administration/service/cleanup`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Очистка</Link>
+          <Link href={`/administration/service/printers`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Printers</Link>
+          <Link href={`/administration/service/categories`} className='nav-page2'><Image src={plusIco} alt="plus" className='ico'/>Categories</Link>
+          <Link href={`/administration/service/cleanup`} className='nav-page2'><Image src={listIco} alt="plus" className='ico'/>Clean up</Link>
         </div>
       )
   }

@@ -27,7 +27,7 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
       let isConnected = await printer.isPrinterConnected();
       if(!isConnected){
         console.log("Printer is not responding: ", current.info.ip)
-        res.json({error: `Принтер "${current.info.name}" не подключен! Заказ отменён! Обратитесь к системному администратору!`} as any)
+        res.json({error: `Printer "${current.info.name}" is not connected! The order has been cancelled! Conatact an administrator`} as any)
         return
       }
 
@@ -44,9 +44,9 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
 
       try{
         printer.alignLeft()
-        printer.println(`Номер заказа: ${additionalInfo.orderID}`)
-        printer.println(`Дата заказа: ${additionalInfo.date}`)
-        printer.leftRight(`Принтер: ${current.info.name}`, `Стол: ${current.table}`)
+        printer.println(`Order #: ${additionalInfo.orderID}`)
+        printer.println(`Date: ${additionalInfo.date}`)
+        printer.leftRight(`Printer: ${current.info.name}`, `Стол: ${current.table}`)
         printer.drawLine()
         for(const dishes in current.order){
           let dish = current.order[dishes]
@@ -64,7 +64,7 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
         res.json({status: "Printed"} as any)
       } catch (err: any) {
         console.log("THERE'S AN ERROR!", err)
-        res.json({error: `При распечатке произошла ошибка!`, err} as any)
+        res.json({error: `An error occured during print!`, err} as any)
       }
     }
   }
@@ -79,7 +79,7 @@ export default async function printingApi(req: NextApiRequest, res: NextApiRespo
     });    
     
     result.alive
-    ? res.json({message: "Обнаружено устройство!", alive: true} as any)
-    : res.json({message: "Нет устройств с таким адресом", alive: false} as any)
+    ? res.json({message: "The device detected!", alive: true} as any)
+    : res.json({message: "No devices with such address", alive: false} as any)
   }
 }

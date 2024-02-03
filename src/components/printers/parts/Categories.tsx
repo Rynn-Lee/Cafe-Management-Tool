@@ -13,16 +13,16 @@ export function Categories({setNewCategory, newCategory, vacantCategories, ask, 
 
   return(
     <fieldset>
-      <legend>Категории</legend>
+      <legend>Categories</legend>
       {vacantCategories.length ? <>
       <div>
         <select onChange={(e)=>{setNewCategory(e.target.value); setdefaulValue(e.target.value)}} value={defaulValue}>
-          <option value="" disabled>Выберите категорию</option>
+          <option value="" disabled>Choose a category</option>
           {vacantCategories.map((category: any, index: number)=>(
             <option key={category._id} value={category.title}>{category.title}</option>
           ))}
         </select>
-        <button onClick={()=>ask(`Добавить категорию "${newCategory}" к принтеру "${printer.name}"?`, ()=>handleCategory(printer, newCategory))}>
+        <button onClick={()=>ask(`Add category "${newCategory}" to printer "${printer.name}"?`, ()=>handleCategory(printer, newCategory))}>
           <Image src={addIco} alt="right" className='ico4'/>
         </button>
       </div>
@@ -30,7 +30,7 @@ export function Categories({setNewCategory, newCategory, vacantCategories, ask, 
       {printer?.category?.map((el: any)=>(
         <span key={el}>
           <Image src={deleteIco} alt="delete" className='ico3 revert'
-            onClick={()=>ask(`Убрать категорию "${el}" из принтера "${printer.name}"?`, ()=>removeCategory(printer, el))}/>
+            onClick={()=>ask(`Remove category "${el}" from printer "${printer.name}"?`, ()=>removeCategory(printer, el))}/>
           <span>{el}<br/></span>
         </span>
       ))}

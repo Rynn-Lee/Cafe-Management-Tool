@@ -17,11 +17,11 @@ export default function Sidebar(){
     <div className="sidebar">
       <span className="logo"><span>Ry<Image src={codeIco} alt="code" className="ico3 revert"/>Panel</span></span>
       <div className="sidebar-buttons">
-        <Link href="/" className="sidebar-button"><Image src={mainIco} className="ico" alt={"Главная"} /><span>Главная</span></Link>
-        <Link href="/orders" className="sidebar-button"><Image src={listIco} className="ico" alt={"Управление"} /><span>Заказы</span></Link>
-        <Link href="/statistics" className="sidebar-button"><Image src={chartIco} className="ico" alt={"Управление"} /><span>Статистика</span></Link>
-        <Link href="/administration/menu/viewdishes" className="sidebar-button"><Image src={manageIco} className="ico" alt={"Управление"} /><span>Управление</span></Link>
-        <Link href={`/account/my`} className="sidebar-button"><Image src={userIco} className="ico" alt={"Аккаунт"} /><span>Аккаунт</span></Link>
+        <Link href="/" className="sidebar-button"><Image src={mainIco} className="ico" alt={"Main"} /><span>Main</span></Link>
+        <Link href="/orders" className="sidebar-button"><Image src={listIco} className="ico" alt={"Orders"} /><span>Orders</span></Link>
+        <Link href="/statistics" className="sidebar-button"><Image src={chartIco} className="ico" alt={"Statistics"} /><span>Statistics</span></Link>
+        <Link href="/administration/menu/viewdishes" className="sidebar-button"><Image src={manageIco} className="ico" alt={"Management"} /><span>Management</span></Link>
+        <Link href={`/account/my`} className="sidebar-button"><Image src={userIco} className="ico" alt={"Account"} /><span>Account</span></Link>
       </div>
       <div>
         <span className="logo version">RynnLee&apos;s Cafe Management Tool v0.0.1</span>

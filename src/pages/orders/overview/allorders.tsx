@@ -35,7 +35,7 @@ export default function AllOrders({}) {
 
   return (
     <>
-      <PageLayout title={"Заказы - Управление кафе"} pageNav={"orders"}>
+      <PageLayout title={"Orders - Cafe Management"} pageNav={"orders"}>
         <PageLayout pageNav={"orders/overview"} nav2>
         <div className='menu-waiter'>
           {orders.length ? orders?.map((order: any) => (

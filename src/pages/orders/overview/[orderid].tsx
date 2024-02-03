@@ -48,7 +48,7 @@ export default function OrderPage() {
 
   return (
     <>
-      <PageLayout title={"Заказы - Управление кафе"} pageNav={"orders"}>
+      <PageLayout title={"Orders - Cafe Management"} pageNav={"orders"}>
         <PageLayout pageNav={"orders/overview"} nav2>
           <div className='order-overview'>
             <div>
@@ -58,31 +58,31 @@ export default function OrderPage() {
               <table>
                 <tbody>
                   <tr>
-                    <td>Заказ номер: </td>
+                    <td>Order #: </td>
                     <td>{order?.orderID}</td>
                   </tr>
                   <tr>
-                    <td>Дата заказа: </td>
+                    <td>Date: </td>
                     <td>{order?.date}</td>
                   </tr>
                   <tr>
-                    <td>Столик: </td>
+                    <td>Table: </td>
                     <td>{order?.table}</td>
                   </tr>
                   <tr>
-                    <td>Обслуживающий официант: </td>
+                    <td>Waiter: </td>
                     <td>{order?.waiter?.full_name}</td>
                   </tr>
                   <tr>
-                    <td>Сумма заказа: </td>
+                    <td>Total sum: </td>
                     <td>{order?.totalCost}тг.</td>
                   </tr>
                 </tbody>
               </table>
               <div className='buttons'>
                 <Link href={"/orders/overview/myorders"}>Назад</Link>
-                <button onClick={()=>ask("Вы действительно хотите отменить заказ?", ()=>mutateOrders.mutate(true))}>Отменить заказ</button>
-                <button onClick={()=>mutateOrders.mutate(false)}>Завершить</button>
+                <button onClick={()=>ask("Are you sure you want to cancel the order?", ()=>mutateOrders.mutate(true))}>Cancel the order</button>
+                <button onClick={()=>mutateOrders.mutate(false)}>Complete</button>
               </div>
             </div>
           </div>

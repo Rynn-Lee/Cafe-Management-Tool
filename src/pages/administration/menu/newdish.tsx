@@ -56,7 +56,7 @@ export default function Add() {
 
   return (
     <>
-      <PageLayout title={"Меню > Просмотр - Управление кафе"} pageNav={"administration"}>
+      <PageLayout title={"Menu > View - Cafe Management"} pageNav={"administration"}>
         <PageLayout pageNav={"administration/menu"} nav2>
           <UniStepper setupStep={setupStep} setSetupStep={setSetupStep} dish>
             <DishName

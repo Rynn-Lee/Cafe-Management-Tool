@@ -13,7 +13,7 @@ export default function MenuStepper({children, step, nextStep, prevStep, order, 
         <button onClick={prevStep} disabled={step ? false : true}><Image src={arrowL} className='ico' alt="Back"/></button>
         {step < 1
           ? <button onClick={nextStep} disabled={order ? false : true}><Image className='ico' src={arrowR} alt="Next"/></button>
-          : <button onClick={()=>ask(`Завершить заказ столика ${table}?`, ()=>mutateOrders.mutate())} disabled={!table}><Image className='ico' src={check} alt="Next"/></button>
+          : <button onClick={()=>ask(`Complete order ${table}?`, ()=>mutateOrders.mutate())} disabled={!table}><Image className='ico' src={check} alt="Next"/></button>
         }
       </div>
       <DialogWindow/>
