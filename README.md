@@ -9,7 +9,7 @@ Also this project has an interesting ability to work with thermal printers :D. W
 ## 💻 What tech stack is used?
 Front-end: NextJS, Sass<br>
 Back-end: NodeJS, node-thermal-printer, ping<br>
-Database: MongoDB, mongoose
+Database: MongoDB, mongoose<br>
 State management: context-api <br>
 API: Axios, formidable <br>
 SWR: react-query<br>
